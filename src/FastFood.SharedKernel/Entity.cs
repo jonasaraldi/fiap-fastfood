@@ -6,6 +6,7 @@ public abstract class Entity
 
     protected Entity()
     {
+        Id = Ulid.NewUlid();
     }
     
     public Ulid Id { get; private set; }

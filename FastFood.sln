@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFood.SharedKernel", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{DFC86D68-E76C-48B4-B36D-5B3EBBD456DF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FF2BFC43-01D6-4536-880E-6DF4C54D2D1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastFood.Atendimento.Tests", "src\Modules\Atendimento\test\FastFood.Atendimento.Tests\FastFood.Atendimento.Tests.csproj", "{93148A6A-5AF2-410F-B1E2-2B705C3B534F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{163E3CCE-FD8A-4551-A8E0-7DF9813B902E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{163E3CCE-FD8A-4551-A8E0-7DF9813B902E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{163E3CCE-FD8A-4551-A8E0-7DF9813B902E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93148A6A-5AF2-410F-B1E2-2B705C3B534F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93148A6A-5AF2-410F-B1E2-2B705C3B534F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93148A6A-5AF2-410F-B1E2-2B705C3B534F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93148A6A-5AF2-410F-B1E2-2B705C3B534F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,8 @@ Global
 		{2D44F551-3EC1-4108-8907-879B559F3492} = {62B4A66C-53CB-4385-AF87-247128F7CFFC}
 		{163E3CCE-FD8A-4551-A8E0-7DF9813B902E} = {DFC86D68-E76C-48B4-B36D-5B3EBBD456DF}
 		{2628FFE4-EFAD-4CF5-9E64-9890616912B3} = {DFC86D68-E76C-48B4-B36D-5B3EBBD456DF}
+		{FF2BFC43-01D6-4536-880E-6DF4C54D2D1D} = {61847C53-EBF8-4337-BB06-CC87053F4F56}
+		{93148A6A-5AF2-410F-B1E2-2B705C3B534F} = {FF2BFC43-01D6-4536-880E-6DF4C54D2D1D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {859266C6-2FB8-4F8B-B4DC-D91071EFAA4E}
