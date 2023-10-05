@@ -1,9 +1,9 @@
-using MediatR;
+using FastFood.Atendimento.Application.Abstractions;
 
 namespace FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 
-public record CriarPedidoCommand : IRequest<CriarPedidoCommandResponse>
+public record CriarPedidoCommand : ICommand<CriarPedidoResponse>
 {
 }
 
-public record CriarPedidoCommandResponse(Ulid PedidoId);
+public record CriarPedidoResponse(Ulid PedidoId);

@@ -1,11 +1,11 @@
+using FastFood.Atendimento.Application.Abstractions;
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork;
 using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
-using MediatR;
 
 namespace FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 
-public class CriarPedidoCommandHandler : IRequestHandler<CriarPedidoCommand, CriarPedidoCommandResponse>
+public class CriarPedidoCommandHandler : ICommandHandler<CriarPedidoCommand, CriarPedidoResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +18,7 @@ public class CriarPedidoCommandHandler : IRequestHandler<CriarPedidoCommand, Cri
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<CriarPedidoCommandResponse> Handle(
+    public async Task<CriarPedidoResponse> Handle(
         CriarPedidoCommand request, CancellationToken cancellationToken)
     {
         Pedido pedido = Pedido.Criar();
