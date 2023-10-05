@@ -12,17 +12,22 @@ public sealed class Pedido : AggregateRoot
 
     private Pedido()
     {
+        Codigo = Ulid.NewUlid().ToString().Substring(0, 5);
         Status = new PedidoCriado();
         RaiseDomainEvent(new PedidoCriadoDomainEvent(Id));
     }
 
+    public string Codigo { get; private set; }
     public StatusDePedido Status { get; private set; }
     public IReadOnlyCollection<ItemDePedido> Itens => _itens.ToList();
-    public Cliente? Cliente { get; private set; } = null;
-    public Cpf? Cpf { get; private set; } = null;
+    public Cliente? Cliente { get; private set; }
+    public Ulid? ClienteId { get; set; }
+    public Cpf? Cpf { get; private set; }
 
     public Pedido AdicionarItem(ItemDePedido item)
     {   
+        item.SetPedido(this);
+        
         _itens.Add(item);
         RaiseDomainEvent(new ItemDePedidoAdicionadoDomainEvent(Id, item.Id));
         
@@ -87,6 +92,7 @@ public sealed class Pedido : AggregateRoot
     public Pedido SetCliente(Cliente cliente)
     {
         Cliente = cliente;
+        ClienteId = cliente.Id;
         return this;
     }
     

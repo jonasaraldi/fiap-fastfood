@@ -2,7 +2,8 @@ namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 
 public sealed class PedidoRecebido : StatusDePedido
 {
-    public PedidoRecebido() : base("Recebido")
+    public PedidoRecebido() 
+        : base(nameof(PedidoRecebido), "Recebido")
     {
     }
 

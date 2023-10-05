@@ -2,6 +2,10 @@ namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 
 public sealed record Email
 {
+    private Email()
+    {
+    }
+
     private Email(string valor)
     {
         Valor = valor;

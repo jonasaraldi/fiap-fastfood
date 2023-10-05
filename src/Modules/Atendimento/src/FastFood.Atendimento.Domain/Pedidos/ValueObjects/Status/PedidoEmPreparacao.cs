@@ -2,7 +2,8 @@ namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 
 public sealed class PedidoEmPreparacao : StatusDePedido
 {
-    public PedidoEmPreparacao() : base("Em Preparação")
+    public PedidoEmPreparacao() 
+        : base(nameof(PedidoEmPreparacao), "Em Preparação")
     {
     }
     

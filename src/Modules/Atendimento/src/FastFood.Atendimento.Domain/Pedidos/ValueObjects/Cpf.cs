@@ -2,6 +2,10 @@ namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 
 public sealed record Cpf
 {
+    private Cpf()
+    {
+    }
+    
     private Cpf(string valor)
     {
         Valor = valor;
