@@ -12,7 +12,7 @@ public sealed class Pedido : AggregateRoot
 
     private Pedido()
     {
-        Codigo = Ulid.NewUlid().ToString().Substring(0, 5);
+        Codigo = GerarCodigo();
         Status = new PedidoCriado();
         RaiseDomainEvent(new PedidoCriadoDomainEvent(Id));
     }
@@ -23,6 +23,14 @@ public sealed class Pedido : AggregateRoot
     public Cliente? Cliente { get; private set; }
     public Ulid? ClienteId { get; set; }
     public Cpf? Cpf { get; private set; }
+
+    private string GerarCodigo()
+    {
+        return Guid.NewGuid()
+            .ToString()
+            .Substring(0, 5)
+            .ToUpper();
+    }
 
     public Pedido AdicionarItem(ItemDePedido item)
     {   
