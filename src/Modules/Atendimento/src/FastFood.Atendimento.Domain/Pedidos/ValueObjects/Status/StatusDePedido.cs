@@ -7,6 +7,7 @@ public abstract class StatusDePedido
 {
     public StatusDePedido(string codigo, string descricao)
     {
+        Codigo = codigo;
         Descricao = descricao;
     }
 

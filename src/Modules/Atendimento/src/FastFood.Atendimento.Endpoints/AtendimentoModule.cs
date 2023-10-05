@@ -1,12 +1,15 @@
 ﻿using Carter;
+using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace FastFood.Pedido.Endpoints;
 
 public class PedidoModule : ICarterModule
-{
+{   
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         var pedido = app.MapGroup("pedidos");
@@ -14,8 +17,11 @@ public class PedidoModule : ICarterModule
         pedido.MapGet("", () => 
             Results.Ok("Lista de pedidos"));
         
-        pedido.MapPost("", () => 
-            Results.Ok("Pedido salvo"));
+        pedido.MapPost("", async (ISender sender) =>
+        {
+            var response = await sender.Send(new CriarPedidoCommand());
+            return Results.Ok(response.PedidoId);
+        });
         
         pedido.MapPost("itens", () => 
             Results.Ok("Novo item adicionado"));

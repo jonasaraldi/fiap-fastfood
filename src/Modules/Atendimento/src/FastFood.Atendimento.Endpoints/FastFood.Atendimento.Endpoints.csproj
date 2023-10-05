@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FastFood.Atendimento.Application\FastFood.Atendimento.Application.csproj" />
+    <ProjectReference Include="..\FastFood.Atendimento.Infrastructure\FastFood.Atendimento.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

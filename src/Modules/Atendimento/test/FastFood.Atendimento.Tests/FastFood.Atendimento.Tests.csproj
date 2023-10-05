@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\FastFood.Atendimento.Application\FastFood.Atendimento.Application.csproj" />
     <ProjectReference Include="..\..\src\FastFood.Atendimento.Domain\FastFood.Atendimento.Domain.csproj" />
   </ItemGroup>
 

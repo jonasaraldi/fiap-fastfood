@@ -1,4 +1,8 @@
+using FastFood.Atendimento.Application.Abstractions.UnitsOfWork;
+using FastFood.Atendimento.Domain.Pedidos.Repositories;
+using FastFood.Atendimento.Infrastructure.Persistence.Postgres;
 using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Contexts;
+using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +19,9 @@ public static class DependencyInjector
             var connectionString = _configuration.GetConnectionString(nameof(AtendimentoDbContext));
             opts.UseNpgsql(connectionString, x => x.MigrationsAssembly(typeof(AtendimentoDbContext).Assembly.FullName));
         });
+        
+        services.AddTransient<IPedidoRespository, PedidoRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         
         return services;
     }
