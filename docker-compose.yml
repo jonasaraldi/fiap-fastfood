@@ -8,6 +8,8 @@ services:
       - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: 123
+    ports:
+      - 5432:5432
   adminer:
     image: adminer
     restart: always
