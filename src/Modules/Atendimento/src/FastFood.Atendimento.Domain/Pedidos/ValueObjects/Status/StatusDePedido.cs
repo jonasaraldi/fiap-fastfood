@@ -24,20 +24,4 @@ public abstract class StatusDePedido
     {
         throw new TrocaDeStatusInvalidaDomainException(pedido.Status, statusInformado);
     }
-    
-    public static StatusDePedido GetByCodigo(string codigo)
-    {
-        Type classeAbstrataType = typeof(StatusDePedido);
-        Assembly assembly = classeAbstrataType.Assembly;
-
-        Type type = assembly
-            .GetTypes()
-            .First(type => type.IsClass &&
-                           !type.IsAbstract &&
-                           classeAbstrataType.IsAssignableFrom(type) &&
-                           type.GetProperty(nameof(Codigo)) != null &&  
-                           ((string)type.GetProperty(nameof(Codigo))?.GetValue(null, null)!) == codigo);
-        
-        return (StatusDePedido)Activator.CreateInstance(type)!;
-    }
 }
