@@ -1,8 +1,10 @@
 ﻿using Carter;
+using FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace FastFood.Atendimento.Endpoints;
@@ -19,11 +21,22 @@ public class PedidoModule : ICarterModule
         pedido.MapPost("", async (ISender sender) =>
         {
             var response = await sender.Send(new CriarPedidoCommand());
-            return Results.Ok(response.PedidoId);
+            return Results.Ok(response);
         });
         
-        pedido.MapPost("itens", () => 
-            Results.Ok("Novo item adicionado"));
+        pedido.MapPost("{pedidoId}/itens", async (
+            Ulid pedidoId, 
+            [FromBody]AdicionarItemDePedidoCommand command, 
+            ISender sender) =>
+        {
+            var response = await sender.Send(command);
+            return Results.Ok(response);
+        });
+        
+        pedido.MapDelete("{pedidoId}/itens/{itemId}", (Ulid pedidoId, Ulid itemId) =>
+        {
+            return Results.Ok("Novo item adicionado");
+        });
         
         pedido.MapPatch("confirmado", () => 
             Results.Ok("Situacao do pedido alterada para confirmada"));
