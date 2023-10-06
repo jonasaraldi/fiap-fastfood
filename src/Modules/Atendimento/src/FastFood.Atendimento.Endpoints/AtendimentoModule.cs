@@ -3,10 +3,9 @@ using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace FastFood.Pedido.Endpoints;
+namespace FastFood.Atendimento.Endpoints;
 
 public class PedidoModule : ICarterModule
 {   

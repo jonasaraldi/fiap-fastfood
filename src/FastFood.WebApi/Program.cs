@@ -1,6 +1,5 @@
 using Carter;
 using FastFood.Atendimento.Endpoints.IoC;
-using FastFood.Atendimento.Infrastructure.IoC;
 using FastFood.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +19,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapCarter();
-app.UseMiddleware<GlobalExceptionHandler>();
+
+app.UseGlobalExceptionHandlerMiddleware();
+
 app.UseAtendimentoModule();
 app.Run();

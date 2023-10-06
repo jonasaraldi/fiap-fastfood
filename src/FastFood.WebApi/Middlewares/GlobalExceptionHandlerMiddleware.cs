@@ -9,11 +9,11 @@ using FastFood.WebApi.Models;
 
 namespace FastFood.WebApi.Middlewares;
 
-public class GlobalExceptionHandler
+public class GlobalExceptionHandlerMiddleware
 {
     private readonly RequestDelegate _next;
 
-    public GlobalExceptionHandler(RequestDelegate next)
+    public GlobalExceptionHandlerMiddleware(RequestDelegate next)
     {
         _next = next;
     }
@@ -62,8 +62,8 @@ public class GlobalExceptionHandler
 
 public static class GlobalExceptionHandlerExtensions
 {
-    public static void UseGlobalExceptionHandler(this IApplicationBuilder app)
+    public static void UseGlobalExceptionHandlerMiddleware(this IApplicationBuilder app)
     {
-        app.UseMiddleware<GlobalExceptionHandler>();
+        app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
     }
 }
