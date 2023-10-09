@@ -2,6 +2,7 @@ using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
+using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 
 namespace FastFood.Atendimento.Tests.Domain;
 
@@ -39,6 +40,86 @@ public class PedidoTests
         var item = CriarItemDePedido(preco);
 
         Assert.Throws<ItemDePedidoDeveTerPrecoMaiorQueZeroDomainException>(() =>
+            pedido.AdicionarItem(item));
+    }
+    
+    [Fact]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusCancelado()
+    {
+        var pedido = Pedido.Criar().Cancelar();
+        var item = CriarItemDePedido();
+
+        Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
+            pedido.AdicionarItem(item));
+    }
+    
+    [Fact]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusConfirmado()
+    {
+        var item = CriarItemDePedido();
+        var pedido = Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar();
+
+        Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
+            pedido.AdicionarItem(item));
+    }
+    
+    [Fact]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusRecebido()
+    {
+        var item = CriarItemDePedido();
+        var pedido = Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber();
+
+        Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
+            pedido.AdicionarItem(item));
+    }
+    
+    [Fact]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusEmPreparacao()
+    {
+        var item = CriarItemDePedido();
+        var pedido = Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber()
+            .Preparar();
+
+        Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
+            pedido.AdicionarItem(item));
+    }
+    
+    [Fact]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusPronto()
+    {
+        var item = CriarItemDePedido();
+        var pedido = Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber()
+            .Preparar()
+            .MarcarComoPronto();
+
+        Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
+            pedido.AdicionarItem(item));
+    }
+    
+    [Fact]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusFinalizado()
+    {
+        var item = CriarItemDePedido();
+        var pedido = Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber()
+            .Preparar()
+            .MarcarComoPronto()
+            .Finalizar();
+
+        Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
             pedido.AdicionarItem(item));
     }
 

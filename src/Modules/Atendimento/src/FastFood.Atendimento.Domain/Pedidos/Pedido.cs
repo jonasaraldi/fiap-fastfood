@@ -41,6 +41,9 @@ public sealed class Pedido : AggregateRoot
 
     public Pedido AdicionarItem(ItemDePedido item)
     {
+        if (Status is not PedidoCriado)
+            throw new ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException(Status);
+        
         if (item.Quantidade <= 0)
             throw new ItemDePedidoDeveTerQuantidadeMaiorQueZeroDomainException();
         
