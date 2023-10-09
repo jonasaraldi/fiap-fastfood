@@ -1,5 +1,6 @@
 ﻿using Carter;
 using FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
+using FastFood.Atendimento.Application.Pedidos.Commands.CancelarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.ConfirmarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.RemoverItemDePedido;
@@ -49,7 +50,7 @@ public class PedidoModule : ICarterModule
             return Results.Ok(response);
         });
         
-        pedido.MapPut("{pedidoId}/confirmado", async (
+        pedido.MapPut("{pedidoId}/confirmar", async (
             Ulid pedidoId,
             ISender sender, 
             CancellationToken cancellationToken) =>
@@ -59,10 +60,14 @@ public class PedidoModule : ICarterModule
             return Results.Ok(response);
         });
         
-        pedido.MapPatch("confirmado", () => 
-            Results.Ok("Situacao do pedido alterada para confirmada"));
-        
-        pedido.MapPatch("finalizado", () => 
-            Results.Ok("Situacao do pedido alterada para finalizada"));
+        pedido.MapPut("{pedidoId}/cancelar", async (
+            Ulid pedidoId,
+            ISender sender, 
+            CancellationToken cancellationToken) =>
+        {
+            var command = new CancelarPedidoCommand(pedidoId);
+            var response = await sender.Send(command, cancellationToken);
+            return Results.Ok(response);
+        });
     }
 }

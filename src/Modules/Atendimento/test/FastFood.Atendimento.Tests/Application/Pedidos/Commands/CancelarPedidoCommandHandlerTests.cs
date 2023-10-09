@@ -1,31 +1,30 @@
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork;
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork.InMemory;
-using FastFood.Atendimento.Application.Pedidos.Commands.ConfirmarPedido;
+using FastFood.Atendimento.Application.Pedidos.Commands.CancelarPedido;
 using FastFood.Atendimento.Domain.Pedidos;
-using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
 using FastFood.Atendimento.Domain.Pedidos.Repositories.InMemory;
-using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 
 namespace FastFood.Atendimento.Tests.Application.Pedidos.Commands;
 
-public class ConfirmarPedidoCommandHandlerTests
+public class CancelarPedidoCommandHandlerTests
 {
     [Fact]
-    public async Task Handle_DeveConfirmarPedido()
+    public async Task Handle_DeveConfirmarCancelar()
     {
-        Pedido pedido = CriarPedidoProntoParaConfirmar();
-        IPedidoRespository respository = new PedidoRepositoryInMemory();
+        Pedido pedido = Pedido.Criar();
+        IPedidoRespository repository = new PedidoRepositoryInMemory();
         IUnitOfWork unitOfWork = new UnitOfWorkInMemory();
-        await respository.AddAsync(pedido, CancellationToken.None);
+        await repository.AddAsync(pedido, CancellationToken.None);
         
-        ConfirmarPedidoCommand command = new(pedido.Id);
-        ConfirmarPedidoCommandHandler handler = new(respository, unitOfWork);
+        CancelarPedidoCommand command = new(pedido.Id);
+        CancelarPedidoCommandHandler handler = new(repository, unitOfWork);
         
         var response = await handler.Handle(command, CancellationToken.None);
         
         Assert.Equal(pedido.Id, response.PedidoId);
+        Assert.Equal(pedido.Status.Descricao, response.Status);
     }
     
     [Fact]
@@ -38,19 +37,10 @@ public class ConfirmarPedidoCommandHandlerTests
         await repository.AddAsync(pedido, CancellationToken.None);
 
         Ulid pedidoIdAleatorio = Ulid.NewUlid();
-        ConfirmarPedidoCommand command = new(pedidoIdAleatorio);
-        ConfirmarPedidoCommandHandler handler = new(repository, unitOfWork);
+        CancelarPedidoCommand command = new(pedidoIdAleatorio);
+        CancelarPedidoCommandHandler handler = new(repository, unitOfWork);
         
         await Assert.ThrowsAsync<PedidoNaoEncontradoDomainException>(async () => 
             await handler.Handle(command, CancellationToken.None));
-    }
-
-    private Pedido CriarPedidoProntoParaConfirmar()
-    {
-        Pedido pedido = Pedido.Criar();
-        ItemDePedido itemDePedido = ItemDePedido.Criar("Coca-cola", "Bebida", Dinheiro.Criar(5), 1);
-        pedido.AdicionarItem(itemDePedido);
-
-        return pedido;
     }
 }
