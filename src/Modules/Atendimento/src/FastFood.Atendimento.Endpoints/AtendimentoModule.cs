@@ -4,6 +4,7 @@ using FastFood.Atendimento.Application.Pedidos.Commands.CancelarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.ConfirmarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.RemoverItemDePedido;
+using FastFood.Atendimento.Endpoints.Models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -31,10 +32,13 @@ public class PedidoModule : ICarterModule
         
         pedido.MapPost("{pedidoId}/itens", async (
             Ulid pedidoId, 
-            [FromBody]AdicionarItemDePedidoCommand command, 
+            [FromBody]AdicionarItemDePedidoRequest request, 
             ISender sender, 
             CancellationToken cancellationToken) =>
         {
+            AdicionarItemDePedidoCommand command = new(
+                pedidoId, request.Nome, request.Descricao, request.Preco, request.Quantidade);
+            
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         });
