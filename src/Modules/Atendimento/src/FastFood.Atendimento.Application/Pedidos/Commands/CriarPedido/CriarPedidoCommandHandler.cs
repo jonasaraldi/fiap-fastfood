@@ -6,7 +6,7 @@ using FastFood.SharedKernel.Exceptions;
 
 namespace FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 
-public class CriarPedidoCommandHandler : ICommandHandler<CriarPedidoCommand, CriarPedidoResponse>
+public sealed class CriarPedidoCommandHandler : ICommandHandler<CriarPedidoCommand, CriarPedidoResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
