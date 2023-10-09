@@ -30,9 +30,9 @@ public class AdicionarItemDePedidoCommandHandlerTests
         ItemDePedido itemDePedido = pedidoSalvo.Itens.FirstOrDefault()!;
         
         Assert.Equal(pedido.Id, response.PedidoId);
-        Assert.NotEqual(Ulid.Empty, response.Id);
+        Assert.NotEqual(Ulid.Empty, response.ItemDePedidoId);
         Assert.NotNull(itemDePedido);
-        Assert.Equal(response.Id, itemDePedido.Id);
+        Assert.Equal(response.ItemDePedidoId, itemDePedido.Id);
         Assert.Equal(command.Nome, itemDePedido.Nome);
         Assert.Equal(command.Descricao, itemDePedido.Descricao);
         Assert.Equal(command.Preco, itemDePedido.Preco.Valor);

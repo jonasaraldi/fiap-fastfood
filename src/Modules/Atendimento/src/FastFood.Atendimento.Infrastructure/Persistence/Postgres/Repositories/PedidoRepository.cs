@@ -20,6 +20,7 @@ public class PedidoRepository : IPedidoRespository
 
     public Task<Pedido?> GetByIdAsync(Ulid id, CancellationToken cancellationToken) =>
         _atendimentoDbContext.Pedidos
+            .Include(p => p.Itens)
             .FirstOrDefaultAsync(p => p.Id.Equals(id), cancellationToken);
 
     public void Update(Pedido pedido) =>

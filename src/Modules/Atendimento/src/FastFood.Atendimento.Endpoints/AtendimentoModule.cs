@@ -1,6 +1,7 @@
 ﻿using Carter;
 using FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
+using FastFood.Atendimento.Application.Pedidos.Commands.RemoverItemDePedido;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -18,24 +19,33 @@ public class PedidoModule : ICarterModule
         pedido.MapGet("", () => 
             Results.Ok("Lista de pedidos"));
         
-        pedido.MapPost("", async (ISender sender) =>
+        pedido.MapPost("", async (
+            ISender sender,
+            CancellationToken cancellationToken) =>
         {
-            var response = await sender.Send(new CriarPedidoCommand());
+            var response = await sender.Send(new CriarPedidoCommand(), cancellationToken);
             return Results.Ok(response);
         });
         
         pedido.MapPost("{pedidoId}/itens", async (
             Ulid pedidoId, 
             [FromBody]AdicionarItemDePedidoCommand command, 
-            ISender sender) =>
+            ISender sender, 
+            CancellationToken cancellationToken) =>
         {
-            var response = await sender.Send(command);
+            var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         });
         
-        pedido.MapDelete("{pedidoId}/itens/{itemId}", (Ulid pedidoId, Ulid itemId) =>
+        pedido.MapDelete("{pedidoId}/itens/{id}", async (
+            Ulid pedidoId, 
+            Ulid id, 
+            ISender sender, 
+            CancellationToken cancellationToken) =>
         {
-            return Results.Ok("Novo item adicionado");
+            var command = new RemoverItemDePedidoCommand(pedidoId, id);
+            var response = await sender.Send(command, cancellationToken);
+            return Results.Ok(response);
         });
         
         pedido.MapPatch("confirmado", () => 

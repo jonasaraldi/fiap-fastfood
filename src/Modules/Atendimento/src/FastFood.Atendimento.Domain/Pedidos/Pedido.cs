@@ -23,6 +23,7 @@ public sealed class Pedido : AggregateRoot
     public Cliente? Cliente { get; private set; }
     public Ulid? ClienteId { get; set; }
     public Cpf? Cpf { get; private set; }
+    public decimal ValorTotal => _itens.Sum(item => item.Quantidade * item.Preco.Valor);
 
     private string GerarCodigo()
     {
@@ -42,8 +43,11 @@ public sealed class Pedido : AggregateRoot
         return this;
     }
 
-    public Pedido RemoverItem(ItemDePedido item)
+    public Pedido RemoverItem(Ulid itemDePedidoId)
     {
+        var item = _itens.FirstOrDefault(item => item.Id.Equals(itemDePedidoId));
+        if (item is null) return this;
+        
         _itens.Remove(item);
         RaiseDomainEvent(new ItemDePedidoRemovidoDomainEvent(Id, item.Id));
 

@@ -24,7 +24,7 @@ public class PedidoTests
         var item = CriarItemDePedido();
         pedido.AdicionarItem(item);
 
-        pedido.RemoverItem(item);
+        pedido.RemoverItem(item.Id);
 
         Assert.DoesNotContain(item, pedido.Itens);
     }

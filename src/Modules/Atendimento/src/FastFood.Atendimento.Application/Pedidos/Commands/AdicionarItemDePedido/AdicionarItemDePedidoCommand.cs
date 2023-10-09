@@ -12,4 +12,4 @@ public record AdicionarItemDePedidoCommand(
 {
 }
 
-public record AdicionarItemDePedidoResponse(Ulid PedidoId, Ulid Id);
+public record AdicionarItemDePedidoResponse(Ulid PedidoId, Ulid ItemDePedidoId);
