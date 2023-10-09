@@ -3,12 +3,12 @@ using FastFood.SharedKernel;
 
 namespace FastFood.Atendimento.Domain.Pedidos.Entities;
 
-public class ItemDePedido : Entity
+public class ItemDePedido : AuditableEntity
 {
     private ItemDePedido()
     {
     }
-
+    
     private ItemDePedido(string nome, string descricao, Dinheiro preco, int quantidade)
     {
         Nome = nome;

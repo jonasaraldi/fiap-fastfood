@@ -1,29 +1,26 @@
 using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Configs.Base;
 using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Configs.Converters;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FastFood.Atendimento.Infrastructure.Persistence.Postgres.Configs;
 
-public class ItemDePedidoConfig : AuditableEntityConfig<ItemDePedido>
+public class HistoricoDePedidoConfig : EntityConfig<HistoricoDePedido>
 {
-    protected override void ConfigureFields(EntityTypeBuilder<ItemDePedido> builder)
+    protected override void ConfigureFields(EntityTypeBuilder<HistoricoDePedido> builder)
     {
-        builder.Property(p => p.Nome).IsRequired();
-        builder.Property(p => p.Descricao).IsRequired();
-        builder.Property(p => p.Quantidade).IsRequired();
+        builder.Property(p => p.Data).IsRequired();
+        
+        builder.Property(p => p.Status)
+            .HasConversion<StatusDePedidoToStringConverter>()
+            .IsRequired();        
         
         builder.Property(p => p.PedidoId)
             .HasConversion<UlidToStringConverter>()
             .IsRequired();
-        
-        builder.OwnsOne(p => p.Preco)
-            .Property(p => p.Valor)
-            .HasColumnName(nameof(ItemDePedido.Preco));
 
         builder.HasOne(p => p.Pedido)
-            .WithMany(p => p.Itens)
+            .WithMany(p => p.Historicos)
             .HasForeignKey(p => p.PedidoId)
             .IsRequired();
     }

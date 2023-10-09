@@ -1,3 +1,4 @@
+using System.Net.Sockets;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Events;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
@@ -10,17 +11,20 @@ namespace FastFood.Atendimento.Domain.Pedidos;
 public sealed class Pedido : AggregateRoot
 {
     private List<ItemDePedido> _itens = new();
+    private List<HistoricoDePedido> _historicos = new();
 
     private Pedido()
     {
         Codigo = GerarCodigo();
-        Status = new PedidoCriado();
+        SetStatus(new PedidoCriado());
+        
         RaiseDomainEvent(new PedidoCriadoDomainEvent(Id));
     }
 
     public string Codigo { get; private set; }
     public StatusDePedido Status { get; private set; }
     public IReadOnlyCollection<ItemDePedido> Itens => _itens.ToList();
+    public IReadOnlyCollection<HistoricoDePedido> Historicos => _historicos.ToList();
     public Cliente? Cliente { get; private set; }
     public Ulid? ClienteId { get; set; }
     public Cpf? Cpf { get; private set; }
@@ -104,11 +108,6 @@ public sealed class Pedido : AggregateRoot
         return this;
     }
 
-    internal void SetStatus(StatusDePedido status)
-    {
-        Status = status;
-    }
-
     public Pedido SetCliente(Cliente cliente)
     {
         Cliente = cliente;
@@ -121,6 +120,16 @@ public sealed class Pedido : AggregateRoot
         Cpf = cpf;
         return this;
     }
+    
+    internal void SetStatus(StatusDePedido status)
+    {
+        Status = status;
+        RegisterUpdate();
+        RegistrarHistorico();
+    }
+
+    private void RegistrarHistorico() => 
+        _historicos.Add(HistoricoDePedido.Criar(this));
 
     public static Pedido Criar() => new();
 }

@@ -3,7 +3,7 @@ using FastFood.SharedKernel;
 
 namespace FastFood.Atendimento.Domain.Pedidos.Entities;
 
-public sealed class Cliente : Entity
+public sealed class Cliente : AuditableEntity
 {
     private Cliente()
     {

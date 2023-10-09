@@ -1,21 +1,15 @@
 using FastFood.Atendimento.Domain.Pedidos;
-using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
+using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Configs.Base;
 using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Configs.Converters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FastFood.Atendimento.Infrastructure.Persistence.Postgres.Configs;
 
-public class PedidoConfig : IEntityTypeConfiguration<Pedido>
+public class PedidoConfig : AuditableEntityConfig<Pedido>
 {
-    public void Configure(EntityTypeBuilder<Pedido> builder)
+    protected override void ConfigureFields(EntityTypeBuilder<Pedido> builder)
     {
-        builder.ToTable(typeof(Pedido).Name);
-        builder.HasKey(p => p.Id);
-        builder.Property(p => p.Id)
-            .HasConversion<UlidToStringConverter>();
-        
-        builder.Property(p => p.CreatedAt).IsRequired();
         builder.Property(p => p.Codigo).IsRequired();
         builder.Property(p => p.ClienteId)
             .HasConversion<UlidToStringConverter>();
@@ -25,6 +19,10 @@ public class PedidoConfig : IEntityTypeConfiguration<Pedido>
             .IsRequired();
 
         builder.HasMany(p => p.Itens)
+            .WithOne(i => i.Pedido)
+            .HasForeignKey(i => i.PedidoId);
+        
+        builder.HasMany(p => p.Historicos)
             .WithOne(i => i.Pedido)
             .HasForeignKey(i => i.PedidoId);
 
