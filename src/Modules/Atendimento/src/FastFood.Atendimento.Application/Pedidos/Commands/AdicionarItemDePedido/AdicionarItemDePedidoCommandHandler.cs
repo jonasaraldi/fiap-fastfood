@@ -8,7 +8,7 @@ using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 
 namespace FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
 
-public class AdicionarItemDePedidoCommandHandler : ICommandHandler<AdicionarItemDePedidoCommand, AdicionarItemDePedidoResponse>
+public sealed class AdicionarItemDePedidoCommandHandler : ICommandHandler<AdicionarItemDePedidoCommand, AdicionarItemDePedidoResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
@@ -40,6 +40,6 @@ public class AdicionarItemDePedidoCommandHandler : ICommandHandler<AdicionarItem
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
 
-        return new(pedido.Id, item.Id);
+        return new(pedido.Id, item.Id, pedido.ValorTotal);
     }
 }

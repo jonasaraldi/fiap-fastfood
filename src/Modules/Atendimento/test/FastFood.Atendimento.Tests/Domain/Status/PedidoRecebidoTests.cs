@@ -1,5 +1,7 @@
 using FastFood.Atendimento.Domain.Pedidos;
+using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
+using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 
 namespace FastFood.Atendimento.Tests.Domain.Status;
@@ -51,5 +53,12 @@ public class PedidoRecebidoTests
         Assert.Throws<TrocaDeStatusInvalidaDomainException>(() => pedido.Finalizar());
     }
     
-    private Pedido PedidoRecebido() => Pedido.Criar().Confirmar().Receber();
+    private Pedido PedidoRecebido()
+    {
+        Pedido pedido = Pedido.Criar();
+        ItemDePedido itemDePedido = ItemDePedido.Criar("Coca-cola", "Bebida", Dinheiro.Criar(5), 1);
+        pedido.AdicionarItem(itemDePedido);
+
+        return pedido.Confirmar().Receber();
+    }
 }

@@ -12,4 +12,5 @@ public record AdicionarItemDePedidoCommand(
 {
 }
 
-public record AdicionarItemDePedidoResponse(Ulid PedidoId, Ulid ItemDePedidoId);
+public record AdicionarItemDePedidoResponse(
+    Ulid PedidoId, Ulid ItemDePedidoId, decimal ValorTotal);

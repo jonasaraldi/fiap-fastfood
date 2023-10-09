@@ -15,13 +15,13 @@ public class RemoverItemDePedidoCommandHandlerTests
     [Fact]
     public async Task Handle_DeveRemoverItemDoPedido()
     {
-        IPedidoRespository pedidoRespository = new PedidoRepositoryInMemory();
+        IPedidoRespository respository = new PedidoRepositoryInMemory();
         IUnitOfWork unitOfWork = new UnitOfWorkInMemory();
      
         Pedido pedido = GetPedidoComUmItem();
-        await pedidoRespository.AddAsync(pedido, CancellationToken.None);
+        await respository.AddAsync(pedido, CancellationToken.None);
         
-        RemoverItemDePedidoCommandHandler handler = new(pedidoRespository, unitOfWork);
+        RemoverItemDePedidoCommandHandler handler = new(respository, unitOfWork);
 
         Ulid itemDePedidoId = pedido.Itens.First().Id;
         RemoverItemDePedidoCommand command = new(pedido.Id, itemDePedidoId);
@@ -36,13 +36,13 @@ public class RemoverItemDePedidoCommandHandlerTests
     [Fact]
     public async Task Handle_NaoDeveRemoverItemDePedido_QuandoPedidoNaoForEncontrado()
     {
-        IPedidoRespository pedidoRespository = new PedidoRepositoryInMemory();
+        IPedidoRespository respository = new PedidoRepositoryInMemory();
         IUnitOfWork unitOfWork = new UnitOfWorkInMemory();
      
         Pedido pedido = GetPedidoComUmItem();
-        await pedidoRespository.AddAsync(pedido, CancellationToken.None);
+        await respository.AddAsync(pedido, CancellationToken.None);
         
-        RemoverItemDePedidoCommandHandler handler = new(pedidoRespository, unitOfWork);
+        RemoverItemDePedidoCommandHandler handler = new(respository, unitOfWork);
 
         Ulid pedidoIdAleatorio = Ulid.NewUlid();
         Ulid itemDePedidoId = pedido.Itens.First().Id;
@@ -55,13 +55,13 @@ public class RemoverItemDePedidoCommandHandlerTests
     [Fact]
     public async Task Handle_DeveRemoverUmDosItensDoPedidoEAtualizarTotal()
     {
-        IPedidoRespository pedidoRespository = new PedidoRepositoryInMemory();
+        IPedidoRespository respository = new PedidoRepositoryInMemory();
         IUnitOfWork unitOfWork = new UnitOfWorkInMemory();
      
         Pedido pedido = GetPedidoComDoisItens();
-        await pedidoRespository.AddAsync(pedido, CancellationToken.None);
+        await respository.AddAsync(pedido, CancellationToken.None);
         
-        RemoverItemDePedidoCommandHandler handler = new(pedidoRespository, unitOfWork);
+        RemoverItemDePedidoCommandHandler handler = new(respository, unitOfWork);
 
         Ulid itemDePedidoId = pedido.Itens.First().Id;
         RemoverItemDePedidoCommand command = new(pedido.Id, itemDePedidoId);
