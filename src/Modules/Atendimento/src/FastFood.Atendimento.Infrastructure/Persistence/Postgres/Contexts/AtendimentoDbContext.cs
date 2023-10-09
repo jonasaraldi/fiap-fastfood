@@ -16,7 +16,7 @@ public class AtendimentoDbContext : DbContext, IAtendimentoDbContext
 {
     private readonly IConfiguration _configuration;
 
-    public AtendimentoDbContext(DbContextOptions options, IConfiguration configuration)
+    public AtendimentoDbContext(DbContextOptions<AtendimentoDbContext> options, IConfiguration configuration)
         : base(options)
     {
         _configuration = configuration;
