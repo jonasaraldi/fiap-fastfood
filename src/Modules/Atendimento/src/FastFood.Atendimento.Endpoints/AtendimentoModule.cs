@@ -1,5 +1,6 @@
 ﻿using Carter;
 using FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
+using FastFood.Atendimento.Application.Pedidos.Commands.ConfirmarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.RemoverItemDePedido;
 using MediatR;
@@ -44,6 +45,16 @@ public class PedidoModule : ICarterModule
             CancellationToken cancellationToken) =>
         {
             var command = new RemoverItemDePedidoCommand(pedidoId, id);
+            var response = await sender.Send(command, cancellationToken);
+            return Results.Ok(response);
+        });
+        
+        pedido.MapPut("{pedidoId}/confirmado", async (
+            Ulid pedidoId,
+            ISender sender, 
+            CancellationToken cancellationToken) =>
+        {
+            var command = new ConfirmarPedidoCommand(pedidoId);
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         });
