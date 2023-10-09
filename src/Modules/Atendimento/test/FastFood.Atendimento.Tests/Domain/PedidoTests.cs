@@ -1,5 +1,6 @@
 using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
+using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 
 namespace FastFood.Atendimento.Tests.Domain;
@@ -15,6 +16,30 @@ public class PedidoTests
         pedido.AdicionarItem(item);
 
         Assert.Contains(item, pedido.Itens);
+    }
+    
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(0)]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoQuantidadeForNegativaOuZero(int quantidade)
+    {
+        var pedido = Pedido.Criar();
+        var item = CriarItemDePedido(quantidade);
+
+        Assert.Throws<ItemDePedidoDeveTerQuantidadeMaiorQueZeroDomainException>(() =>
+            pedido.AdicionarItem(item));
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(0)]
+    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPrecoForNegativoOuZero(decimal preco)
+    {
+        var pedido = Pedido.Criar();
+        var item = CriarItemDePedido(preco);
+
+        Assert.Throws<ItemDePedidoDeveTerPrecoMaiorQueZeroDomainException>(() =>
+            pedido.AdicionarItem(item));
     }
 
     [Fact]
@@ -67,4 +92,10 @@ public class PedidoTests
 
     private ItemDePedido CriarItemDePedido() => 
         ItemDePedido.Criar("Produto 1", "Produto 1", Dinheiro.Criar(10), 2);
+    
+    private ItemDePedido CriarItemDePedido(int quantidade) => 
+        ItemDePedido.Criar("Produto 1", "Produto 1", Dinheiro.Criar(10), quantidade);
+    
+    private ItemDePedido CriarItemDePedido(decimal preco) => 
+        ItemDePedido.Criar("Produto 1", "Produto 1", Dinheiro.Criar(preco), 1);
 }

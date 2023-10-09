@@ -1,6 +1,8 @@
 using FastFood.Atendimento.Domain.Pedidos;
+using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Events;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
+using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 
 namespace FastFood.Atendimento.Tests.Domain.Status;
@@ -19,12 +21,19 @@ public class PedidoCriadoTests
     [Fact]
     public void Confirmar_StatusCriado_DeveMudarParaConfirmado()
     {
-        var pedido = PedidoCriado();
+        var pedido = PedidoCriadoComItens();
 
         pedido.Confirmar();
         
         Assert.IsType<PedidoConfirmado>(pedido.Status);
         Assert.IsType<PedidoConfirmadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+    }
+    
+    [Fact]
+    public void Confirmar_StatusCriado_NaoDeveMudarParaConfirmado_QuandoNaoHouverItens()
+    {
+        var pedido = PedidoCriado();
+        Assert.Throws<PedidoNaoPodeSerConfirmadoSemItensDomainException>(() => pedido.Confirmar());
     }
     
     [Fact]
@@ -67,4 +76,13 @@ public class PedidoCriadoTests
     }
     
     private Pedido PedidoCriado() => Pedido.Criar();
+    
+    private Pedido PedidoCriadoComItens()
+    {
+        Pedido pedido = Pedido.Criar();
+        ItemDePedido itemDePedido = ItemDePedido.Criar("Coca-cola", "Bebida", Dinheiro.Criar(5), 1);
+        pedido.AdicionarItem(itemDePedido);
+
+        return pedido;
+    }
 }

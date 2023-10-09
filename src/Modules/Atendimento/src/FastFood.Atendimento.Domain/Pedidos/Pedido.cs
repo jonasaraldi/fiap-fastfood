@@ -1,5 +1,6 @@
 using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Events;
+using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 using FastFood.SharedKernel;
@@ -24,6 +25,7 @@ public sealed class Pedido : AggregateRoot
     public Ulid? ClienteId { get; set; }
     public Cpf? Cpf { get; private set; }
     public decimal ValorTotal => _itens.Sum(item => item.Quantidade * item.Preco.Valor);
+    public bool PossuiItens => _itens.Any();
 
     private string GerarCodigo()
     {
@@ -34,7 +36,13 @@ public sealed class Pedido : AggregateRoot
     }
 
     public Pedido AdicionarItem(ItemDePedido item)
-    {   
+    {
+        if (item.Quantidade <= 0)
+            throw new ItemDePedidoDeveTerQuantidadeMaiorQueZeroDomainException();
+        
+        if(item.Preco.Valor <= 0)
+            throw new ItemDePedidoDeveTerPrecoMaiorQueZeroDomainException();
+        
         item.SetPedido(this);
         
         _itens.Add(item);

@@ -1,3 +1,5 @@
+using FastFood.Atendimento.Domain.Pedidos.Exceptions;
+
 namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 
 public sealed class PedidoCriado : StatusDePedido
@@ -10,6 +12,13 @@ public sealed class PedidoCriado : StatusDePedido
     public override void Cancelar(Pedido pedido) =>
         pedido.SetStatus(new PedidoCancelado());
 
-    public override void Confirmar(Pedido pedido) => 
+    public override void Confirmar(Pedido pedido)
+    {
+        if (!pedido.PossuiItens)
+        {
+            throw new PedidoNaoPodeSerConfirmadoSemItensDomainException();
+        }
+
         pedido.SetStatus(new PedidoConfirmado());
+    }
 }
