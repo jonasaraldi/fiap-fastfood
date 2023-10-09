@@ -3,9 +3,9 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace FastFood.WebApi.Extensions;
+namespace FastFood.WebApi.Configurations;
 
-public static class HealthCheckExtension
+public static class HealthCheckConfiguration
 {
     public static void AddHealthCheck(this IServiceCollection services, IConfiguration configuration)
     {

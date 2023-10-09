@@ -1,6 +1,6 @@
 using Carter;
 using FastFood.Atendimento.Endpoints.IoC;
-using FastFood.WebApi.Extensions;
+using FastFood.WebApi.Configurations;
 using FastFood.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
