@@ -60,6 +60,9 @@ public sealed class Pedido : AggregateRoot
 
     public Pedido RemoverItem(Ulid itemDePedidoId)
     {
+        if (Status is not PedidoCriado)
+            throw new ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException(Status);
+        
         var item = _itens.FirstOrDefault(item => item.Id.Equals(itemDePedidoId));
         if (item is null) return this;
         
@@ -120,6 +123,9 @@ public sealed class Pedido : AggregateRoot
     
     public Pedido SetCpf(Cpf cpf)
     {
+        if (Status is not PedidoCriado)
+            throw new CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException(Status);
+        
         Cpf = cpf;
         return this;
     }

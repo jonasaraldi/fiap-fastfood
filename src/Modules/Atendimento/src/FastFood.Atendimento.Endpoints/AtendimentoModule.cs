@@ -1,5 +1,6 @@
 ﻿using Carter;
 using FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
+using FastFood.Atendimento.Application.Pedidos.Commands.AtualizarCpf;
 using FastFood.Atendimento.Application.Pedidos.Commands.CancelarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.ConfirmarPedido;
 using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
@@ -29,6 +30,17 @@ public class PedidoModule : ICarterModule
         {
             var response = await sender.Send(new CriarPedidoCommand(), cancellationToken);
             return Results.Ok(response);
+        });
+        
+        pedido.MapPut("{pedidoId}/cpf", async (
+            Ulid pedidoId,
+            [FromBody]AtualizarCpfRequest request,
+            ISender sender, 
+            CancellationToken cancellationToken) =>
+        {
+            var command = new AtualizarCpfCommand(pedidoId, request.cpf);
+            await sender.Send(command, cancellationToken);
+            return Results.NoContent();
         });
         
         pedido.MapPost("{pedidoId}/itens", async (

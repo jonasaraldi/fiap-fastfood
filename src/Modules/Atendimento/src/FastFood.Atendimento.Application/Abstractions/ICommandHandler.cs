@@ -2,7 +2,8 @@ using MediatR;
 
 namespace FastFood.Atendimento.Application.Abstractions;
 
-public interface ICommandHandler : IRequestHandler<ICommand>
+public interface ICommandHandler<TCommand> : IRequestHandler<TCommand>
+    where TCommand : ICommand
 {
 }
 

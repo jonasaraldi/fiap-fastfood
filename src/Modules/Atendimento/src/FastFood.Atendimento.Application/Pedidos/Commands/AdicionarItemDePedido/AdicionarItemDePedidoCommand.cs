@@ -2,7 +2,7 @@ using FastFood.Atendimento.Application.Abstractions;
 
 namespace FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
 
-public record AdicionarItemDePedidoCommand(
+public sealed record AdicionarItemDePedidoCommand(
     Ulid PedidoId,
     string Nome,
     string Descricao,
@@ -12,5 +12,5 @@ public record AdicionarItemDePedidoCommand(
 {
 }
 
-public record AdicionarItemDePedidoResponse(
+public sealed record AdicionarItemDePedidoResponse(
     Ulid PedidoId, Ulid ItemDePedidoId, decimal ValorTotal);

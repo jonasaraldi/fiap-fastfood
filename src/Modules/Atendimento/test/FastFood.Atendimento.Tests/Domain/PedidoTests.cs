@@ -8,6 +8,8 @@ namespace FastFood.Atendimento.Tests.Domain;
 
 public class PedidoTests
 {
+    private const string CpfValido = "87995476000";
+    
     [Fact]
     public void AdicionarItem_DeveAdicionarItemAoPedido()
     {
@@ -57,9 +59,7 @@ public class PedidoTests
     public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusConfirmado()
     {
         var item = CriarItemDePedido();
-        var pedido = Pedido.Criar()
-            .AdicionarItem(item)
-            .Confirmar();
+        var pedido = CriarPedidoConfirmado(item);
 
         Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
             pedido.AdicionarItem(item));
@@ -69,10 +69,7 @@ public class PedidoTests
     public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusRecebido()
     {
         var item = CriarItemDePedido();
-        var pedido = Pedido.Criar()
-            .AdicionarItem(item)
-            .Confirmar()
-            .Receber();
+        var pedido = CriarPedidoRecebido(item);
 
         Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
             pedido.AdicionarItem(item));
@@ -82,11 +79,7 @@ public class PedidoTests
     public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusEmPreparacao()
     {
         var item = CriarItemDePedido();
-        var pedido = Pedido.Criar()
-            .AdicionarItem(item)
-            .Confirmar()
-            .Receber()
-            .Preparar();
+        var pedido = CriarPedidoEmPreparacao(item);
 
         Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
             pedido.AdicionarItem(item));
@@ -96,12 +89,7 @@ public class PedidoTests
     public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusPronto()
     {
         var item = CriarItemDePedido();
-        var pedido = Pedido.Criar()
-            .AdicionarItem(item)
-            .Confirmar()
-            .Receber()
-            .Preparar()
-            .MarcarComoPronto();
+        var pedido = CriarPedidoPronto(item);
 
         Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
             pedido.AdicionarItem(item));
@@ -111,13 +99,7 @@ public class PedidoTests
     public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusFinalizado()
     {
         var item = CriarItemDePedido();
-        var pedido = Pedido.Criar()
-            .AdicionarItem(item)
-            .Confirmar()
-            .Receber()
-            .Preparar()
-            .MarcarComoPronto()
-            .Finalizar();
+        var pedido = CriarPedidoFinalizado(item);
 
         Assert.Throws<ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException>(() =>
             pedido.AdicionarItem(item));
@@ -133,6 +115,66 @@ public class PedidoTests
         pedido.RemoverItem(item.Id);
 
         Assert.DoesNotContain(item, pedido.Itens);
+    }
+    
+    [Fact]
+    public void RemoverItem_NaoDeveRemoverItemDoPedido_QuandoPedidoEstiverComStatusCancelado()
+    {
+        var pedido = Pedido.Criar().Cancelar();
+        var item = CriarItemDePedido();
+
+        Assert.Throws<ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException>(() =>
+            pedido.RemoverItem(item.Id));
+    }
+    
+    [Fact]
+    public void RemoverItem_NaoDeveRemoverItemDoPedido_QuandoPedidoEstiverComStatusConfirmado()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoConfirmado(item);
+
+        Assert.Throws<ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException>(() =>
+            pedido.RemoverItem(item.Id));
+    }
+    
+    [Fact]
+    public void RemoverItem_NaoDeveRemoverItemDoPedido_QuandoPedidoEstiverComStatusRecebido()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoRecebido(item);
+
+        Assert.Throws<ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException>(() =>
+            pedido.RemoverItem(item.Id));
+    }
+    
+    [Fact]
+    public void RemoverItem_NaoDeveRemoverItemDoPedido_QuandoPedidoEstiverComStatusEmPreparacao()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoEmPreparacao(item);
+
+        Assert.Throws<ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException>(() =>
+            pedido.RemoverItem(item.Id));
+    }
+    
+    [Fact]
+    public void RemoverItem_NaoDeveRemoverItemDoPedido_QuandoPedidoEstiverComStatusPronto()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoPronto(item);
+        
+        Assert.Throws<ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException>(() =>
+            pedido.RemoverItem(item.Id));
+    }
+    
+    [Fact]
+    public void RemoverItem_NaoDeveRemoverItemDoPedido_QuandoPedidoEstiverComStatusFinalizado()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoFinalizado(item);
+
+        Assert.Throws<ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException>(() =>
+            pedido.RemoverItem(item.Id));
     }
 
     [Fact]
@@ -150,7 +192,7 @@ public class PedidoTests
     public void SetCpf_DeveDefinirCpf()
     {
         var pedido = Pedido.Criar();
-        var cpf = Cpf.Criar("87995476000");
+        var cpf = Cpf.Criar(CpfValido);
 
         pedido.SetCpf(cpf);
 
@@ -158,14 +200,79 @@ public class PedidoTests
     }
     
     [Fact]
-    public void CriarPedido_NaoDeveDefinirCliente()
+    public void SetCpf_NaoDeveDefinirCpf_QuandoPedidoEstiverComStatusCancelado()
+    {
+        var pedido = Pedido.Criar().Cancelar();
+        var cpf = Cpf.Criar(CpfValido);
+
+        Assert.Throws<CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException>(() =>
+            pedido.SetCpf(cpf));
+    }
+    
+    [Fact]
+    public void SetCpf_NaoDeveDefinirCpf_QuandoPedidoEstiverComStatusConfirmado()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoConfirmado(item);
+        var cpf = Cpf.Criar(CpfValido);
+
+        Assert.Throws<CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException>(() =>
+            pedido.SetCpf(cpf));
+    }
+    
+    [Fact]
+    public void SetCpf_NaoDeveDefinirCpf_QuandoPedidoEstiverComStatusRecebido()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoRecebido(item);
+        var cpf = Cpf.Criar(CpfValido);
+
+        Assert.Throws<CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException>(() =>
+            pedido.SetCpf(cpf));
+    }
+    
+    [Fact]
+    public void SetCpf_NaoDeveDefinirCpf_QuandoPedidoEstiverComStatusEmPreparacao()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoEmPreparacao(item);
+        var cpf = Cpf.Criar(CpfValido);
+
+        Assert.Throws<CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException>(() =>
+            pedido.SetCpf(cpf));
+    }
+    
+    [Fact]
+    public void SetCpf_NaoDeveDefinirCpf_QuandoPedidoEstiverComStatusPronto()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoPronto(item);
+        var cpf = Cpf.Criar(CpfValido);
+
+        Assert.Throws<CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException>(() =>
+            pedido.SetCpf(cpf));
+    }
+    
+    [Fact]
+    public void SetCpf_NaoDeveDefinirCpf_QuandoPedidoEstiverComStatusFinalizado()
+    {
+        var item = CriarItemDePedido();
+        var pedido = CriarPedidoFinalizado(item);
+        var cpf = Cpf.Criar(CpfValido);
+
+        Assert.Throws<CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException>(() =>
+            pedido.SetCpf(cpf));
+    }
+    
+    [Fact]
+    public void CriarPedido_NaoDeveVirComClienteDefinido()
     {
         var pedido = Pedido.Criar();
         Assert.Null(pedido.Cliente);
     }
     
     [Fact]
-    public void CriarPedido_NaoDeveDefinirCpf()
+    public void CriarPedido_NaoDeveVirComCpfDefinido()
     {
         var pedido = Pedido.Criar();
         Assert.Null(pedido.Cpf);
@@ -179,4 +286,39 @@ public class PedidoTests
     
     private ItemDePedido CriarItemDePedido(decimal preco) => 
         ItemDePedido.Criar("Produto 1", "Produto 1", Dinheiro.Criar(preco), 1);
+
+    private Pedido CriarPedidoConfirmado(ItemDePedido item) =>
+        Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar();
+    
+    private Pedido CriarPedidoRecebido(ItemDePedido item) =>
+        Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber();
+    
+    private Pedido CriarPedidoEmPreparacao(ItemDePedido item) =>
+        Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber()
+            .Preparar();
+    
+    private Pedido CriarPedidoPronto(ItemDePedido item) =>
+        Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber()
+            .Preparar()
+            .MarcarComoPronto();
+    
+    private Pedido CriarPedidoFinalizado(ItemDePedido item) =>
+        Pedido.Criar()
+            .AdicionarItem(item)
+            .Confirmar()
+            .Receber()
+            .Preparar()
+            .MarcarComoPronto()
+            .Finalizar();
 }
