@@ -1,10 +1,9 @@
-using System.Net.Sockets;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
-using FastFood.Atendimento.Domain.Pedidos.Events;
+using FastFood.Contracts.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
-using FastFood.SharedKernel;
+using FastFood.Contracts.Abstractions;
 
 namespace FastFood.Atendimento.Domain.Pedidos;
 
@@ -18,7 +17,7 @@ public sealed class Pedido : AggregateRoot
         Codigo = GerarCodigo();
         SetStatus(new PedidoCriado());
         
-        RaiseDomainEvent(new PedidoCriadoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoCriadoDomainEvent(Id));
     }
 
     public string Codigo { get; private set; }
@@ -53,7 +52,7 @@ public sealed class Pedido : AggregateRoot
         item.SetPedido(this);
         
         _itens.Add(item);
-        RaiseDomainEvent(new ItemDePedidoAdicionadoDomainEvent(Id, item.Id));
+        RaiseDomainEvent(new DomainEvents.ItemDePedidoAdicionadoDomainEvent(Id, item.Id));
         
         return this;
     }
@@ -67,7 +66,7 @@ public sealed class Pedido : AggregateRoot
         if (item is null) return this;
         
         _itens.Remove(item);
-        RaiseDomainEvent(new ItemDePedidoRemovidoDomainEvent(Id, item.Id));
+        RaiseDomainEvent(new DomainEvents.ItemDePedidoRemovidoDomainEvent(Id, item.Id));
 
         return this;
     }
@@ -75,7 +74,7 @@ public sealed class Pedido : AggregateRoot
     public Pedido Cancelar()
     {
         Status.Cancelar(this);
-        RaiseDomainEvent(new PedidoCanceladoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoCanceladoDomainEvent(Id));
         
         return this;
     }
@@ -83,7 +82,7 @@ public sealed class Pedido : AggregateRoot
     public Pedido Confirmar()
     {
         Status.Confirmar(this);
-        RaiseDomainEvent(new PedidoConfirmadoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoConfirmadoDomainEvent(Id));
         
         return this;
     }
@@ -109,7 +108,7 @@ public sealed class Pedido : AggregateRoot
     public Pedido Finalizar()
     {
         Status.Finalizar(this);
-        RaiseDomainEvent(new PedidoFinalizadoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoFinalizadoDomainEvent(Id));
         
         return this;
     }

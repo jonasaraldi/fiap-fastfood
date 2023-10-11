@@ -1,4 +1,6 @@
-namespace FastFood.SharedKernel;
+using FastFood.SharedKernel;
+
+namespace FastFood.Contracts.Abstractions;
 
 public abstract class AggregateRoot : AuditableEntity
 {

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\FastFood.SharedKernel\FastFood.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\..\FastFood.Contracts\FastFood.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

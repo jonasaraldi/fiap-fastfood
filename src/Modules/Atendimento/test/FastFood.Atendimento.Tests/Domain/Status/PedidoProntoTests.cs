@@ -1,9 +1,9 @@
 using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
-using FastFood.Atendimento.Domain.Pedidos.Events;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
+using FastFood.Contracts.Pedidos;
 
 namespace FastFood.Atendimento.Tests.Domain.Status;
 
@@ -52,7 +52,7 @@ public class PedidoProntoTests
         pedido.Finalizar();
         
         Assert.IsType<PedidoFinalizado>(pedido.Status);
-        Assert.IsType<PedidoFinalizadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoFinalizadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     private Pedido PedidoPronto()

@@ -1,9 +1,9 @@
 using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
-using FastFood.Atendimento.Domain.Pedidos.Events;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
+using FastFood.Contracts.Pedidos;
 
 namespace FastFood.Atendimento.Tests.Domain.Status;
 
@@ -15,7 +15,7 @@ public class PedidoCriadoTests
         var pedido = PedidoCriado();
         
         Assert.IsType<PedidoCriado>(pedido.Status);
-        Assert.IsType<PedidoCriadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoCriadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     [Fact]
@@ -26,7 +26,7 @@ public class PedidoCriadoTests
         pedido.Confirmar();
         
         Assert.IsType<PedidoConfirmado>(pedido.Status);
-        Assert.IsType<PedidoConfirmadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoConfirmadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     [Fact]
@@ -44,7 +44,7 @@ public class PedidoCriadoTests
         pedido.Cancelar();
         
         Assert.IsType<PedidoCancelado>(pedido.Status);
-        Assert.IsType<PedidoCanceladoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoCanceladoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     [Fact]
