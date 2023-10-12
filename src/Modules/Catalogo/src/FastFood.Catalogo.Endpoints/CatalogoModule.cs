@@ -1,7 +1,9 @@
 ﻿using Carter;
-using FastFood.Catalogo.Application.Produtos.Commands.CriarProduto;
-using FastFood.Catalogo.Application.Produtos.Queries.GetCategorias;
-using FastFood.Catalogo.Application.Produtos.Queries.GetProdutosPorCategoria;
+using FastFood.Catalogo.Application.Services.Categorias.Queries.GetCategorias;
+using FastFood.Catalogo.Application.Services.Produtos.Commands.AtualizarProduto;
+using FastFood.Catalogo.Application.Services.Produtos.Commands.CriarProduto;
+using FastFood.Catalogo.Application.Services.Produtos.Queries.GetProdutosPorCategoria;
+using FastFood.Catalogo.Endpoints.Models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -44,6 +46,19 @@ public class CatalogoModule : ICarterModule
             [FromBody]CriarProdutoCommand command,
             CancellationToken cancellationToken) =>
         {
+            var response = await sender.Send(command, cancellationToken);
+            return Results.Ok(response);
+        });
+        
+        produto.MapPut("{id}", async (
+            Ulid id,
+            [FromBody]AtualizarProdutoRequest request,
+            ISender sender,
+            CancellationToken cancellationToken) =>
+        {
+            var command = new AtualizarProdutoCommand(
+                id, request.Nome, request.Descricao, request.Categoria, request.Preco, request.UrlDaImagem);
+            
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         });

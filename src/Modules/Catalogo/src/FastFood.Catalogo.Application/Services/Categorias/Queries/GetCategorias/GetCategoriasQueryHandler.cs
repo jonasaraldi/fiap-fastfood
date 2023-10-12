@@ -1,7 +1,7 @@
 using FastFood.Catalogo.Application.Abstractions;
 using FastFood.Catalogo.Domain.Produtos.Enums;
 
-namespace FastFood.Catalogo.Application.Produtos.Queries.GetCategorias;
+namespace FastFood.Catalogo.Application.Services.Categorias.Queries.GetCategorias;
 
 public class GetCategoriasQueryHandler : ICommandHandler<GetCategoriasQuery, GetCategoriasResponse>
 {

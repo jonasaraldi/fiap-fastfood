@@ -2,7 +2,7 @@ using FastFood.Catalogo.Application.Abstractions;
 using FastFood.Catalogo.Domain.Produtos.Enums;
 using FastFood.Catalogo.Domain.Produtos.Repositories;
 
-namespace FastFood.Catalogo.Application.Produtos.Queries.GetProdutosPorCategoria;
+namespace FastFood.Catalogo.Application.Services.Produtos.Queries.GetProdutosPorCategoria;
 
 public class GetProdutosPorCategoriaQueryHandler 
     : ICommandHandler<GetProdutosPorCategoriaQuery, ProdutosPorCategoriaResponse>
@@ -24,7 +24,7 @@ public class GetProdutosPorCategoriaQueryHandler
         return new ProdutosPorCategoriaResponse(
             produtos
                 .Select(p => new ProdutoPorCategoria(
-                    p.Nome, p.Descricao, p.Preco, p.Categoria.Nome, p.UrlDaImagem))
+                    p.Id, p.Nome, p.Descricao, p.Preco, p.Categoria.Nome, p.UrlDaImagem))
                 .ToList());
     }
 }

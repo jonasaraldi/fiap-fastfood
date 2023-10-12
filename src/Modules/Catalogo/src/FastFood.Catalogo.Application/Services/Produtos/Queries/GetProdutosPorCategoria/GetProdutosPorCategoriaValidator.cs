@@ -1,7 +1,7 @@
 using FastFood.Catalogo.Domain.Produtos.Enums;
 using FluentValidation;
 
-namespace FastFood.Catalogo.Application.Produtos.Queries.GetProdutosPorCategoria;
+namespace FastFood.Catalogo.Application.Services.Produtos.Queries.GetProdutosPorCategoria;
 
 public class GetProdutosPorCategoriaValidator : AbstractValidator<GetProdutosPorCategoriaQuery>
 {

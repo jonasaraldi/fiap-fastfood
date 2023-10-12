@@ -5,7 +5,7 @@ using FastFood.Catalogo.Domain.Produtos.Enums;
 using FastFood.Catalogo.Domain.Produtos.Repositories;
 using FastFood.Catalogo.Domain.Produtos.ValueObjects;
 
-namespace FastFood.Catalogo.Application.Produtos.Commands.CriarProduto;
+namespace FastFood.Catalogo.Application.Services.Produtos.Commands.CriarProduto;
 
 public class CriarProdutoCommandHandler 
     : ICommandHandler<CriarProdutoCommand, CriarProdutoResponse>

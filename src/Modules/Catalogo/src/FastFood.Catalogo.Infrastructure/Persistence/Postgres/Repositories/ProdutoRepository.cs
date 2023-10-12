@@ -25,4 +25,10 @@ public class ProdutoRepository : IProdutoRepository
             .OrderByDescending(p => p.CreatedAt)
             .AsNoTracking()
             .ToListAsync();
+
+    public Task<Produto?> GetByIdAsync(Ulid id, CancellationToken cancellationToken) => 
+        _dbContext.Produtos.FirstOrDefaultAsync(p => p.Id.Equals(id), cancellationToken);
+
+    public void Update(Produto produto) => 
+        _dbContext.Produtos.Update(produto);
 }
