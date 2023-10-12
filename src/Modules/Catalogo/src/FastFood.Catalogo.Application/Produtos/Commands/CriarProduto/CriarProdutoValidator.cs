@@ -12,13 +12,13 @@ public class CriarProdutoValidator : AbstractValidator<CriarProdutoCommand>
             .NotEmpty()
             .WithMessage("Nome não informado")
             .MaximumLength(Produto.NomeMaxLength)
-            .WithMessage("Nome ultrapassou o limite de 100 caracteres");
+            .WithMessage($"Nome ultrapassou o limite de {Produto.NomeMaxLength} caracteres");
 
         RuleFor(x => x.Descricao)
             .NotEmpty()
             .WithMessage("Descrição não informada")
             .MaximumLength(Produto.DescricaoMaxLength)
-            .WithMessage("Descrição ultrapassou o limite de 500 caracteres");
+            .WithMessage($"Descrição ultrapassou o limite de {Produto.DescricaoMaxLength} caracteres");
 
         RuleFor(x => x.Categoria)
             .NotEmpty()
@@ -34,6 +34,6 @@ public class CriarProdutoValidator : AbstractValidator<CriarProdutoCommand>
             .NotEmpty()
             .WithMessage("Url da imagem não informada")
             .MaximumLength(Produto.UrlDaImagemMaxLength)
-            .WithMessage("Url da imagem ultrapassou o limite de 500 caracteres");
+            .WithMessage($"Url da imagem ultrapassou o limite de {Produto.UrlDaImagemMaxLength} caracteres");
     }
 }

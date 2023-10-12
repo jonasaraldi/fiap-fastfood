@@ -1,5 +1,3 @@
-using System.Reflection;
-
 namespace FastFood.Catalogo.Domain.Produtos.Enums;
 
 public class CategoriaDeProduto
@@ -22,8 +20,9 @@ public class CategoriaDeProduto
     public string Codigo { get; set; }
     public string Nome { get; set; }
 
-    public static CategoriaDeProduto? Get(string codigo) => 
-        codigo switch 
+    public static CategoriaDeProduto? Get(string codigo)
+    {
+        return codigo switch
         {
             nameof(Lanche) => Lanche,
             nameof(Acompanhamento) => Acompanhamento,
@@ -31,4 +30,5 @@ public class CategoriaDeProduto
             nameof(Sobremesa) => Sobremesa,
             _ => null
         };
+    }
 }
