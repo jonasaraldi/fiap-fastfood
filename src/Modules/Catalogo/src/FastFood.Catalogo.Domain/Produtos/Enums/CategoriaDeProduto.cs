@@ -17,8 +17,8 @@ public class CategoriaDeProduto
         Nome = nome;
     }
 
-    public string Codigo { get; set; }
-    public string Nome { get; set; }
+    public string Codigo { get; }
+    public string Nome { get; }
 
     public static CategoriaDeProduto? Get(string codigo)
     {
@@ -31,4 +31,13 @@ public class CategoriaDeProduto
             _ => null
         };
     }
+
+    public static ICollection<CategoriaDeProduto> GetAll() =>
+        new List<CategoriaDeProduto>
+        {
+            Lanche,
+            Acompanhamento,
+            Bebida,
+            Sobremesa
+        };
 }

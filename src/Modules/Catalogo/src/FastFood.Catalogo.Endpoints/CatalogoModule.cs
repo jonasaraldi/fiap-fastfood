@@ -1,5 +1,6 @@
 ﻿using Carter;
 using FastFood.Catalogo.Application.Produtos.Commands.CriarProduto;
+using FastFood.Catalogo.Application.Produtos.Queries.GetCategorias;
 using FastFood.Catalogo.Application.Produtos.Queries.GetProdutosPorCategoria;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,18 @@ public class CatalogoModule : ICarterModule
 {   
     public void AddRoutes(IEndpointRouteBuilder app)
     {
+        var categoria = app.MapGroup("categorias");
+        
+        categoria.MapGet("", async (
+            ISender sender,
+            CancellationToken cancellationToken) =>
+        {
+            var response = await sender.Send(
+                new GetCategoriasQuery(), cancellationToken);
+            
+            return Results.Ok(response);
+        });
+        
         var produto = app.MapGroup("produtos");
         
         produto.MapGet("{categoria}", async (
