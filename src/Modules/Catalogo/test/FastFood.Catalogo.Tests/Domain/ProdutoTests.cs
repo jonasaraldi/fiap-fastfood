@@ -1,7 +1,7 @@
 using FastFood.Catalogo.Domain.Produtos;
+using FastFood.Catalogo.Domain.Produtos.Enums;
 using FastFood.Catalogo.Domain.Produtos.Exceptions;
 using FastFood.Catalogo.Domain.Produtos.ValueObjects;
-using FastFood.Catalogo.Domain.Produtos.ValueObjects.Categorias;
 using FastFood.Contracts.Produtos;
 
 namespace FastFood.Catalogo.Tests.Domain;

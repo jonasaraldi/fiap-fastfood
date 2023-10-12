@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FastFood.Catalogo.Application\FastFood.Catalogo.Application.csproj" />
+    <ProjectReference Include="..\FastFood.Catalogo.Infrastructure\FastFood.Catalogo.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

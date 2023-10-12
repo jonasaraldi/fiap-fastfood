@@ -1,6 +1,6 @@
+using FastFood.Catalogo.Domain.Produtos.Enums;
 using FastFood.Catalogo.Domain.Produtos.Exceptions;
 using FastFood.Catalogo.Domain.Produtos.ValueObjects;
-using FastFood.Catalogo.Domain.Produtos.ValueObjects.Categorias;
 using FastFood.Contracts.Abstractions;
 using FastFood.Contracts.Produtos;
 
@@ -8,6 +8,10 @@ namespace FastFood.Catalogo.Domain.Produtos;
 
 public sealed class Produto : AggregateRoot
 {
+    public const int NomeMaxLength = 100;
+    public const int DescricaoMaxLength = 500;
+    public const int UrlDaImagemMaxLength = 500;
+    
     private Produto()
     {
     }

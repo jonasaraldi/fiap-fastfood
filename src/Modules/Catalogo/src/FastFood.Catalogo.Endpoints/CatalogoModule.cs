@@ -12,12 +12,12 @@ public class CatalogoModule : ICarterModule
 {   
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        var pedido = app.MapGroup("produtos");
+        var produto = app.MapGroup("produtos");
         
-        pedido.MapGet("", () => 
+        produto.MapGet("", () => 
             Results.Ok("Lista de produtos"));
         
-        pedido.MapPost("", async (
+        produto.MapPost("", async (
             ISender sender,
             [FromBody]CriarProdutoCommand command,
             CancellationToken cancellationToken) =>

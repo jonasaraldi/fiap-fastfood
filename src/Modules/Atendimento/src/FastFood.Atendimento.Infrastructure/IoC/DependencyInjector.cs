@@ -12,7 +12,8 @@ namespace FastFood.Atendimento.Infrastructure.IoC;
 
 public static class DependencyInjector
 {
-    public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services, IConfiguration _configuration)
+    public static IServiceCollection AddInfrastructureDependencies(
+        this IServiceCollection services, IConfiguration _configuration)
     {
         services.AddDbContext<IAtendimentoDbContext, AtendimentoDbContext>(opts =>
         {

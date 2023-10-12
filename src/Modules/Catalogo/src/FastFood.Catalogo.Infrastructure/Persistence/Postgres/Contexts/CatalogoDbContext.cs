@@ -1,34 +1,35 @@
-using FastFood.Atendimento.Domain.Pedidos;
+using FastFood.Catalogo.Domain.Produtos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace FastFood.Atendimento.Infrastructure.Persistence.Postgres.Contexts;
+namespace FastFood.Catalogo.Infrastructure.Persistence.Postgres.Contexts;
 
-public interface IAtendimentoDbContext
+public interface ICatalogoDbContext
 {
-    DbSet<Pedido> Pedidos { get; set; }
+    DbSet<Produto> Produtos { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    
     DbSet<TEntity> Set<TEntity>() where TEntity : class;
 }
 
-public class AtendimentoDbContext : DbContext, IAtendimentoDbContext
+public class CatalogoDbContext : DbContext, ICatalogoDbContext
 {
     private readonly IConfiguration _configuration;
 
-    public AtendimentoDbContext(DbContextOptions<AtendimentoDbContext> options, IConfiguration configuration)
+    public CatalogoDbContext(DbContextOptions<CatalogoDbContext> options, IConfiguration configuration)
         : base(options)
     {
         _configuration = configuration;
     }
 
-    public DbSet<Pedido> Pedidos { get; set; }
-
+    public DbSet<Produto> Produtos { get; set; }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql(_configuration.GetConnectionString(GetType().Name));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AtendimentoDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -7,22 +7,22 @@ namespace FastFood.Atendimento.Infrastructure.Persistence.Postgres.Repositories;
 
 public class PedidoRepository : IPedidoRespository
 {
-    private readonly IAtendimentoDbContext _atendimentoDbContext;
+    private readonly IAtendimentoDbContext _dbContext;
 
-    public PedidoRepository(IAtendimentoDbContext atendimentoDbContext)
+    public PedidoRepository(IAtendimentoDbContext dbContext)
     {
-        _atendimentoDbContext = atendimentoDbContext;
+        _dbContext = dbContext;
     }
     
     public async Task AddAsync(Pedido pedido, CancellationToken cancellationToken) => 
-        await _atendimentoDbContext.Pedidos
+        await _dbContext.Pedidos
             .AddAsync(pedido, cancellationToken);
 
     public Task<Pedido?> GetByIdAsync(Ulid id, CancellationToken cancellationToken) =>
-        _atendimentoDbContext.Pedidos
+        _dbContext.Pedidos
             .Include(p => p.Itens)
             .FirstOrDefaultAsync(p => p.Id.Equals(id), cancellationToken);
 
     public void Update(Pedido pedido) =>
-        _atendimentoDbContext.Pedidos.Update(pedido);
+        _dbContext.Pedidos.Update(pedido);
 }
