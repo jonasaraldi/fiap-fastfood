@@ -1,4 +1,4 @@
-namespace FastFood.SharedKernel.Exceptions;
+namespace FastFood.Contracts.Abstractions.Exceptions;
 
 public class InvalidOperationDomainException : DomainException
 {

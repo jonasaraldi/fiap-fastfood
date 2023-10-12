@@ -1,4 +1,4 @@
-namespace FastFood.SharedKernel;
+namespace FastFood.Contracts.Abstractions;
 
 public abstract class Entity
 {

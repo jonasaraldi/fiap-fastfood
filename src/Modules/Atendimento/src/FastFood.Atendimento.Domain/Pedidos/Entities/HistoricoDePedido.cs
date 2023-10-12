@@ -1,5 +1,5 @@
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
-using FastFood.SharedKernel;
+using FastFood.Contracts.Abstractions;
 
 namespace FastFood.Atendimento.Domain.Pedidos.Entities;
 

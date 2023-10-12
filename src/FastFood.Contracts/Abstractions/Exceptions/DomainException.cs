@@ -1,4 +1,4 @@
-namespace FastFood.SharedKernel.Exceptions;
+namespace FastFood.Contracts.Abstractions.Exceptions;
 
 public abstract class DomainException : Exception
 {

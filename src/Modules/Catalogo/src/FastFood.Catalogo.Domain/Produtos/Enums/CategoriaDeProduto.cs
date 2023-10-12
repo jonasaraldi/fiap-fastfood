@@ -18,4 +18,5 @@ public record CategoriaDeProduto
     public static CategoriaDeProduto Lanche => new(nameof(Lanche), "Lanche");
     public static CategoriaDeProduto Acompanhamento => new(nameof(Acompanhamento), "Acompanhamento");
     public static CategoriaDeProduto Bebida => new(nameof(Bebida), "Bebida");
+    public static CategoriaDeProduto Sobremesa => new(nameof(Sobremesa), "Sobremesa");
 }

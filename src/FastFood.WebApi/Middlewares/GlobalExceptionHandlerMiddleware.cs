@@ -1,10 +1,6 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using System;
 using System.Net;
 using System.Text.Json;
-using FastFood.SharedKernel.Exceptions;
+using FastFood.Contracts.Abstractions.Exceptions;
 using FastFood.WebApi.Models;
 
 namespace FastFood.WebApi.Middlewares;
@@ -40,13 +36,17 @@ public class GlobalExceptionHandlerMiddleware
             statusCode = HttpStatusCode.BadRequest;
             message = exception.Message;
         }
-
-        statusCode = exception switch
+        
+        if (exception is NotFoundDomainException)
         {
-            NotFoundDomainException => HttpStatusCode.NotFound,
-            InvalidOperationDomainException => HttpStatusCode.BadRequest,
-            _ => statusCode
-        };
+            statusCode = HttpStatusCode.NotFound;
+        }
+        
+        if (exception is ValidationErrorException)
+        {
+            statusCode = HttpStatusCode.BadRequest;
+            message = exception.ToString();
+        }
 
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)statusCode;

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace FastFood.Atendimento.Endpoints;
 
-public class PedidoModule : ICarterModule
+public class AtendimentoModule : ICarterModule
 {   
     public void AddRoutes(IEndpointRouteBuilder app)
     {

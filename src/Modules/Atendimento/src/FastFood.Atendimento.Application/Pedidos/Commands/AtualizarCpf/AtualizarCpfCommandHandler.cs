@@ -4,6 +4,7 @@ using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
+using MediatR;
 
 namespace FastFood.Atendimento.Application.Pedidos.Commands.AtualizarCpf;
 
@@ -20,7 +21,7 @@ public sealed class AtualizarCpfCommandHandler : ICommandHandler<AtualizarCpfCom
         _unitOfWork = unitOfWork;
     }
     
-    public async Task Handle(
+    public async Task<Unit> Handle(
         AtualizarCpfCommand request, CancellationToken cancellationToken)
     {
         Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
@@ -33,5 +34,7 @@ public sealed class AtualizarCpfCommandHandler : ICommandHandler<AtualizarCpfCom
         
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
+        
+        return Unit.Value;
     }
 }

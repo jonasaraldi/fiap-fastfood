@@ -1,5 +1,5 @@
 using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Configs.Converters;
-using FastFood.SharedKernel;
+using FastFood.Contracts.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

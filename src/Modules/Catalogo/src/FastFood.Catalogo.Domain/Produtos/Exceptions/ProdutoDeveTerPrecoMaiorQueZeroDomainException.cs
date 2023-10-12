@@ -1,4 +1,4 @@
-using FastFood.SharedKernel.Exceptions;
+using FastFood.Contracts.Abstractions.Exceptions;
 
 namespace FastFood.Catalogo.Domain.Produtos.Exceptions;
 

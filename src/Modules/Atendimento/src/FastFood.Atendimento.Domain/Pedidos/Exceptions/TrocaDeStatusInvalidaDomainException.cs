@@ -1,5 +1,5 @@
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
-using FastFood.SharedKernel.Exceptions;
+using FastFood.Contracts.Abstractions.Exceptions;
 
 namespace FastFood.Atendimento.Domain.Pedidos.Exceptions;
 

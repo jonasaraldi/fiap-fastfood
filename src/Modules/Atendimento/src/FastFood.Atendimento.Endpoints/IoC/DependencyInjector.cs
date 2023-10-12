@@ -8,10 +8,11 @@ namespace FastFood.Atendimento.Endpoints.IoC;
 
 public static class DependencyInjector
 {
-    public static IServiceCollection AddAtendimentoModuleDependencies(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddAtendimentoModule(
+        this IServiceCollection services, IConfiguration configuration)
     {
         services.AddInfrastructureDependencies(configuration);
-        services.AddApplicationDependencies(configuration);
+        services.AddApplicationDependencies();
         
         return services;
     }
