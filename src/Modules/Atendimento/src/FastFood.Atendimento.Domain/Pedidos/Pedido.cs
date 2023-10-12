@@ -27,7 +27,7 @@ public sealed class Pedido : AggregateRoot
     public Cliente? Cliente { get; private set; }
     public Ulid? ClienteId { get; set; }
     public Cpf? Cpf { get; private set; }
-    public decimal ValorTotal => _itens.Sum(item => item.Quantidade * item.Preco.Valor);
+    public decimal ValorTotal => _itens.Sum(item => item.Quantidade * item.Preco);
     public bool PossuiItens => _itens.Any();
 
     private string GerarCodigo()
@@ -46,7 +46,7 @@ public sealed class Pedido : AggregateRoot
         if (item.Quantidade <= 0)
             throw new ItemDePedidoDeveTerQuantidadeMaiorQueZeroDomainException();
         
-        if(item.Preco.Valor <= 0)
+        if(item.Preco <= 0)
             throw new ItemDePedidoDeveTerPrecoMaiorQueZeroDomainException();
         
         item.SetPedido(this);

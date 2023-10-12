@@ -1,4 +1,4 @@
-namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects;
+namespace FastFood.Catalogo.Domain.Produtos.ValueObjects;
 
 public sealed class Dinheiro
 {
