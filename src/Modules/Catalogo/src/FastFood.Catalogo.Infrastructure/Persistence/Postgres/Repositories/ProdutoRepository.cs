@@ -31,4 +31,7 @@ public class ProdutoRepository : IProdutoRepository
 
     public void Update(Produto produto) => 
         _dbContext.Produtos.Update(produto);
+
+    public void Remove(Produto produto) => 
+        _dbContext.Produtos.Remove(produto);
 }

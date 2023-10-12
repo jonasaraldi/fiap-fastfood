@@ -1,6 +1,6 @@
 namespace FastFood.Catalogo.Endpoints.Models;
 
-public record AtualizarProdutoRequest(
+public record ProdutoRequest(
     string Nome, 
     string Descricao, 
     string Categoria, 

@@ -8,4 +8,5 @@ public interface IProdutoRepository
     Task<ICollection<Produto>> GetProdutosPorCategoriaAsync(CategoriaDeProduto categoria);
     Task<Produto?> GetByIdAsync(Ulid id, CancellationToken cancellationToken);
     void Update(Produto produto);
+    void Remove(Produto produto);
 }
