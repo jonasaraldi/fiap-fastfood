@@ -9,7 +9,7 @@ using MediatR;
 
 namespace FastFood.Catalogo.Application.Services.Produtos.Commands.AtualizarProduto;
 
-public class AtualizarProdutoCommandHandler : ICommandHandler<AtualizarProdutoCommand>
+public class AtualizarProdutoCommandHandler : ICommandHandler<AtualizarProdutoCommand, AtualizarProdutoResponse>
 {
     private readonly IProdutoRepository _produtoRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -22,7 +22,7 @@ public class AtualizarProdutoCommandHandler : ICommandHandler<AtualizarProdutoCo
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<Unit> Handle(
+    public async Task<AtualizarProdutoResponse> Handle(
         AtualizarProdutoCommand request, CancellationToken cancellationToken)
     {
         Produto? produto = await _produtoRepository.GetByIdAsync(request.Id, cancellationToken);
@@ -44,6 +44,6 @@ public class AtualizarProdutoCommandHandler : ICommandHandler<AtualizarProdutoCo
         _produtoRepository.Update(produto);
         await _unitOfWork.CommitAsync(cancellationToken); 
         
-        return Unit.Value;
+        return new(produto.Id);
     }
 }

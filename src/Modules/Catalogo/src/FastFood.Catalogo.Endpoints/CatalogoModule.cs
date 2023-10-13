@@ -48,7 +48,11 @@ public class CatalogoModule : ICarterModule
             CancellationToken cancellationToken) =>
         {
             var command = new CriarProdutoCommand(
-                request.Nome, request.Descricao, request.Categoria, request.Preco, request.UrlDaImagem);
+                request.Nome, 
+                request.Descricao, 
+                request.Categoria, 
+                request.Preco, 
+                request.UrlDaImagem);
             
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
@@ -61,7 +65,12 @@ public class CatalogoModule : ICarterModule
             CancellationToken cancellationToken) =>
         {
             var command = new AtualizarProdutoCommand(
-                id, request.Nome, request.Descricao, request.Categoria, request.Preco, request.UrlDaImagem);
+                id,
+                request.Nome, 
+                request.Descricao, 
+                request.Categoria, 
+                request.Preco, 
+                request.UrlDaImagem);
             
             await sender.Send(command, cancellationToken);
             return Results.NoContent();

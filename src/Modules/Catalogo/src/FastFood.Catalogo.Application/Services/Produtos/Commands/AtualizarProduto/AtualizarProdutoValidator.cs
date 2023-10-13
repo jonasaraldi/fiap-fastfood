@@ -1,4 +1,3 @@
-using FastFood.Catalogo.Application.Services.Produtos.Validators;
 using FluentValidation;
 
 namespace FastFood.Catalogo.Application.Services.Produtos.Commands.AtualizarProduto;

@@ -1,12 +1,11 @@
-using FastFood.Catalogo.Application.Services.Produtos.Commands;
 using FastFood.Catalogo.Domain.Produtos;
 using FastFood.Catalogo.Domain.Produtos.Enums;
 using FluentValidation;
 
-namespace FastFood.Catalogo.Application.Services.Produtos.Validators;
+namespace FastFood.Catalogo.Application.Services.Produtos.Commands.AtualizarProduto;
 
-public abstract class ProdutoValidator<TProdutoCommand> : AbstractValidator<TProdutoCommand>
-    where TProdutoCommand : ProdutoCommand
+public abstract class ProdutoValidator<TProdutoValidator> : AbstractValidator<TProdutoValidator>
+    where TProdutoValidator : ProdutoCommand
 {
     public ProdutoValidator()
     {
