@@ -11,8 +11,8 @@ public static class DependencyInjector
     public static IServiceCollection AddAtendimentoModule(
         this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddInfrastructureDependencies(configuration);
-        services.AddApplicationDependencies();
+        services.AddInfrastructure(configuration);
+        services.AddApplication();
         
         return services;
     }

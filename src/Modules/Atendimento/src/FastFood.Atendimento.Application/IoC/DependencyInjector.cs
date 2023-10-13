@@ -6,7 +6,7 @@ namespace FastFood.Atendimento.Application.IoC;
 
 public static class DependencyInjector
 {
-    public static IServiceCollection AddApplicationDependencies(
+    public static IServiceCollection AddApplication(
         this IServiceCollection services)
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());

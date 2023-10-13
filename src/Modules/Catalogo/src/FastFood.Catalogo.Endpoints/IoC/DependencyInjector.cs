@@ -9,16 +9,16 @@ namespace FastFood.Catalogo.Endpoints.IoC;
 public static class DependencyInjector
 {
     public static IServiceCollection AddCatalogoModule(
-        this IServiceCollection services, IConfiguration configuration)
+        this IServiceCollection services, IConfiguration configuration, WebApplicationBuilder builder)
     {
-        services.AddInfrastructureDependencies(configuration);
-        services.AddApplicationDependencies();
+        services.AddInfrastructure(configuration, builder);
+        services.AddApplication();
         
         return services;
     }
     
     public static void UseCatalogoModule(this WebApplication app)
     {
-        app.MigrateDatabase();
+        app.UseInfrastructure();
     }
 }

@@ -8,11 +8,12 @@ namespace FastFood.Catalogo.Application.IoC;
 
 public static class DependencyInjector
 {
-    public static IServiceCollection AddApplicationDependencies(
+    public static IServiceCollection AddApplication(
         this IServiceCollection services)
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggerPipelineBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         
         return services;

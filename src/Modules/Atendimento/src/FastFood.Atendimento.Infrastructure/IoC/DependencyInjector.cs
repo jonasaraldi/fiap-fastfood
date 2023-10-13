@@ -12,12 +12,12 @@ namespace FastFood.Atendimento.Infrastructure.IoC;
 
 public static class DependencyInjector
 {
-    public static IServiceCollection AddInfrastructureDependencies(
-        this IServiceCollection services, IConfiguration _configuration)
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<IAtendimentoDbContext, AtendimentoDbContext>(opts =>
         {
-            var connectionString = _configuration.GetConnectionString(nameof(AtendimentoDbContext));
+            var connectionString = configuration.GetConnectionString(nameof(AtendimentoDbContext));
             opts.UseNpgsql(connectionString, x => x.MigrationsAssembly(typeof(AtendimentoDbContext).Assembly.FullName));
         });
         
