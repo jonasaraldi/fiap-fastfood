@@ -33,7 +33,8 @@ public sealed class AdicionarItemDePedidoCommandHandler : ICommandHandler<Adicio
             request.Nome, 
             request.Descricao, 
             Dinheiro.Criar(request.Preco),
-            request.Quantidade);
+            request.Quantidade,
+            request.Observacao);
         
         pedido.AdicionarItem(item);
 

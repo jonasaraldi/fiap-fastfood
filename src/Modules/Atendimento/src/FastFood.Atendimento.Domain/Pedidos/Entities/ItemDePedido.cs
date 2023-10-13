@@ -9,12 +9,13 @@ public class ItemDePedido : AuditableEntity
     {
     }
     
-    private ItemDePedido(string nome, string descricao, Dinheiro preco, int quantidade)
+    private ItemDePedido(string nome, string descricao, Dinheiro preco, int quantidade, string? observacao)
     {
         Nome = nome;
         Descricao = descricao;
         Preco = preco;
         Quantidade = quantidade;
+        Observacao = observacao;
     }
 
     public Pedido Pedido { get; private set; }
@@ -23,6 +24,7 @@ public class ItemDePedido : AuditableEntity
     public string Descricao { get; private set; }
     public Dinheiro Preco { get; private set; }
     public int Quantidade { get; private set; }
+    public string? Observacao { get; private set; }
 
     public void SetPedido(Pedido pedido)
     {
@@ -30,6 +32,6 @@ public class ItemDePedido : AuditableEntity
         PedidoId = pedido.Id;
     }
     
-    public static ItemDePedido Criar(string nome, string descricao, Dinheiro preco, int quantidade) => 
-        new(nome, descricao, preco, quantidade);
+    public static ItemDePedido Criar(string nome, string descricao, Dinheiro preco, int quantidade, string? observacao = null) => 
+        new(nome, descricao, preco, quantidade, observacao);
 }

@@ -7,7 +7,8 @@ public sealed record AdicionarItemDePedidoCommand(
     string Nome,
     string Descricao,
     decimal Preco,
-    int Quantidade) 
+    int Quantidade,
+    string? Observacao = null)
     : ICommand<AdicionarItemDePedidoResponse>
 {
 }

@@ -1,3 +1,5 @@
+using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
+
 namespace FastFood.Atendimento.Domain.Pedidos.Repositories.InMemory;
 
 public class PedidoRepositoryInMemory : IPedidoRespository
@@ -21,5 +23,15 @@ public class PedidoRepositoryInMemory : IPedidoRespository
         if (indexOf < 0) return;
         
         Pedidos[indexOf] = pedido;
+    }
+
+    public Task<ICollection<Pedido>> GetConfirmadosDeHojeAsync(CancellationToken cancellationToken)
+    {
+        ICollection<Pedido> pedidosConfirmados = Pedidos
+            .Where(p => p.Status.Equals(StatusDePedido.Confirmado) && p.UpdatedAt >= DateTime.UtcNow.Date)
+            .OrderBy(p => p.UpdatedAt)
+            .ToList();
+        
+        return Task.FromResult(pedidosConfirmados);
     }
 }

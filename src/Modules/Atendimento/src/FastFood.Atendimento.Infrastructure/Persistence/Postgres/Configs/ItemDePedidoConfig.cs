@@ -13,6 +13,7 @@ public class ItemDePedidoConfig : AuditableEntityConfig<ItemDePedido>
         builder.Property(p => p.Nome).IsRequired();
         builder.Property(p => p.Descricao).IsRequired();
         builder.Property(p => p.Quantidade).IsRequired();
+        builder.Property(p => p.Observacao);
         
         builder.Property(p => p.PedidoId)
             .HasConversion<UlidToStringConverter>()

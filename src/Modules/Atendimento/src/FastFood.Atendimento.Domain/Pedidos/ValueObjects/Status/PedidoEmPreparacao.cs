@@ -7,7 +7,7 @@ public sealed class PedidoEmPreparacao : StatusDePedido
     {
     }
     
-    public override void Pronto(Pedido pedido)
+    public override void MarcarComoPronto(Pedido pedido)
     {
         pedido.SetStatus(new PedidoPronto());
     }

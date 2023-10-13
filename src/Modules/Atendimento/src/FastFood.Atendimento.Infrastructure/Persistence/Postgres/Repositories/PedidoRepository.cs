@@ -1,5 +1,6 @@
 using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
+using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,4 +26,11 @@ public class PedidoRepository : IPedidoRespository
 
     public void Update(Pedido pedido) =>
         _dbContext.Pedidos.Update(pedido);
+
+    public async Task<ICollection<Pedido>> GetConfirmadosDeHojeAsync(CancellationToken cancellationToken) =>
+        await _dbContext.Pedidos
+            .Include(p => p.Itens)
+            .Where(p => p.Status.Equals(StatusDePedido.Confirmado) && p.UpdatedAt >= DateTime.UtcNow.Date)
+            .OrderBy(p => p.UpdatedAt)
+            .ToListAsync(cancellationToken);
 }

@@ -4,4 +4,7 @@ public record AdicionarItemDePedidoRequest(
     string Nome,
     string Descricao,
     decimal Preco,
-    int Quantidade);
+    int Quantidade,
+    string? Observacao)
+{
+}

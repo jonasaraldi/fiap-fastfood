@@ -101,7 +101,7 @@ public sealed class Pedido : AggregateRoot
     
     public Pedido MarcarComoPronto()
     {
-        Status.Pronto(this);
+        Status.MarcarComoPronto(this);
         return this;
     }
     

@@ -6,6 +6,7 @@ using FastFood.Atendimento.Application.Services.Pedidos.Commands.ConfirmarPedido
 using FastFood.Atendimento.Application.Services.Pedidos.Commands.CriarPedido;
 using FastFood.Atendimento.Application.Services.Pedidos.Commands.FinalizarPedido;
 using FastFood.Atendimento.Application.Services.Pedidos.Commands.RemoverItemDePedido;
+using FastFood.Atendimento.Application.Services.Pedidos.Queries.GetPedidosConfirmados;
 using FastFood.Atendimento.Endpoints.Models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +23,18 @@ public class AtendimentoModule : ICarterModule
         var pedido = app.MapGroup("pedidos");
         
         pedido.MapGet("", () => 
-            Results.Ok("Lista de pedidos"));
+            Results.Ok("Lista de pedidos ordenados por mais recente"));
+        
+        pedido.MapGet("confirmados", async (
+            ISender sender,
+            CancellationToken cancellationToken) =>
+        {
+            var response = await sender.Send(new GetPedidosConfirmadosQuery(), cancellationToken);
+            return Results.Ok(response);
+        });
+        
+        pedido.MapPut("{pedidoId}/cliente", () => 
+            Results.Ok("Informar nome e email do cliente no pedido"));
         
         pedido.MapPost("", async (
             ISender sender,
@@ -50,7 +62,7 @@ public class AtendimentoModule : ICarterModule
             CancellationToken cancellationToken) =>
         {
             AdicionarItemDePedidoCommand command = new(
-                pedidoId, request.Nome, request.Descricao, request.Preco, request.Quantidade);
+                pedidoId, request.Nome, request.Descricao, request.Preco, request.Quantidade, request.Observacao);
             
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
@@ -87,14 +99,14 @@ public class AtendimentoModule : ICarterModule
             return Results.Ok(response);
         });
         
-        pedido.MapPut("{pedidoId}/finalizar", async (
-            Ulid pedidoId,
-            ISender sender, 
-            CancellationToken cancellationToken) =>
-        {
-            var command = new FinalizarPedidoCommand(pedidoId);
-            var response = await sender.Send(command, cancellationToken);
-            return Results.Ok(response);
-        });
+        // pedido.MapPut("{pedidoId}/finalizar", async (
+        //     Ulid pedidoId,
+        //     ISender sender, 
+        //     CancellationToken cancellationToken) =>
+        // {
+        //     var command = new FinalizarPedidoCommand(pedidoId);
+        //     var response = await sender.Send(command, cancellationToken);
+        //     return Results.Ok(response);
+        // });
     }
 }
