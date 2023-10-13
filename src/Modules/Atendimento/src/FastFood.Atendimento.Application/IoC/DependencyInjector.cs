@@ -1,4 +1,6 @@
 using System.Reflection;
+using FastFood.Atendimento.Application.Behaviors;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +12,9 @@ public static class DependencyInjector
         this IServiceCollection services)
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggerPipelineBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         
         return services;
     }

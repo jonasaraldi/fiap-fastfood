@@ -9,9 +9,9 @@ namespace FastFood.Atendimento.Endpoints.IoC;
 public static class DependencyInjector
 {
     public static IServiceCollection AddAtendimentoModule(
-        this IServiceCollection services, IConfiguration configuration)
+        this IServiceCollection services, IConfiguration configuration, WebApplicationBuilder builder)
     {
-        services.AddInfrastructure(configuration);
+        services.AddInfrastructure(configuration, builder);
         services.AddApplication();
         
         return services;
@@ -19,6 +19,6 @@ public static class DependencyInjector
     
     public static void UseAtendimentoModule(this WebApplication app)
     {
-        app.MigrateDatabase();
+        app.UseInfrastructure();
     }
 }

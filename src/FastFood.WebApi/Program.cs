@@ -10,7 +10,7 @@ builder.Services.AddCarter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAtendimentoModule(builder.Configuration);
+builder.Services.AddAtendimentoModule(builder.Configuration, builder);
 builder.Services.AddCatalogoModule(builder.Configuration, builder);
 
 builder.Services.AddHealthCheck(builder.Configuration);

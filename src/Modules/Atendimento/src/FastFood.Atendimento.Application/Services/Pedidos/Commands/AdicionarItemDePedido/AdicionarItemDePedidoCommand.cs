@@ -1,6 +1,6 @@
 using FastFood.Atendimento.Application.Abstractions;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.AdicionarItemDePedido;
 
 public sealed record AdicionarItemDePedidoCommand(
     Ulid PedidoId,

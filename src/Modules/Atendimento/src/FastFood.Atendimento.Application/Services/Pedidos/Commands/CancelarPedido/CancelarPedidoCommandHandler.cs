@@ -4,33 +4,34 @@ using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.RemoverItemDePedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.CancelarPedido;
 
-public sealed class RemoverItemDePedidoCommandHandler : ICommandHandler<RemoverItemDePedidoCommand, RemoverItemDePedidoResponse>
+public class CancelarPedidoCommandHandler : ICommandHandler<CancelarPedidoCommand, CancelarPedidoResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public RemoverItemDePedidoCommandHandler(
-        IPedidoRespository pedidoRespository,
+    public CancelarPedidoCommandHandler(
+        IPedidoRespository pedidoRespository, 
         IUnitOfWork unitOfWork)
     {
         _pedidoRespository = pedidoRespository;
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<RemoverItemDePedidoResponse> Handle(
-        RemoverItemDePedidoCommand request, CancellationToken cancellationToken)
+    public async Task<CancelarPedidoResponse> Handle(
+        CancelarPedidoCommand request, CancellationToken cancellationToken)
     {
         Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
-        
+
         if (pedido is null)
             throw new PedidoNaoEncontradoDomainException();
         
-        pedido.RemoverItem(request.ItemDePedidoId);
+        pedido.Cancelar();
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
         
-        return new(request.PedidoId, request.ItemDePedidoId, pedido.ValorTotal);
+        return new CancelarPedidoResponse(
+            pedido.Id, pedido.Status.Descricao);
     }
 }

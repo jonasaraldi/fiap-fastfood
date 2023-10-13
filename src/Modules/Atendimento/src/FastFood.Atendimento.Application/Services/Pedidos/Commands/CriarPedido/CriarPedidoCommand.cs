@@ -1,6 +1,6 @@
 using FastFood.Atendimento.Application.Abstractions;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.CriarPedido;
 
 public record CriarPedidoCommand : ICommand<CriarPedidoResponse>
 {

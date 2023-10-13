@@ -6,7 +6,7 @@ using FastFood.Atendimento.Domain.Pedidos.Repositories;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using MediatR;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.AtualizarCpf;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.AtualizarCpf;
 
 public sealed class AtualizarCpfCommandHandler : ICommandHandler<AtualizarCpfCommand>
 {
@@ -29,7 +29,7 @@ public sealed class AtualizarCpfCommandHandler : ICommandHandler<AtualizarCpfCom
         if (pedido is null) 
             throw new PedidoNaoEncontradoDomainException();
 
-        var cpf = Cpf.Criar(request.cpf);
+        var cpf = Cpf.Criar(request.Cpf);
         pedido.SetCpf(cpf);
         
         _pedidoRespository.Update(pedido);

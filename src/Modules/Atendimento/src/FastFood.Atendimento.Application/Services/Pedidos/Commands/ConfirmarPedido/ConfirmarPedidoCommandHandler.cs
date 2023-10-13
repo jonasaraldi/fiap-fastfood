@@ -1,19 +1,17 @@
 using FastFood.Atendimento.Application.Abstractions;
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork;
 using FastFood.Atendimento.Domain.Pedidos;
-using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
-using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.AdicionarItemDePedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.ConfirmarPedido;
 
-public sealed class AdicionarItemDePedidoCommandHandler : ICommandHandler<AdicionarItemDePedidoCommand, AdicionarItemDePedidoResponse>
+public sealed class ConfirmarPedidoCommandHandler : ICommandHandler<ConfirmarPedidoCommand, ConfirmarPedidoResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public AdicionarItemDePedidoCommandHandler(
+    public ConfirmarPedidoCommandHandler(
         IPedidoRespository pedidoRespository,
         IUnitOfWork unitOfWork)
     {
@@ -21,25 +19,19 @@ public sealed class AdicionarItemDePedidoCommandHandler : ICommandHandler<Adicio
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<AdicionarItemDePedidoResponse> Handle(
-        AdicionarItemDePedidoCommand request, CancellationToken cancellationToken)
+    public async Task<ConfirmarPedidoResponse> Handle(
+        ConfirmarPedidoCommand request, CancellationToken cancellationToken)
     {
         Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
 
-        if (pedido is null) 
+        if (pedido is null)
             throw new PedidoNaoEncontradoDomainException();
-
-        ItemDePedido item = ItemDePedido.Criar(
-            request.Nome, 
-            request.Descricao, 
-            Dinheiro.Criar(request.Preco),
-            request.Quantidade);
         
-        pedido.AdicionarItem(item);
-
+        pedido.Confirmar();
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
-
-        return new(pedido.Id, item.Id, pedido.ValorTotal);
+        
+        return new ConfirmarPedidoResponse(
+            pedido.Id, pedido.Status.Descricao, pedido.ValorTotal);
     }
 }

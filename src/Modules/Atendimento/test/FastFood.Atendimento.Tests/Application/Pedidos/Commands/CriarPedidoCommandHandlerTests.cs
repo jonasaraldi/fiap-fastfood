@@ -1,6 +1,6 @@
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork;
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork.InMemory;
-using FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
+using FastFood.Atendimento.Application.Services.Pedidos.Commands.CriarPedido;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
 using FastFood.Atendimento.Domain.Pedidos.Repositories.InMemory;
 

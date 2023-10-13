@@ -1,6 +1,6 @@
 using FastFood.Atendimento.Application.Abstractions;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.CancelarPedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.CancelarPedido;
 
 public record CancelarPedidoCommand(Ulid PedidoId) 
     : ICommand<CancelarPedidoResponse>

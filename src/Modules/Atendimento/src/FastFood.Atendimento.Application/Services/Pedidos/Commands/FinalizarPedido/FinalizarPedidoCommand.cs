@@ -1,6 +1,6 @@
 using FastFood.Atendimento.Application.Abstractions;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.FinalizarPedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.FinalizarPedido;
 
 public record FinalizarPedidoCommand(Ulid PedidoId) : ICommand<FinalizarPedidoResponse>
 {

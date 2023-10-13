@@ -1,6 +1,6 @@
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork;
 using FastFood.Atendimento.Application.Abstractions.UnitsOfWork.InMemory;
-using FastFood.Atendimento.Application.Pedidos.Commands.FinalizarPedido;
+using FastFood.Atendimento.Application.Services.Pedidos.Commands.FinalizarPedido;
 using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;

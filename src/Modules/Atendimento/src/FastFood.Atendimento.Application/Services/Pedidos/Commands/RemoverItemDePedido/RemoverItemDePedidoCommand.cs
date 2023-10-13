@@ -1,6 +1,6 @@
 using FastFood.Atendimento.Application.Abstractions;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.RemoverItemDePedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.RemoverItemDePedido;
 
 public record RemoverItemDePedidoCommand(Ulid PedidoId, Ulid ItemDePedidoId) 
     : ICommand<RemoverItemDePedidoResponse>

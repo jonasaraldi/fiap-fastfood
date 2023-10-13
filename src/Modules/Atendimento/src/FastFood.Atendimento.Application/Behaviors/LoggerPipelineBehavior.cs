@@ -1,8 +1,8 @@
-using FastFood.Catalogo.Application.Abstractions;
+using FastFood.Atendimento.Application.Abstractions;
 using FastFood.Contracts.Abstractions.Exceptions;
 using MediatR;
 
-namespace FastFood.Catalogo.Application.Behaviors;
+namespace FastFood.Atendimento.Application.Behaviors;
 
 public class LoggerPipelineBehavior <TCommand, TResponse> : IPipelineBehavior<TCommand, TResponse>
     where TCommand : ICommand<TResponse>

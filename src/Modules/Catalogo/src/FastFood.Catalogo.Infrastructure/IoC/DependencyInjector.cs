@@ -5,7 +5,6 @@ using FastFood.Catalogo.Infrastructure.Persistence.Postgres;
 using FastFood.Catalogo.Infrastructure.Persistence.Postgres.Contexts;
 using FastFood.Catalogo.Infrastructure.Persistence.Postgres.Repositories;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,7 +37,6 @@ public static class DependencyInjector
     
     public static void UseInfrastructure(this WebApplication app)
     {
-        app.ConfigureLogging();
         app.MigrateDatabase();
     }
 
@@ -47,30 +45,5 @@ public static class DependencyInjector
         using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
         using var context = serviceScope.ServiceProvider.GetService<CatalogoDbContext>();
             context.Database.Migrate();
-    }
-    
-    private static void ConfigureLogging(this WebApplication app)
-    {
-        app.UseSerilogRequestLogging(options =>
-        {
-            options.GetLevel = (httpContext, elapsed, ex) =>
-            {
-                string[] ignorePaths = { "swagger", "health", "health-ui" };
-                string path = httpContext.Request.Path.ToString();
-
-                bool existsPathsToIgnore = ignorePaths.Any(ignorePath => path.Contains(ignorePath));
-                if (existsPathsToIgnore) return LogEventLevel.Debug;
-                    
-                int statusCode = httpContext.Response.StatusCode;
-                return statusCode switch
-                {
-                    >= 500 => LogEventLevel.Fatal,
-                    >= 400 => LogEventLevel.Error,
-                    >= 300 => LogEventLevel.Warning,
-                    >= 200 => LogEventLevel.Information,
-                    _ => LogEventLevel.Information
-                };
-            };
-        });
     }
 }

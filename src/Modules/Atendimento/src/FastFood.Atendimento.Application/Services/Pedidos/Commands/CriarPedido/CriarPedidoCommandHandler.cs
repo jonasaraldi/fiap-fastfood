@@ -3,7 +3,7 @@ using FastFood.Atendimento.Application.Abstractions.UnitsOfWork;
 using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Repositories;
 
-namespace FastFood.Atendimento.Application.Pedidos.Commands.CriarPedido;
+namespace FastFood.Atendimento.Application.Services.Pedidos.Commands.CriarPedido;
 
 public sealed class CriarPedidoCommandHandler : ICommandHandler<CriarPedidoCommand, CriarPedidoResponse>
 {
