@@ -2,6 +2,7 @@
 using FastFood.Catalogo.Application.Services.Categorias.Queries.GetCategorias;
 using FastFood.Catalogo.Application.Services.Produtos.Commands.AtualizarProduto;
 using FastFood.Catalogo.Application.Services.Produtos.Commands.CriarProduto;
+using FastFood.Catalogo.Application.Services.Produtos.Commands.EditarProduto;
 using FastFood.Catalogo.Application.Services.Produtos.Commands.RemoverProduto;
 using FastFood.Catalogo.Application.Services.Produtos.Queries.GetProdutosPorCategoria;
 using FastFood.Catalogo.Endpoints.Models;
@@ -47,7 +48,7 @@ public class CatalogoModule : ICarterModule
             [FromBody]ProdutoRequest request,
             CancellationToken cancellationToken) =>
         {
-            var command = new CriarProdutoCommand(
+            var command = new AdicionarProdutoCommand(
                 request.Nome, 
                 request.Descricao, 
                 request.Categoria, 
@@ -64,7 +65,7 @@ public class CatalogoModule : ICarterModule
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            var command = new AtualizarProdutoCommand(
+            var command = new EditarProdutoCommand(
                 id,
                 request.Nome, 
                 request.Descricao, 

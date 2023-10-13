@@ -7,13 +7,13 @@ using FastFood.Catalogo.Domain.Produtos.ValueObjects;
 
 namespace FastFood.Catalogo.Application.Services.Produtos.Commands.CriarProduto;
 
-public class CriarProdutoCommandHandler 
-    : ICommandHandler<CriarProdutoCommand, CriarProdutoResponse>
+public class AdicionarProdutoCommandHandler 
+    : ICommandHandler<AdicionarProdutoCommand, AdicionarProdutoResponse>
 {
     private readonly IProdutoRepository _produtoRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CriarProdutoCommandHandler(
+    public AdicionarProdutoCommandHandler(
         IProdutoRepository produtoRepository, 
         IUnitOfWork unitOfWork)
     {
@@ -21,8 +21,8 @@ public class CriarProdutoCommandHandler
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<CriarProdutoResponse> Handle(
-        CriarProdutoCommand request, CancellationToken cancellationToken)
+    public async Task<AdicionarProdutoResponse> Handle(
+        AdicionarProdutoCommand request, CancellationToken cancellationToken)
     {
         Produto produto = Produto.Criar(
             request.Nome, 

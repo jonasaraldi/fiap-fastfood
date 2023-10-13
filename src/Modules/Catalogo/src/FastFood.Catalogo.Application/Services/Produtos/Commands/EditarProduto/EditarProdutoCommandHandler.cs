@@ -5,16 +5,15 @@ using FastFood.Catalogo.Domain.Produtos.Enums;
 using FastFood.Catalogo.Domain.Produtos.Exceptions;
 using FastFood.Catalogo.Domain.Produtos.Repositories;
 using FastFood.Catalogo.Domain.Produtos.ValueObjects;
-using MediatR;
 
-namespace FastFood.Catalogo.Application.Services.Produtos.Commands.AtualizarProduto;
+namespace FastFood.Catalogo.Application.Services.Produtos.Commands.EditarProduto;
 
-public class AtualizarProdutoCommandHandler : ICommandHandler<AtualizarProdutoCommand, AtualizarProdutoResponse>
+public class EditarProdutoCommandHandler : ICommandHandler<EditarProdutoCommand, EditarProdutoResponse>
 {
     private readonly IProdutoRepository _produtoRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarProdutoCommandHandler(
+    public EditarProdutoCommandHandler(
         IProdutoRepository produtoRepository,
         IUnitOfWork unitOfWork)
     {
@@ -22,8 +21,8 @@ public class AtualizarProdutoCommandHandler : ICommandHandler<AtualizarProdutoCo
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<AtualizarProdutoResponse> Handle(
-        AtualizarProdutoCommand request, CancellationToken cancellationToken)
+    public async Task<EditarProdutoResponse> Handle(
+        EditarProdutoCommand request, CancellationToken cancellationToken)
     {
         Produto? produto = await _produtoRepository.GetByIdAsync(request.Id, cancellationToken);
         
