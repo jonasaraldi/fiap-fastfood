@@ -31,7 +31,6 @@ public sealed class ConfirmarPedidoCommandHandler : ICommandHandler<ConfirmarPed
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
         
-        return new ConfirmarPedidoResponse(
-            pedido.Id, pedido.Status.Descricao, pedido.ValorTotal);
+        return new(pedido.Id, pedido.Status.Descricao, pedido.ValorTotal);
     }
 }

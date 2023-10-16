@@ -26,11 +26,12 @@ public class GetPedidosConfirmadosQueryHandler : ICommandHandler<GetPedidosConfi
                 pedido.Itens
                     .Select(item => new ItemDePedidoConfirmadoResponse(
                         item.Id, 
-                        item.Nome, 
+                        item.Nome,
+                        item.Descricao,
                         item.Quantidade, 
                         item.Observacao)
                 )));
         
-        return new GetPedidosConfirmadosResponse(pedidosConfirmadosResponse);
+        return new(pedidosConfirmadosResponse);
     }
 }

@@ -18,5 +18,6 @@ public sealed record PedidoConfirmadoResponse(
 public sealed record ItemDePedidoConfirmadoResponse(
     Ulid Id,
     string Nome,
+    string Descricao,
     int Quantidade,
     string? Observacao);

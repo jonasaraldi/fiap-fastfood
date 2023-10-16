@@ -31,7 +31,6 @@ public class CancelarPedidoCommandHandler : ICommandHandler<CancelarPedidoComman
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
         
-        return new CancelarPedidoResponse(
-            pedido.Id, pedido.Status.Descricao);
+        return new(pedido.Id, pedido.Status.Descricao);
     }
 }

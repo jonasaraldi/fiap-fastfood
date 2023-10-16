@@ -34,4 +34,15 @@ public class PedidoRepositoryInMemory : IPedidoRespository
         
         return Task.FromResult(pedidosConfirmados);
     }
+
+    public Task<ICollection<Pedido>> GetPorDataAsync(
+        DateTime dataInicial, DateTime dataFinal, CancellationToken cancellationToken)
+    {
+        ICollection<Pedido> pedidos = Pedidos
+            .Where(p => p.CreatedAt >= dataInicial && p.CreatedAt <= dataFinal)
+            .OrderByDescending(p => p.CreatedAt)
+            .ToList();
+
+        return Task.FromResult(pedidos);
+    }
 }

@@ -32,5 +32,16 @@ public class PedidoRepository : IPedidoRespository
             .Include(p => p.Itens)
             .Where(p => p.Status.Equals(StatusDePedido.Confirmado) && p.UpdatedAt >= DateTime.UtcNow.Date)
             .OrderBy(p => p.UpdatedAt)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+    public async Task<ICollection<Pedido>> GetPorDataAsync(
+        DateTime dataInicial, DateTime dataFinal, CancellationToken cancellationToken) =>
+        await _dbContext.Pedidos
+            .Include(p => p.Itens)
+            .Include(p => p.Historicos)
+            .Where(p => p.CreatedAt >= dataInicial && p.CreatedAt <= dataFinal)
+            .OrderByDescending(p => p.CreatedAt)
+            .AsNoTracking()
             .ToListAsync(cancellationToken);
 }
