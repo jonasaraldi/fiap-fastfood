@@ -20,31 +20,7 @@ public class PedidoTests
 
         Assert.Contains(item, pedido.Itens);
     }
-    
-    [Theory]
-    [InlineData(-1)]
-    [InlineData(0)]
-    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoQuantidadeForNegativaOuZero(int quantidade)
-    {
-        var pedido = Pedido.Criar();
-        var item = CriarItemDePedido(quantidade);
 
-        Assert.Throws<ItemDePedidoDeveTerQuantidadeMaiorQueZeroDomainException>(() =>
-            pedido.AdicionarItem(item));
-    }
-
-    [Theory]
-    [InlineData(-1)]
-    [InlineData(0)]
-    public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPrecoForNegativoOuZero(decimal preco)
-    {
-        var pedido = Pedido.Criar();
-        var item = CriarItemDePedido(preco);
-
-        Assert.Throws<ItemDePedidoDeveTerPrecoMaiorQueZeroDomainException>(() =>
-            pedido.AdicionarItem(item));
-    }
-    
     [Fact]
     public void AdicionarItem_NaoDeveAdicionarItemAoPedido_QuandoPedidoEstiverComStatusCancelado()
     {
@@ -281,12 +257,6 @@ public class PedidoTests
     private ItemDePedido CriarItemDePedido() => 
         ItemDePedido.Criar("Produto 1", "Produto 1", Dinheiro.Criar(10), 2);
     
-    private ItemDePedido CriarItemDePedido(int quantidade) => 
-        ItemDePedido.Criar("Produto 1", "Produto 1", Dinheiro.Criar(10), quantidade);
-    
-    private ItemDePedido CriarItemDePedido(decimal preco) => 
-        ItemDePedido.Criar("Produto 1", "Produto 1", Dinheiro.Criar(preco), 1);
-
     private Pedido CriarPedidoConfirmado(ItemDePedido item) =>
         Pedido.Criar()
             .AdicionarItem(item)

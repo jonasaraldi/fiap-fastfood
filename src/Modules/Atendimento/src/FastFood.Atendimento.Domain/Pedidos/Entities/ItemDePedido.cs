@@ -1,3 +1,4 @@
+using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 using FastFood.Contracts.Abstractions;
 
@@ -32,6 +33,14 @@ public class ItemDePedido : AuditableEntity
         PedidoId = pedido.Id;
     }
     
-    public static ItemDePedido Criar(string nome, string descricao, Dinheiro preco, int quantidade, string? observacao = null) => 
-        new(nome, descricao, preco, quantidade, observacao);
+    public static ItemDePedido Criar(string nome, string descricao, Dinheiro preco, int quantidade, string? observacao = null)
+    {
+        if (quantidade <= 0)
+            throw new ItemDePedidoDeveTerQuantidadeMaiorQueZeroDomainException();
+        
+        if(preco <= 0)
+            throw new ItemDePedidoDeveTerPrecoMaiorQueZeroDomainException();
+        
+        return new ItemDePedido(nome, descricao, preco, quantidade, observacao);
+    }
 }
