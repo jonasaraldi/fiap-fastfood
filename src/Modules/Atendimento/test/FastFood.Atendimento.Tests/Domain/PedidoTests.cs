@@ -2,7 +2,6 @@ using FastFood.Atendimento.Domain.Pedidos;
 using FastFood.Atendimento.Domain.Pedidos.Entities;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 using FastFood.Atendimento.Domain.Pedidos.ValueObjects;
-using FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;
 
 namespace FastFood.Atendimento.Tests.Domain;
 

@@ -4,10 +4,11 @@ namespace FastFood.Contracts.Pedidos;
 
 public static class DomainEvents
 {
-    public record ItemDePedidoAdicionadoDomainEvent(Ulid PedidoId, Ulid ItemDePedidoId) : DomainEvent;
-    public record ItemDePedidoRemovidoDomainEvent(Ulid PedidoId, Ulid ItemDePedidoId) : DomainEvent;
-    public record PedidoCanceladoDomainEvent(Ulid PedidoId) : DomainEvent;
-    public record PedidoConfirmadoDomainEvent(Ulid PedidoId) : DomainEvent;
-    public record PedidoCriadoDomainEvent(Ulid PedidoId) : DomainEvent;
-    public record PedidoFinalizadoDomainEvent(Ulid PedidoId) : DomainEvent;
+    public record ItemDePedidoAdicionado(Ulid PedidoId, Ulid ItemDePedidoId) : DomainEvent;
+    public record ItemDePedidoRemovido(Ulid PedidoId, Ulid ItemDePedidoId) : DomainEvent;
+    public record ClienteIdentificado(Ulid PedidoId, Ulid ClienteId, string Nome, string Email) : DomainEvent;
+    public record PedidoCancelado(Ulid PedidoId) : DomainEvent;
+    public record PedidoConfirmado(Ulid PedidoId) : DomainEvent;
+    public record PedidoCriado(Ulid PedidoId) : DomainEvent;
+    public record PedidoFinalizado(Ulid PedidoId) : DomainEvent;
 }

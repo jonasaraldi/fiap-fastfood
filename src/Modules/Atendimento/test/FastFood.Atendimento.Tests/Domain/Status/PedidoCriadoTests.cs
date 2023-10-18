@@ -15,7 +15,7 @@ public class PedidoCriadoTests
         var pedido = PedidoCriado();
         
         Assert.IsType<PedidoCriado>(pedido.Status);
-        Assert.IsType<DomainEvents.PedidoCriadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoCriado>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     [Fact]
@@ -26,7 +26,7 @@ public class PedidoCriadoTests
         pedido.Confirmar();
         
         Assert.IsType<PedidoConfirmado>(pedido.Status);
-        Assert.IsType<DomainEvents.PedidoConfirmadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoConfirmado>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     [Fact]
@@ -44,7 +44,7 @@ public class PedidoCriadoTests
         pedido.Cancelar();
         
         Assert.IsType<PedidoCancelado>(pedido.Status);
-        Assert.IsType<DomainEvents.PedidoCanceladoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoCancelado>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     [Fact]

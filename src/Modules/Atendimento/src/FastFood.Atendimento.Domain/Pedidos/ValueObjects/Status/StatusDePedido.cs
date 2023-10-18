@@ -1,4 +1,3 @@
-using System.Reflection;
 using FastFood.Atendimento.Domain.Pedidos.Exceptions;
 
 namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects.Status;

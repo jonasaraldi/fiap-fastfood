@@ -24,7 +24,7 @@ public sealed class Produto : AggregateRoot
         SetPreco(preco);
         SetUrlDaImagem(urlDaImagem);
         
-        RaiseDomainEvent(new DomainEvents.ProdutoCriadoDomainEvent(
+        RaiseDomainEvent(new DomainEvents.ProdutoCriado(
             Id, Nome, Descricao, Categoria.Nome, Preco, UrlDaImagem));
     }
 

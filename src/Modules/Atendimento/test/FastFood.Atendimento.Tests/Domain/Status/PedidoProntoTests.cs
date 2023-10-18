@@ -52,7 +52,7 @@ public class PedidoProntoTests
         pedido.Finalizar();
         
         Assert.IsType<PedidoFinalizado>(pedido.Status);
-        Assert.IsType<DomainEvents.PedidoFinalizadoDomainEvent>(pedido.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.PedidoFinalizado>(pedido.GetDomainEvents().LastOrDefault());
     }
     
     private Pedido PedidoPronto()

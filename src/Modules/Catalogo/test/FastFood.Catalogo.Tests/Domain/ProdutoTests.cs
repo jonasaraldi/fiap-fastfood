@@ -24,7 +24,7 @@ public class ProdutoTests
         Assert.Equal(categoria, produto.Categoria);
         Assert.Equal(preco, produto.Preco);
         Assert.Equal(urlDaImagem, produto.UrlDaImagem);
-        Assert.IsType<DomainEvents.ProdutoCriadoDomainEvent>(produto.GetDomainEvents().LastOrDefault());
+        Assert.IsType<DomainEvents.ProdutoCriado>(produto.GetDomainEvents().LastOrDefault());
     }
     
     [Fact]

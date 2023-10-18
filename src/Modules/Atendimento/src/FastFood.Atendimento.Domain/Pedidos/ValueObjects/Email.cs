@@ -17,4 +17,6 @@ public sealed record Email
     {
         return new(valor);
     }
+    
+    public static implicit operator string(Email email) => email.Valor;
 }

@@ -5,6 +5,7 @@ using FastFood.Atendimento.Application.Services.Pedidos.Commands.CancelarPedido;
 using FastFood.Atendimento.Application.Services.Pedidos.Commands.ConfirmarPedido;
 using FastFood.Atendimento.Application.Services.Pedidos.Commands.CriarPedido;
 using FastFood.Atendimento.Application.Services.Pedidos.Commands.FinalizarPedido;
+using FastFood.Atendimento.Application.Services.Pedidos.Commands.IdentificarCliente;
 using FastFood.Atendimento.Application.Services.Pedidos.Commands.RemoverItemDePedido;
 using FastFood.Atendimento.Application.Services.Pedidos.Queries.GetConsultaDePedidos;
 using FastFood.Atendimento.Application.Services.Pedidos.Queries.GetPedidosConfirmados;
@@ -44,8 +45,16 @@ public class AtendimentoModule : ICarterModule
             return Results.Ok(response);
         });
         
-        pedido.MapPut("{pedidoId}/cliente", () => 
-            Results.Ok("Informar nome e email do cliente no pedido"));
+        pedido.MapPut("{pedidoId}/cliente", async (
+            Ulid pedidoId,
+            [FromBody]IdentificarClienteRequest request,
+            ISender sender,
+            CancellationToken cancellationToken) =>
+        {
+            IdentificarClienteCommand command = new(pedidoId, request.Nome, request.Email); 
+            await sender.Send(command, cancellationToken);
+            return Results.NoContent();
+        });
         
         pedido.MapPost("", async (
             ISender sender,
@@ -61,7 +70,7 @@ public class AtendimentoModule : ICarterModule
             ISender sender, 
             CancellationToken cancellationToken) =>
         {
-            var command = new AtualizarCpfCommand(pedidoId, request.cpf);
+            AtualizarCpfCommand command = new(pedidoId, request.cpf);
             await sender.Send(command, cancellationToken);
             return Results.NoContent();
         });
@@ -85,7 +94,7 @@ public class AtendimentoModule : ICarterModule
             ISender sender, 
             CancellationToken cancellationToken) =>
         {
-            var command = new RemoverItemDePedidoCommand(pedidoId, id);
+            RemoverItemDePedidoCommand command = new(pedidoId, id);
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         });
@@ -95,7 +104,7 @@ public class AtendimentoModule : ICarterModule
             ISender sender, 
             CancellationToken cancellationToken) =>
         {
-            var command = new ConfirmarPedidoCommand(pedidoId);
+            ConfirmarPedidoCommand command = new(pedidoId);
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         });
@@ -105,7 +114,7 @@ public class AtendimentoModule : ICarterModule
             ISender sender, 
             CancellationToken cancellationToken) =>
         {
-            var command = new CancelarPedidoCommand(pedidoId);
+            CancelarPedidoCommand command = new(pedidoId);
             var response = await sender.Send(command, cancellationToken);
             return Results.Ok(response);
         });

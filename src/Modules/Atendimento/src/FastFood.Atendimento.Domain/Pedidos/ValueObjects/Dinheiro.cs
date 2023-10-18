@@ -1,6 +1,6 @@
 namespace FastFood.Atendimento.Domain.Pedidos.ValueObjects;
 
-public sealed class Dinheiro
+public sealed record Dinheiro
 {
     private const string MoedaBrasileira = "BRL";
 

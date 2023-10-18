@@ -17,7 +17,7 @@ public sealed class Pedido : AggregateRoot
         Codigo = GerarCodigo();
         SetStatus(new PedidoCriado());
         
-        RaiseDomainEvent(new DomainEvents.PedidoCriadoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoCriado(Id));
     }
 
     public string Codigo { get; private set; }
@@ -46,7 +46,7 @@ public sealed class Pedido : AggregateRoot
         item.SetPedido(this);
         
         _itens.Add(item);
-        RaiseDomainEvent(new DomainEvents.ItemDePedidoAdicionadoDomainEvent(Id, item.Id));
+        RaiseDomainEvent(new DomainEvents.ItemDePedidoAdicionado(Id, item.Id));
         
         return this;
     }
@@ -60,7 +60,7 @@ public sealed class Pedido : AggregateRoot
         if (item is null) return this;
         
         _itens.Remove(item);
-        RaiseDomainEvent(new DomainEvents.ItemDePedidoRemovidoDomainEvent(Id, item.Id));
+        RaiseDomainEvent(new DomainEvents.ItemDePedidoRemovido(Id, item.Id));
 
         return this;
     }
@@ -68,7 +68,7 @@ public sealed class Pedido : AggregateRoot
     public Pedido Cancelar()
     {
         Status.Cancelar(this);
-        RaiseDomainEvent(new DomainEvents.PedidoCanceladoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoCancelado(Id));
         
         return this;
     }
@@ -76,7 +76,7 @@ public sealed class Pedido : AggregateRoot
     public Pedido Confirmar()
     {
         Status.Confirmar(this);
-        RaiseDomainEvent(new DomainEvents.PedidoConfirmadoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoConfirmado(Id));
         
         return this;
     }
@@ -102,7 +102,7 @@ public sealed class Pedido : AggregateRoot
     public Pedido Finalizar()
     {
         Status.Finalizar(this);
-        RaiseDomainEvent(new DomainEvents.PedidoFinalizadoDomainEvent(Id));
+        RaiseDomainEvent(new DomainEvents.PedidoFinalizado(Id));
         
         return this;
     }
@@ -111,6 +111,9 @@ public sealed class Pedido : AggregateRoot
     {
         Cliente = cliente;
         ClienteId = cliente.Id;
+        RaiseDomainEvent(new DomainEvents.ClienteIdentificado(
+            Id, cliente.Id, cliente.Nome, cliente.Email));
+        
         return this;
     }
     
