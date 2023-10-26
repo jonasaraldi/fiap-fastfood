@@ -15,7 +15,7 @@
 
 ## Sobre
 
-O FastFood API entrega uma solução de auto-atendimento para restaurantes e gerencia todo o fluxo de pedidos, desde sua criação, pagamento, preparo, monitoramento e entrega ao cliente.
+O FastFood API entrega uma solução de auto-atendimento para restaurantes que gerencia todo o fluxo de pedidos, desde sua criação, pagamento, preparo, monitoramento e entrega ao cliente.
 
 Esse projeto é o tech challenge proposto pela pós-graduação de Arquitetura de Software da FIAP. 
 Ao longo dos próximos meses a solução receberá evoluções graduais, por esse motivo, ainda não está com todas as funcionalidades esperadas. 
