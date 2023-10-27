@@ -13,14 +13,14 @@
   </a>
 </p>
 
-## Sobre
+## 📃 Sobre
 
-O FastFood API entrega uma solução de auto-atendimento para restaurantes e gerencia todo o fluxo de pedidos, desde sua criação, pagamento, preparo, monitoramento e entrega ao cliente.
+O FastFood API entrega uma solução de auto-atendimento para restaurantes que gerencia todo o fluxo de pedidos, desde sua criação, pagamento, preparo, monitoramento e entrega ao cliente.
 
 Esse projeto é o tech challenge proposto pela pós-graduação de Arquitetura de Software da FIAP. 
 Ao longo dos próximos meses a solução receberá evoluções graduais, por esse motivo, ainda não está com todas as funcionalidades esperadas. 
 
-## Tecnologias
+## 🚀 Tecnologias
 
 A tecnologias utilizadas nesse projeto foram escolhidas com o objetivo de entregar uma solução que seja escalável, resiliente e de fácil manutenção. 
 Pensando nos passos futuros, foi optado por seguir uma **arquitetura monolítica modular**, que facilitará a migração para microsserviços. 
@@ -35,8 +35,9 @@ Os conceitos e tecnologias utilizadas no projeto foram:
 - Docker
 - Command Query Segregation (CQS) com MediatR
 - Minimals API
+- xUnit
 
-## Documentação
+## 📖 Documentação
 
 Nessa solução estamos utilizando o Domain Driven Design (DDD) para entender e modelar o domínio do negócio, identificando e categorizando os subdomínios.
 
@@ -54,7 +55,7 @@ Como documentação, foram criados alguns artefatos para facilitar o entendiment
   - [Component](/docs/c4-model/component.png)
 - Swagger (API)
 
-## Instalação
+## 💻 Instalação
 
 **Premissas:**
 - Ter o docker instalado na maquina.
