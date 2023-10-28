@@ -39,7 +39,7 @@ public class PedidoModule : ICarterModule
             .WithOpenApi(operation => new(operation)
             {
                 Summary = "Consulta de pedidos",
-                Description = "Retorna uma lista de pedidos dentro de um período estipulado."
+                Description = "Retorna uma lista de pedidos dentro de um período estipulado. Caso o período não seja informado, por padrão é retornado todos os pedidos criados dentro de um mês."
             });
 
         pedido.MapGet("confirmados", async (
