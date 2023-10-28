@@ -1,4 +1,3 @@
-using FastFood.Atendimento.Infrastructure.Persistence.Postgres.Contexts;
 using FastFood.Catalogo.Infrastructure.Persistence.Postgres.Contexts;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -15,8 +14,8 @@ public static class HealthCheckConfiguration
         //
         // services.AddHealthChecks()
         //     .AddNpgSql(
-        //         configuration.GetConnectionString(nameof(AtendimentoDbContext))!,
-        //         name: $"Postgres ({nameof(AtendimentoDbContext)})",
+        //         configuration.GetConnectionString(nameof(PedidoDbContext}DbContext))!,
+        //         name: $"Postgres ({nameof(PedidoDbContext)})",
         //         tags: new[] { "database", "db" } );
         //
         // services.AddHealthChecks()

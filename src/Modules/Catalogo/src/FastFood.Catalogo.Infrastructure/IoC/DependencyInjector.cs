@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Serilog.Events;
 using ILogger = FastFood.Catalogo.Application.Abstractions.ILogger;
 
 namespace FastFood.Catalogo.Infrastructure.IoC;

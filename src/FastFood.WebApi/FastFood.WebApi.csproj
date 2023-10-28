@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modules\Atendimento\src\FastFood.Atendimento.Endpoints\FastFood.Atendimento.Endpoints.csproj" />
     <ProjectReference Include="..\Modules\Catalogo\src\FastFood.Catalogo.Endpoints\FastFood.Catalogo.Endpoints.csproj" />
+    <ProjectReference Include="..\Modules\Pedidos\src\FastFood.Pedidos.Endpoints\FastFood.Pedidos.Endpoints.csproj" />
   </ItemGroup>
 
 </Project>
