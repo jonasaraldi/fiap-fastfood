@@ -12,7 +12,7 @@ services:
         condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__AtendimentoDbContext=Host=postgres;Port=5432;Database=atendimento;User Id=postgres;Password=123;
+      - ConnectionStrings__PedidoDbContext=Host=postgres;Port=5432;Database=pedido;User Id=postgres;Password=123;
       - ConnectionStrings__CatalogoDbContext=Host=postgres;Port=5432;Database=catalogo;User Id=postgres;Password=123;
     networks:
       - internal

@@ -1,6 +1,6 @@
 using Carter;
-using FastFood.Atendimento.Endpoints.IoC;
 using FastFood.Catalogo.Endpoints.IoC;
+using FastFood.Pedidos.Endpoints.IoC;
 using FastFood.WebApi.Configurations;
 using FastFood.WebApi.Middlewares;
 
@@ -10,7 +10,7 @@ builder.Services.AddCarter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAtendimentoModule(builder.Configuration, builder);
+builder.Services.AddPedidoModule(builder.Configuration, builder);
 builder.Services.AddCatalogoModule(builder.Configuration, builder);
 
 builder.Services.AddHealthCheck(builder.Configuration);
@@ -28,7 +28,7 @@ app.UseHttpsRedirection();
 app.MapCarter();
 app.UseGlobalExceptionHandlerMiddleware();
 
-app.UseAtendimentoModule();
+app.UsePedidoModule();
 app.UseCatalogoModule();
 
 app.Run();
