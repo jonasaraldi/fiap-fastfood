@@ -1,0 +1,38 @@
+ContextMap FastFoodContextMap {
+	type = SYSTEM_LANDSCAPE
+	state = TO_BE
+    
+	contains CatalogoContext
+	contains PedidosContext
+	contains ClientesContext
+	contains ComandeiraContext
+	contains PagamentoContext
+    contains GatewayDePagamentoContext
+
+	PagamentoContext [D, ACL]<-[U] GatewayDePagamentoContext {
+        implementationTechnology = "HTTP Request"
+    }
+    
+    PedidosContext <- CatalogoContext {
+        implementationTechnology = "Messaging"
+    }
+
+    PedidosContext -> ClientesContext {
+        implementationTechnology = "Messaging"
+    }
+
+    PedidosContext [P]<->[P] ComandeiraContext {
+        implementationTechnology = "Messaging"
+    }
+
+    PedidosContext [P]<->[P] PagamentoContext {
+        implementationTechnology = "Messaging"
+    }
+}
+
+BoundedContext PedidosContext
+BoundedContext ComandeiraContext
+BoundedContext CatalogoContext
+BoundedContext ClientesContext
+BoundedContext PagamentoContext
+BoundedContext GatewayDePagamentoContext

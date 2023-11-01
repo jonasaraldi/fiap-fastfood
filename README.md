@@ -47,7 +47,7 @@ Como documentação, foram criados alguns artefatos para facilitar o entendiment
   - [Fluxo de pedido](/docs/storytelling/fluxo-pedido.png)
   - [Fluxo de pedido - Pagamento reprovado](/docs/storytelling/fluxo-pedido-pagamento-reprovado.png)
   - [Fluxo de preparo](/docs/storytelling/fluxo-preparo.png)
-- Context Map
+- [Context Map](/docs/context-map/src-gen/context-map_ContextMap.png)
 - [Event Storming](https://miro.com/welcomeonboard/bFNEM05zRk1oT0R6THE0VnNTaTVEOGQ2Z0NQbkM1SWxxQ0R6dk9qTHlrUzhlRDhhUEhTUTg1U21INXFhMTFTNXwzNDU4NzY0NTU5OTUzNzM4OTIzfDI=?share_link_id=357172007426)
 - C4 Model
   - [Context](/docs/c4-model/system-context.png)
