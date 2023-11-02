@@ -53,7 +53,9 @@ Como documentação, foram criados alguns artefatos para facilitar o entendiment
   - [Context](/docs/c4-model/system-context.png)
   - [Container](/docs/c4-model/container.png)
   - [Component](/docs/c4-model/component.png)
-- Swagger (API)
+- Requests (API)
+  - Swagger: http://localhost/swagger
+  - [Postman para importar](postman.json)
 
 ## 💻 Instalação
 
