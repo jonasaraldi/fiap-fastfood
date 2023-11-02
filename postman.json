@@ -1,0 +1,1125 @@
+{
+	"info": {
+		"_postman_id": "1d57f3d5-508f-48a8-a98e-7ce944d27dd2",
+		"name": "FastFood.WebApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "285508"
+	},
+	"item": [
+		{
+			"name": "pedidos",
+			"item": [
+				{
+					"name": "Registra cliente (nome e e-mail)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/cliente",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"cliente"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Registra o cliente na base com nome e e-mail."
+					},
+					"response": [
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/cliente",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"cliente"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Consulta a fila de pedidos da cozinha",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{baseUrl}}/pedidos/confirmados",
+						"description": "Retorna todos os pedidos confirmados do dia atual, essa é a fila de pedidos enviada para a cozinha preparar."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": "{{baseUrl}}/pedidos/confirmados"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidos\": [\n    {\n      \"id\": {\n        \"random\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"codigo\": \"<string>\",\n      \"data\": \"<dateTime>\",\n      \"itens\": [\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        },\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": {\n        \"random\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"codigo\": \"<string>\",\n      \"data\": \"<dateTime>\",\n      \"itens\": [\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        },\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Consulta de pedidos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos?dataInicial=<dateTime>&dataFinal=<dateTime>",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos"
+							],
+							"query": [
+								{
+									"key": "dataInicial",
+									"value": "<dateTime>"
+								},
+								{
+									"key": "dataFinal",
+									"value": "<dateTime>"
+								}
+							]
+						},
+						"description": "Retorna uma lista de pedidos dentro de um período estipulado. Caso o período não seja informado, por padrão é retornado todos os pedidos criados dentro de um mês."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pedidos?dataInicial=<dateTime>&dataFinal=<dateTime>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos"
+									],
+									"query": [
+										{
+											"key": "dataInicial",
+											"value": "<dateTime>"
+										},
+										{
+											"key": "dataFinal",
+											"value": "<dateTime>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"dataInicial\": \"<dateTime>\",\n  \"dataFinal\": \"<dateTime>\",\n  \"pedidos\": [\n    {\n      \"id\": {\n        \"random\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"codigo\": \"<string>\",\n      \"status\": \"<string>\",\n      \"dataDeCriacao\": \"<dateTime>\",\n      \"dataDeAlteracao\": \"<dateTime>\",\n      \"valorTotal\": \"<double>\",\n      \"itens\": [\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"preco\": \"<double>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        },\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"preco\": \"<double>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        }\n      ],\n      \"historicos\": [\n        {\n          \"status\": \"<string>\",\n          \"data\": \"<dateTime>\"\n        },\n        {\n          \"status\": \"<string>\",\n          \"data\": \"<dateTime>\"\n        }\n      ]\n    },\n    {\n      \"id\": {\n        \"random\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"codigo\": \"<string>\",\n      \"status\": \"<string>\",\n      \"dataDeCriacao\": \"<dateTime>\",\n      \"dataDeAlteracao\": \"<dateTime>\",\n      \"valorTotal\": \"<double>\",\n      \"itens\": [\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"preco\": \"<double>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        },\n        {\n          \"id\": {\n            \"random\": \"<string>\",\n            \"time\": \"<dateTime>\"\n          },\n          \"nome\": \"<string>\",\n          \"descricao\": \"<string>\",\n          \"preco\": \"<double>\",\n          \"quantidade\": \"<integer>\",\n          \"observacao\": \"<string>\"\n        }\n      ],\n      \"historicos\": [\n        {\n          \"status\": \"<string>\",\n          \"data\": \"<dateTime>\"\n        },\n        {\n          \"status\": \"<string>\",\n          \"data\": \"<dateTime>\"\n        }\n      ]\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Cria um novo pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{baseUrl}}/pedidos",
+						"description": "Cria um novo pedido do zero, sem itens e cliente. Essa é a chamada que da início a todo o processo do pedido."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": "{{baseUrl}}/pedidos"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "Registra o CPF do cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cpf\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/cpf",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"cpf"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Registra o CPF do cliente para posteriormente gera a nota fiscal com o CPF."
+					},
+					"response": [
+						{
+							"name": "No Content",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cpf\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/cpf",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"cpf"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Adiciona item ao pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"quantidade\": \"<integer>\",\n  \"observacao\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/itens",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"itens"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Adiciona um novo item ao pedido informado."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"quantidade\": \"<integer>\",\n  \"observacao\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/itens",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"itens"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"itemDePedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"valorTotal\": \"<double>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove item do pedido",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/itens/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"itens",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								},
+								{
+									"key": "id",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Remove um item específico do pedido informado."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/itens/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"itens",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										},
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"itemDePedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"valorTotal\": \"<double>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Confirma o pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"confirmar"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Confirma o pedido indicando que ele está pronto para ser feito pela cozinha (após pago)."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"confirmar"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"valorTotal\": \"<double>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancela o pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/cancelar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"cancelar"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Cancela o pedido informado caso já não esteja confirmado."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/cancelar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"cancelar"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "catálogo",
+			"item": [
+				{
+					"name": "categorias",
+					"item": [
+						{
+							"name": "Consulta de categorias",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": "{{baseUrl}}/categorias",
+								"description": "Retorna todas as categorias de produto disponíveis."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": ""
+											}
+										],
+										"url": "{{baseUrl}}/categorias"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "produtos",
+					"item": [
+						{
+							"name": "Consulta de produtos por categoria",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produtos/categoria/:categoria",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos",
+										"categoria",
+										":categoria"
+									],
+									"variable": [
+										{
+											"key": "categoria",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Retorna todos os produtos da categoria informada."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": ""
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/produtos/categoria/:categoria",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produtos",
+												"categoria",
+												":categoria"
+											],
+											"variable": [
+												{
+													"key": "categoria"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Adiciona um novo produto",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/produtos",
+								"description": "Adiciona um novo produto ao catálogo."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/produtos"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Edita um produto",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produtos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Edita um produto específico do catálogo."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produtos/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produtos",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Remove um produto",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produtos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Remove um produto específico do catálogo."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produtos/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produtos",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost"
+		}
+	]
+}
