@@ -3,9 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
 spec:
+  storageClassName: local-storage
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-storage
   resources:
     requests:
-      storage: 5Gi
+      storage: 1Gi

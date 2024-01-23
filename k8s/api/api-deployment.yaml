@@ -1,28 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fiap-fastfood-deployment
+  name: api-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: fiap-fastfood
+      app: api
   template:
     metadata:
       labels:
-        app: fiap-fastfood
+        app: api
     spec:
       containers:
-      - name: fiap-fastfood-container
+      - name: api
         image: jonasaraldi/fiap-fastfood:1.0.0
         resources:
-          limits:
-            memory: "128Mi"
+          requests:
+            memory: "256Mi"
             cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: 1
         ports:
         - containerPort: 80
         envFrom:
         - secretRef:
-            name: fiap-fastfood-secrets
+            name: api-secrets
         - configMapRef:
-            name: fiap-fastfood-config
+            name: api-configmap
