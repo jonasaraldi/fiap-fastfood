@@ -14,6 +14,23 @@ public class PagamentoModule : ICarterModule
         var pagamentos = app.MapGroup("pagamentos")
             .WithTags("Pagamento");
 
+        pagamentos.MapGet("{pedidoId}", async (
+            Ulid pedidoId,
+            ISender sender,
+            CancellationToken cancellationToken) =>
+        {
+            // retornar QRcode?
+            return TypedResults.Ok();
+        });
+        
+        pagamentos.MapPost("", async (
+            ISender sender,
+            CancellationToken cancellationToken) =>
+        {
+            // retornar QRcode?
+            return TypedResults.Ok();
+        });
+        
         pagamentos.MapPut("status", async (
             ISender sender,
             CancellationToken cancellationToken) =>
