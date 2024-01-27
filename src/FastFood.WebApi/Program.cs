@@ -1,5 +1,6 @@
 using Carter;
 using FastFood.Catalogo.Endpoints.IoC;
+using FastFood.Pagamentos.Endpoints.IoC;
 using FastFood.Pedidos.Endpoints.IoC;
 using FastFood.WebApi.Configurations;
 using FastFood.WebApi.Middlewares;
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddPedidoModule(builder.Configuration, builder);
 builder.Services.AddCatalogoModule(builder.Configuration, builder);
+builder.Services.AddPagamentoModule(builder.Configuration, builder);
 
 builder.Services.AddHealthCheck(builder.Configuration);
 
@@ -30,5 +32,6 @@ app.UseGlobalExceptionHandlerMiddleware();
 
 app.UsePedidoModule();
 app.UseCatalogoModule();
+app.UsePagamentoModule();
 
 app.Run();
