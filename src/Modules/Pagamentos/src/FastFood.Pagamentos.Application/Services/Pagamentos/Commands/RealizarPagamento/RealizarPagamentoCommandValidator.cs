@@ -8,6 +8,6 @@ public sealed class RealizarPagamentoCommandValidator : AbstractValidator<Realiz
     {
         RuleFor(p => p.PedidoId)
             .NotEmpty()
-            .WithMessage("Id do pedido não informado");
+            .WithMessage("Pedido não informado");
     }
 }

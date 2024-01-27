@@ -1,4 +1,8 @@
 using Carter;
+using FastFood.Pagamentos.Application.Services.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
+using FastFood.Pagamentos.Application.Services.Pagamentos.Commands.RealizarPagamento;
+using FastFood.Pagamentos.Application.Services.Pagamentos.Queries.GetSituacaoDoPagamento;
+using FastFood.Pagamentos.Endpoints.Models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -11,31 +15,38 @@ public class PagamentoModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        var pagamentos = app.MapGroup("pagamentos")
+        var pagamentos = app.MapGroup("pedidos/{pedidoId}/pagamentos")
             .WithTags("Pagamento");
 
-        pagamentos.MapGet("{pedidoId}", async (
+        pagamentos.MapPost("", async (
             Ulid pedidoId,
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            // retornar QRcode?
-            return TypedResults.Ok();
+            RealizarPagamentoCommand command = new(pedidoId); 
+            await sender.Send(command, cancellationToken);
+            return TypedResults.NoContent();
         });
         
-        pagamentos.MapPost("", async (
+        pagamentos.MapGet("situacao", async (
+            Ulid pedidoId,
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            // retornar QRcode?
-            return TypedResults.Ok();
+            GetSituacaoDoPagamentoQuery query = new(pedidoId);
+            var response = await sender.Send(query, cancellationToken);
+            return TypedResults.Ok(response);
         });
         
-        pagamentos.MapPut("status", async (
+        pagamentos.MapPut("situacao", async (
+            Ulid pedidoId,
+            [FromBody] AtualizarSituacaoDoPagamentoRequest request,
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            return TypedResults.Ok();
+            AtualizarSituacaoDoPagamentoCommand command = new(pedidoId, request.CodigoDaSolicitacao);
+            await sender.Send(command, cancellationToken);
+            return TypedResults.NoContent();
         });
     }
 }

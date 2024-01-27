@@ -16,7 +16,7 @@ public sealed class RealizarPagamentoCommandHandler : ICommandHandler<RealizarPa
     
     public Task Handle(RealizarPagamentoCommand request, CancellationToken cancellationToken)
     {
-        var pagamento = Pagamento.Criar(request.PedidoId);
+        Pagamento pagamento = Pagamento.Criar(request.PedidoId);
         return _pagamentoRepository.AddAsync(pagamento, cancellationToken);
     }
 }
