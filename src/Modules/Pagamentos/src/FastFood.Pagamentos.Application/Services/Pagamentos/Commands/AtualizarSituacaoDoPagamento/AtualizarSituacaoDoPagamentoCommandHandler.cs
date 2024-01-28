@@ -1,19 +1,24 @@
 using FastFood.Pagamentos.Application.Abstractions;
 using FastFood.Pagamentos.Application.Gateways.Repositories;
+using FastFood.Pagamentos.Application.Gateways.UnitOfWorks;
 using FastFood.Pagamentos.Domain;
 using FastFood.Pagamentos.Domain.Exceptions;
 using FastFood.Pagamentos.Domain.ValueObjects.Situacao;
+using MediatR;
 
 namespace FastFood.Pagamentos.Application.Services.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
 
 public class AtualizarSituacaoDoPagamentoCommandHandler : ICommandHandler<AtualizarSituacaoDoPagamentoCommand>
 {
     private readonly IPagamentoRepository _pagamentoRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
     public AtualizarSituacaoDoPagamentoCommandHandler(
-        IPagamentoRepository pagamentoRepository)
+        IPagamentoRepository pagamentoRepository,
+        IUnitOfWork unitOfWork)
     {
         _pagamentoRepository = pagamentoRepository;
+        _unitOfWork = unitOfWork;
     }
     
     public async Task Handle(
@@ -26,6 +31,7 @@ public class AtualizarSituacaoDoPagamentoCommandHandler : ICommandHandler<Atuali
         }
         
         AtualizarSituacao(request.CodigoDaSituacao, pagamento);
+        await _unitOfWork.CommitAsync(cancellationToken);
     }
 
     private void AtualizarSituacao(string codigo, Pagamento pagamento)

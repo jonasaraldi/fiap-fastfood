@@ -20,7 +20,7 @@ public class RemoverProdutoCommandHandler : ICommandHandler<RemoverProdutoComman
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<Unit> Handle(RemoverProdutoCommand request, CancellationToken cancellationToken)
+    public async Task Handle(RemoverProdutoCommand request, CancellationToken cancellationToken)
     {
         Produto? produto = await _produtoRepository.GetByIdAsync(request.Id, cancellationToken);
         
@@ -29,7 +29,5 @@ public class RemoverProdutoCommandHandler : ICommandHandler<RemoverProdutoComman
         
         _produtoRepository.Remove(produto!);
         await _unitOfWork.CommitAsync(cancellationToken);
-        
-        return Unit.Value;
     }
 }

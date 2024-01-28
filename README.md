@@ -73,7 +73,7 @@ git clone https://github.com/jonasaraldi/FastFood.git
 Executar o docker compose:
 
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
 
 Acessar no navegador:

@@ -6,6 +6,10 @@ namespace FastFood.Pagamentos.Domain;
 
 public sealed class Pagamento : AggregateRoot
 {
+    private Pagamento()
+    {
+    }
+    
     private Pagamento(Ulid pedidoId)
     {
         PedidoId = pedidoId;

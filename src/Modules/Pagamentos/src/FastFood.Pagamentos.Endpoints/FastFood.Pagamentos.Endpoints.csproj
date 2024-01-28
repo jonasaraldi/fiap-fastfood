@@ -2,11 +2,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FastFood.Pagamentos.Application\FastFood.Pagamentos.Application.csproj" />
+    <ProjectReference Include="..\FastFood.Pagamentos.Infrastructure\FastFood.Pagamentos.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Carter" Version="7.2.0" />
-    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
   <PropertyGroup>

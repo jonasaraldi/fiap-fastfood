@@ -22,7 +22,7 @@ public class IdentificarClienteCommandHandler : ICommandHandler<IdentificarClien
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<Unit> Handle(
+    public async Task Handle(
         IdentificarClienteCommand request, CancellationToken cancellationToken)
     {
         Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
@@ -36,7 +36,5 @@ public class IdentificarClienteCommandHandler : ICommandHandler<IdentificarClien
         
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
-        
-        return Unit.Value;
     }
 }
