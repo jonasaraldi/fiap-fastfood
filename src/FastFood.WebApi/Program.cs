@@ -11,6 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCarter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(cfg =>
+{   
+    var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+        .Where(a => a.FullName.Contains(nameof(FastFood))
+            && a.FullName.Contains("Application"))
+        .ToArray();
+    
+    cfg.RegisterServicesFromAssemblies(assemblies);
+});
 
 builder.Services.AddPedidoModule(builder.Configuration, builder);
 builder.Services.AddCatalogoModule(builder.Configuration, builder);

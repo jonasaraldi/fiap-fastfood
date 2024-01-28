@@ -25,10 +25,10 @@ public static class DependencyInjector
         {
             var raiseDomainEventInterceptor = serviceProvider.GetRequiredService<RaiseDomainEventInterceptor>();
             var connectionString = configuration.GetConnectionString(nameof(PagamentoDbContext));
-            
+
             optionsBuilder
-                .UseNpgsql(connectionString, p => p.MigrationsAssembly(typeof(PagamentoDbContext).Assembly.FullName))
-                .AddInterceptors(raiseDomainEventInterceptor);
+                .UseNpgsql(connectionString, p => p.MigrationsAssembly(typeof(PagamentoDbContext).Assembly.FullName));
+            //.AddInterceptors(raiseDomainEventInterceptor);
         });
 
         services.AddSingleton<ILogger, SerialogLogger>();

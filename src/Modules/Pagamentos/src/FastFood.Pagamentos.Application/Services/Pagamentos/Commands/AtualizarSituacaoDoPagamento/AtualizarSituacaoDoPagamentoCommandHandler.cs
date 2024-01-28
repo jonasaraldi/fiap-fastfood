@@ -12,13 +12,16 @@ public class AtualizarSituacaoDoPagamentoCommandHandler : ICommandHandler<Atuali
 {
     private readonly IPagamentoRepository _pagamentoRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IPublisher _publisher;
 
     public AtualizarSituacaoDoPagamentoCommandHandler(
         IPagamentoRepository pagamentoRepository,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IPublisher publisher)
     {
         _pagamentoRepository = pagamentoRepository;
         _unitOfWork = unitOfWork;
+        _publisher = publisher;
     }
     
     public async Task Handle(
@@ -31,6 +34,11 @@ public class AtualizarSituacaoDoPagamentoCommandHandler : ICommandHandler<Atuali
         }
         
         AtualizarSituacao(request.CodigoDaSituacao, pagamento);
+        
+        var publishTasks = pagamento.GetDomainEvents()
+            .Select(domainEvent => _publisher.Publish(domainEvent, cancellationToken));
+
+        await Task.WhenAll(publishTasks);
         await _unitOfWork.CommitAsync(cancellationToken);
     }
 

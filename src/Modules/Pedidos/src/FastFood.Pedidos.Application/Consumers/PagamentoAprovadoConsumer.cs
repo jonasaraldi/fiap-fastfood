@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace FastFood.Pedidos.Application.Consumers;
 
-public class PagamentoAprovadoConsumer : IDomainEventHandler<DomainEvents.PagamentoAprovado>
+public class PagamentoAprovadoConsumer : INotificationHandler<DomainEvents.PagamentoAprovado>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
