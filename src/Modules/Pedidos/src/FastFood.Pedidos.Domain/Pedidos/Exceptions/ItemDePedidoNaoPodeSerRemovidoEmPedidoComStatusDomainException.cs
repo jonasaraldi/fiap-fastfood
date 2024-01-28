@@ -7,7 +7,7 @@ public class ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException
     : DomainException 
 {
     public ItemDePedidoNaoPodeSerRemovidoEmPedidoComStatusDomainException(StatusDePedido status) 
-        : base($"Item de pedido não pode ser removido em pedido com status {status.Descricao.ToLower()}")
+        : base($"Item de pedido não pode ser removido em pedido com status {status.Descricao.ToLower()}.")
     {
     }
 }

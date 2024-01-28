@@ -18,6 +18,9 @@ public class PedidoConfig : AuditableEntityConfig<Pedido>
             .HasConversion<StatusDePedidoToStringConverter>()
             .IsRequired();
 
+        builder.Property(p => p.Pago)
+            .IsRequired();
+
         builder.HasMany(p => p.Itens)
             .WithOne(i => i.Pedido)
             .HasForeignKey(i => i.PedidoId);

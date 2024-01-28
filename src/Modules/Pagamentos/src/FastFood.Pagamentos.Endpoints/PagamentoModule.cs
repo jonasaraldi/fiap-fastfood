@@ -15,7 +15,7 @@ public class PagamentoModule : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        var pagamentos = app.MapGroup("pedidos/{pedidoId}/pagamentos")
+        var pagamentos = app.MapGroup("pagamentos/{pedidoId}")
             .WithTags("Pagamento");
 
         pagamentos.MapPost("", async (
@@ -44,7 +44,7 @@ public class PagamentoModule : ICarterModule
             ISender sender,
             CancellationToken cancellationToken) =>
         {
-            AtualizarSituacaoDoPagamentoCommand command = new(pedidoId, request.CodigoDaSolicitacao);
+            AtualizarSituacaoDoPagamentoCommand command = new(pedidoId, request.CodigoDaSituacao);
             await sender.Send(command, cancellationToken);
             return TypedResults.NoContent();
         });

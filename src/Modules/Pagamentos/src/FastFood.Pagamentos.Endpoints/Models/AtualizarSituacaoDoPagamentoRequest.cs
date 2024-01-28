@@ -1,3 +1,3 @@
 namespace FastFood.Pagamentos.Endpoints.Models;
 
-public record AtualizarSituacaoDoPagamentoRequest(string CodigoDaSolicitacao);
+public record AtualizarSituacaoDoPagamentoRequest(string CodigoDaSituacao);

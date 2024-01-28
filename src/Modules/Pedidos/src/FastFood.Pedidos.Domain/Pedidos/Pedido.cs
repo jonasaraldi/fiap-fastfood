@@ -30,10 +30,11 @@ public sealed class Pedido : AggregateRoot
     public IReadOnlyCollection<ItemDePedido> Itens => _itens.ToList();
     public IReadOnlyCollection<HistoricoDePedido> Historicos => _historicos.ToList();
     public Cliente? Cliente { get; private set; }
-    public Ulid? ClienteId { get; set; }
+    public Ulid? ClienteId { get; private set; }
     public Cpf? Cpf { get; private set; }
     public decimal ValorTotal => _itens.Sum(item => item.Quantidade * item.Preco);
     public bool PossuiItens => _itens.Any();
+    public bool Pago { get; private set; }
 
     private string GerarCodigo()
     {
@@ -151,4 +152,12 @@ public sealed class Pedido : AggregateRoot
 
     public static Pedido Criar() => 
         new(Array.Empty<ItemDePedido>());
+
+    public void MarcarComoPago()
+    {
+        if (Status is not PedidoConfirmado)
+            throw new PedidoNaoPodeSerPagoNoStatusDomainException(Status);
+
+        Pago = true;
+    }
 }

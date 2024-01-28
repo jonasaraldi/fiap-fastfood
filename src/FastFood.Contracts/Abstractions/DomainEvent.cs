@@ -1,6 +1,8 @@
+using MediatR;
+
 namespace FastFood.Contracts.Abstractions;
 
-public abstract record DomainEvent
+public abstract record DomainEvent : INotification
 {
     public DomainEvent()
     {

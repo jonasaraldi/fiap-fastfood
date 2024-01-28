@@ -7,7 +7,7 @@ public class CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException
     : DomainException 
 {
     public CpfNaoPodeSerAlteradoEmPedidoComStatusDomainException(StatusDePedido status) 
-        : base($"CPF não pode ser alterado em pedido com status {status.Descricao.ToLower()}")
+        : base($"CPF não pode ser alterado em pedido com status {status.Descricao.ToLower()}.")
     {
     }
 }

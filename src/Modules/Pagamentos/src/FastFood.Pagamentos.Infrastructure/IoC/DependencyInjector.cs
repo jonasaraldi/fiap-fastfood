@@ -4,6 +4,7 @@ using FastFood.Pagamentos.Application.Gateways.UnitOfWorks;
 using FastFood.Pagamentos.Infrastructure.Logging;
 using FastFood.Pagamentos.Infrastructure.Persistence.Postgres;
 using FastFood.Pagamentos.Infrastructure.Persistence.Postgres.Contexts;
+using FastFood.Pagamentos.Infrastructure.Persistence.Postgres.Interceptors;
 using FastFood.Pagamentos.Infrastructure.Persistence.Postgres.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +20,17 @@ public static class DependencyInjector
     public static IServiceCollection AddInfrastructure(
         this IServiceCollection services, IConfiguration configuration, WebApplicationBuilder builder)
     {
-        services.AddDbContext<IPagamentoDbContext, PagamentoDbContext>(opts =>
+        services.AddSingleton<RaiseDomainEventInterceptor>();
+        services.AddDbContext<IPagamentoDbContext, PagamentoDbContext>((serviceProvider, optionsBuilder) =>
         {
+            var raiseDomainEventInterceptor = serviceProvider.GetRequiredService<RaiseDomainEventInterceptor>();
             var connectionString = configuration.GetConnectionString(nameof(PagamentoDbContext));
-            opts.UseNpgsql(connectionString, x => x.MigrationsAssembly(typeof(PagamentoDbContext).Assembly.FullName));
+            
+            optionsBuilder
+                .UseNpgsql(connectionString, p => p.MigrationsAssembly(typeof(PagamentoDbContext).Assembly.FullName))
+                .AddInterceptors(raiseDomainEventInterceptor);
         });
-        
+
         services.AddSingleton<ILogger, SerialogLogger>();
         services.AddTransient<IPagamentoRepository, PagamentoRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -1,3 +1,4 @@
+using System.Reflection;
 using Carter;
 using FastFood.Catalogo.Endpoints.IoC;
 using FastFood.Pagamentos.Endpoints.IoC;
@@ -31,7 +32,7 @@ app.MapCarter();
 app.UseGlobalExceptionHandlerMiddleware();
 
 app.UsePedidoModule();
-app.UseCatalogoModule();
+app.UseCatalogoModule(); 
 app.UsePagamentoModule();
 
 app.Run();

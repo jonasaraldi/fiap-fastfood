@@ -7,7 +7,7 @@ public class ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException
     : DomainException 
 {
     public ItemDePedidoNaoPodeSerAdicionadoEmPedidoComStatusDomainException(StatusDePedido status) 
-        : base($"Item de pedido não pode ser adicionado em pedido com status {status.Descricao.ToLower()}")
+        : base($"Item de pedido não pode ser adicionado em pedido com status {status.Descricao.ToLower()}.")
     {
     }
 }
