@@ -45,4 +45,22 @@ public class PedidoRepositoryInMemory : IPedidoRespository
 
         return Task.FromResult(pedidos);
     }
+
+    public Task<ICollection<Pedido>> GetPedidosEmOperacaoAsync(CancellationToken cancellationToken)
+    {
+        StatusDePedido[] statusDePedidosPossiveis =
+        {
+            StatusDePedido.Recebido, 
+            StatusDePedido.EmPreparacao,
+            StatusDePedido.Pronto
+        };
+        
+        ICollection<Pedido> pedidos = Pedidos
+            .Where(p => statusDePedidosPossiveis.Contains(p.Status) && p.CreatedAt >= DateTime.UtcNow.Date)
+            .OrderByDescending(p => p.Status.Ordem)
+            .ThenBy(p => p.CreatedAt)
+            .ToList();
+        
+        return Task.FromResult(pedidos);
+    }
 }

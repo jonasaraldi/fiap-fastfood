@@ -11,14 +11,16 @@ public abstract class StatusDePedido
     public static StatusDePedido Pronto = new PedidoPronto();
     public static StatusDePedido Finalizado = new PedidoFinalizado();
     
-    public StatusDePedido(string codigo, string descricao)
+    public StatusDePedido(string codigo, string descricao, int ordem)
     {
         Codigo = codigo;
         Descricao = descricao;
+        Ordem = ordem;
     }
 
     public string Codigo { get; private set; }
     public string Descricao { get; private set; }
+    public int Ordem { get; private set; }
     public virtual void Cancelar(Pedido pedido) => RetornarErro(pedido, Cancelado);
     public virtual void Confirmar(Pedido pedido) => RetornarErro(pedido, Confirmado);
     public virtual void Receber(Pedido pedido) => RetornarErro(pedido, Recebido);

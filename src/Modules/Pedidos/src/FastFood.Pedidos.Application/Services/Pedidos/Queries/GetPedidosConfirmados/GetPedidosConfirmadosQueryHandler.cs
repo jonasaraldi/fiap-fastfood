@@ -3,7 +3,8 @@ using FastFood.Pedidos.Domain.Pedidos.Repositories;
 
 namespace FastFood.Pedidos.Application.Services.Pedidos.Queries.GetPedidosConfirmados;
 
-public class GetPedidosConfirmadosQueryHandler : ICommandHandler<GetPedidosConfirmadosQuery, GetPedidosConfirmadosResponse>
+public class GetPedidosConfirmadosQueryHandler 
+    : ICommandHandler<GetPedidosConfirmadosQuery, GetPedidosConfirmadosResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
 

@@ -5,7 +5,7 @@ namespace FastFood.Pedidos.Domain.Pedidos.ValueObjects.Status;
 public sealed class PedidoPendente : StatusDePedido
 {
     public PedidoPendente() 
-        : base(nameof(PedidoPendente), "Pendente")
+        : base(nameof(PedidoPendente), "Pendente", 1)
     {
     }
     

@@ -7,6 +7,7 @@ using FastFood.Pedidos.Application.Services.Pedidos.Commands.CriarPedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.IdentificarCliente;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.RemoverItemDePedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetConsultaDePedidos;
+using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetConsultaOperacionalDePedidos;
 using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetPedidosConfirmados;
 using FastFood.Pedidos.Endpoints.Models;
 using MediatR;
@@ -54,7 +55,20 @@ public class PedidoModule : ICarterModule
                 Summary = "Consulta a fila de pedidos da cozinha",
                 Description = "Retorna todos os pedidos confirmados do dia atual, essa é a fila de pedidos enviada para a cozinha preparar."
             });
-            
+        
+        pedido.MapGet("operacionais", async (
+                ISender sender,
+                CancellationToken cancellationToken) =>
+            {
+                var response = await sender.Send(new GetPedidosOperacionaisQuery(), cancellationToken);
+                return TypedResults.Ok(response);
+            })
+            .WithOpenApi(operation => new(operation)
+            {
+                Summary = "Consulta a fila de pedidos em operação",
+                Description = "Retorna todos os pedidos prontos, em preparação e recebidos pela cozinha no dia atual."
+            });
+
         pedido.MapPut("{pedidoId}/cliente", async (
                 Ulid pedidoId,
                 [FromBody]IdentificarClienteRequest request,

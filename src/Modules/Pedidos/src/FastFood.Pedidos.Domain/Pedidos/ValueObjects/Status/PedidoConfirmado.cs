@@ -3,7 +3,7 @@ namespace FastFood.Pedidos.Domain.Pedidos.ValueObjects.Status;
 public sealed class PedidoConfirmado : StatusDePedido
 {
     public PedidoConfirmado() 
-        : base(nameof(PedidoConfirmado), "Confirmado")
+        : base(nameof(PedidoConfirmado), "Confirmado", 3)
     {
     }
     

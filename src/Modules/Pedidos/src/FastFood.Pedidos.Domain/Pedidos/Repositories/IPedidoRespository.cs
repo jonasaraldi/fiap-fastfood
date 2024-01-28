@@ -7,4 +7,5 @@ public interface IPedidoRespository
     void Update(Pedido pedido);
     Task<ICollection<Pedido>> GetConfirmadosDeHojeAsync(CancellationToken cancellationToken);
     Task<ICollection<Pedido>> GetPorDataAsync(DateTime dataInicial, DateTime dataFinal, CancellationToken cancellationToken);
+    Task<ICollection<Pedido>> GetPedidosEmOperacaoAsync(CancellationToken cancellationToken);
 }

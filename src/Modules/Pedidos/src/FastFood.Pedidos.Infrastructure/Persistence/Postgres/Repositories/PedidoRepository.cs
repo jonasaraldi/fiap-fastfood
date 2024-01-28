@@ -30,7 +30,7 @@ public class PedidoRepository : IPedidoRespository
     public async Task<ICollection<Pedido>> GetConfirmadosDeHojeAsync(CancellationToken cancellationToken) =>
         await _dbContext.Pedidos
             .Include(p => p.Itens)
-            .Where(p => p.Status.Equals(StatusDePedido.Confirmado) && p.UpdatedAt >= DateTime.UtcNow.Date)
+            .Where(p => p.Status.Equals(StatusDePedido.Confirmado) && p.UpdatedAt >= DateTime.UtcNow.Date && p.Pago)
             .OrderBy(p => p.UpdatedAt)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
@@ -44,4 +44,20 @@ public class PedidoRepository : IPedidoRespository
             .OrderByDescending(p => p.CreatedAt)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
+
+    public async Task<ICollection<Pedido>> GetPedidosEmOperacaoAsync(CancellationToken cancellationToken)
+    {
+        StatusDePedido[] statusDePedidosPossiveis =
+        {
+            StatusDePedido.Recebido, 
+            StatusDePedido.EmPreparacao,
+            StatusDePedido.Pronto
+        };
+        
+        return await _dbContext.Pedidos
+            .Include(p => p.Itens)
+            .Where(p => statusDePedidosPossiveis.Contains(p.Status) && p.CreatedAt >= DateTime.UtcNow.Date && p.Pago)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+    }
 }
