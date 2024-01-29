@@ -1,4 +1,3 @@
-using System.Reflection;
 using Carter;
 using FastFood.Catalogo.Endpoints.IoC;
 using FastFood.Pagamentos.Endpoints.IoC;
@@ -7,6 +6,8 @@ using FastFood.WebApi.Configurations;
 using FastFood.WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddCarter();
 builder.Services.AddEndpointsApiExplorer();

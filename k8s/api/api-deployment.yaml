@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: api-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: api
@@ -14,18 +14,16 @@ spec:
     spec:
       containers:
       - name: api
-        image: jonasaraldi/fiap-fastfood:1.0.0
+        image: jonasaraldi/fiap-fastfood:2.0.0
         resources:
           requests:
             memory: "256Mi"
             cpu: "500m"
           limits:
             memory: "512Mi"
-            cpu: 1
+            cpu: "1"
+        envFrom:
+          - secretRef:
+              name: api-secrets
         ports:
         - containerPort: 80
-        envFrom:
-        - secretRef:
-            name: api-secrets
-        - configMapRef:
-            name: api-configmap
