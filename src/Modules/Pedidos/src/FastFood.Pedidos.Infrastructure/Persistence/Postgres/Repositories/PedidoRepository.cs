@@ -27,14 +27,6 @@ public class PedidoRepository : IPedidoRespository
     public void Update(Pedido pedido) =>
         _dbContext.Pedidos.Update(pedido);
 
-    public async Task<ICollection<Pedido>> GetConfirmadosDeHojeAsync(CancellationToken cancellationToken) =>
-        await _dbContext.Pedidos
-            .Include(p => p.Itens)
-            .Where(p => p.Status.Equals(StatusDePedido.Confirmado) && p.UpdatedAt >= DateTime.UtcNow.Date && p.Pago)
-            .OrderBy(p => p.UpdatedAt)
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
-
     public async Task<ICollection<Pedido>> GetPorDataAsync(
         DateTime dataInicial, DateTime dataFinal, CancellationToken cancellationToken) =>
         await _dbContext.Pedidos

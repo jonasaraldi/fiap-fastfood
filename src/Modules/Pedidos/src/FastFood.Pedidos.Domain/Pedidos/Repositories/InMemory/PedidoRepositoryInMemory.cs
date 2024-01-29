@@ -25,16 +25,6 @@ public class PedidoRepositoryInMemory : IPedidoRespository
         Pedidos[indexOf] = pedido;
     }
 
-    public Task<ICollection<Pedido>> GetConfirmadosDeHojeAsync(CancellationToken cancellationToken)
-    {
-        ICollection<Pedido> pedidosConfirmados = Pedidos
-            .Where(p => p.Status.Equals(StatusDePedido.Confirmado) && p.UpdatedAt >= DateTime.UtcNow.Date)
-            .OrderBy(p => p.UpdatedAt)
-            .ToList();
-        
-        return Task.FromResult(pedidosConfirmados);
-    }
-
     public Task<ICollection<Pedido>> GetPorDataAsync(
         DateTime dataInicial, DateTime dataFinal, CancellationToken cancellationToken)
     {

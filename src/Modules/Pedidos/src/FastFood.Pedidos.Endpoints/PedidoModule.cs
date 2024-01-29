@@ -11,7 +11,6 @@ using FastFood.Pedidos.Application.Services.Pedidos.Commands.PrepararPedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.RemoverItemDePedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetConsultaDePedidos;
 using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetConsultaOperacionalDePedidos;
-using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetPedidosConfirmados;
 using FastFood.Pedidos.Endpoints.Models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -44,19 +43,6 @@ public class PedidoModule : ICarterModule
             {
                 Summary = "Consulta de pedidos",
                 Description = "Retorna uma lista de pedidos dentro de um período estipulado. Caso o período não seja informado, por padrão é retornado todos os pedidos criados dentro de um mês."
-            });
-
-        pedido.MapGet("confirmados", async (
-                ISender sender,
-                CancellationToken cancellationToken) =>
-            {
-                var response = await sender.Send(new GetPedidosConfirmadosQuery(), cancellationToken);
-                return TypedResults.Ok(response);
-            })
-            .WithOpenApi(operation => new(operation)
-            {
-                Summary = "Consulta a fila de pedidos da cozinha",
-                Description = "Retorna todos os pedidos confirmados do dia atual, essa é a fila de pedidos enviada para a cozinha preparar."
             });
         
         pedido.MapGet("operacionais", async (
