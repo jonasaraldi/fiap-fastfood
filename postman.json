@@ -1,11 +1,384 @@
 {
 	"info": {
-		"_postman_id": "1d57f3d5-508f-48a8-a98e-7ce944d27dd2",
+		"_postman_id": "51ffd7b3-9701-4914-94f1-f9f5888b2bd4",
 		"name": "FastFood.WebApi",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "285508"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32545565"
 	},
 	"item": [
+		{
+			"name": "catálogo",
+			"item": [
+				{
+					"name": "categorias",
+					"item": [
+						{
+							"name": "Consulta de categorias",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/categorias",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"categorias"
+									]
+								},
+								"description": "Retorna todas as categorias de produto disponíveis."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": ""
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/categorias",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"categorias"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "produtos",
+					"item": [
+						{
+							"name": "Consulta de produtos por categoria",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produtos/categoria/:categoria",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos",
+										"categoria",
+										":categoria"
+									],
+									"variable": [
+										{
+											"key": "categoria",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Retorna todos os produtos da categoria informada."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": ""
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/produtos/categoria/:categoria",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produtos",
+												"categoria",
+												":categoria"
+											],
+											"variable": [
+												{
+													"key": "categoria"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Adiciona um novo produto",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produtos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos"
+									]
+								},
+								"description": "Adiciona um novo produto ao catálogo."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produtos",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produtos"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Edita um produto",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produtos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Edita um produto específico do catálogo."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produtos/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produtos",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Remove um produto",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/produtos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"produtos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<string>"
+										}
+									]
+								},
+								"description": "Remove um produto específico do catálogo."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{baseUrl}}/produtos/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"produtos",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
 		{
 			"name": "pedidos",
 			"item": [
@@ -96,7 +469,7 @@
 					]
 				},
 				{
-					"name": "Consulta a fila de pedidos da cozinha",
+					"name": "Consulta operacional de pedidos",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -116,7 +489,16 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": "{{baseUrl}}/pedidos/confirmados",
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/confirmados",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								"confirmados"
+							]
+						},
 						"description": "Retorna todos os pedidos confirmados do dia atual, essa é a fila de pedidos enviada para a cozinha preparar."
 					},
 					"response": [
@@ -134,7 +516,16 @@
 										"value": "application/json"
 									}
 								],
-								"url": "{{baseUrl}}/pedidos/confirmados"
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/confirmados",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										"confirmados"
+									]
+								}
 							},
 							"status": "OK",
 							"code": 200,
@@ -259,7 +650,15 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": "{{baseUrl}}/pedidos",
+						"url": {
+							"raw": "{{baseUrl}}/pedidos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos"
+							]
+						},
 						"description": "Cria um novo pedido do zero, sem itens e cliente. Essa é a chamada que da início a todo o processo do pedido."
 					},
 					"response": [
@@ -281,7 +680,15 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": "{{baseUrl}}/pedidos"
+								"url": {
+									"raw": "{{baseUrl}}/pedidos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos"
+									]
+								}
 							},
 							"status": "OK",
 							"code": 200,
@@ -579,6 +986,93 @@
 					]
 				},
 				{
+					"name": "Cancela o pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/cancelar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"cancelar"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Cancela o pedido informado caso já não esteja confirmado."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/cancelar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"cancelar"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
 					"name": "Confirma o pedido",
 					"request": {
 						"method": "PUT",
@@ -666,7 +1160,7 @@
 					]
 				},
 				{
-					"name": "Cancela o pedido",
+					"name": "Iniciar preparo do pedido",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -684,14 +1178,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pedidos/:pedidoId/cancelar",
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/iniciar-preparo",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"pedidos",
 								":pedidoId",
-								"cancelar"
+								"iniciar-preparo"
 							],
 							"variable": [
 								{
@@ -700,7 +1194,7 @@
 								}
 							]
 						},
-						"description": "Cancela o pedido informado caso já não esteja confirmado."
+						"description": "Confirma o pedido indicando que ele está pronto para ser feito pela cozinha (após pago)."
 					},
 					"response": [
 						{
@@ -722,14 +1216,14 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{baseUrl}}/pedidos/:pedidoId/cancelar",
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"pedidos",
 										":pedidoId",
-										"cancelar"
+										"confirmar"
 									],
 									"variable": [
 										{
@@ -748,285 +1242,238 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\"\n}"
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"valorTotal\": \"<double>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Finalizar preparo do pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/finalizar-preparo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"finalizar-preparo"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Confirma o pedido indicando que ele está pronto para ser feito pela cozinha (após pago)."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"confirmar"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"valorTotal\": \"<double>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Finalizar o pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedidos/:pedidoId/finalizar",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedidos",
+								":pedidoId",
+								"finalizar"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Confirma o pedido indicando que ele está pronto para ser feito pela cozinha (após pago)."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"confirmar"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"valorTotal\": \"<double>\"\n}"
 						}
 					]
 				}
 			]
 		},
 		{
-			"name": "catálogo",
+			"name": "pagamentos",
 			"item": [
 				{
-					"name": "categorias",
-					"item": [
-						{
-							"name": "Consulta de categorias",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
+					"name": "Realizar pagamento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
 							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": ""
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": "{{baseUrl}}/categorias",
-								"description": "Retorna todas as categorias de produto disponíveis."
-							},
-							"response": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pagamentos/:pedidoId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pagamentos",
+								":pedidoId"
+							],
+							"variable": [
 								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": ""
-											}
-										],
-										"url": "{{baseUrl}}/categorias"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						}
-					]
-				},
-				{
-					"name": "produtos",
-					"item": [
-						{
-							"name": "Consulta de produtos por categoria",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": ""
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{baseUrl}}/produtos/categoria/:categoria",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"produtos",
-										"categoria",
-										":categoria"
-									],
-									"variable": [
-										{
-											"key": "categoria",
-											"value": "<string>"
-										}
-									]
-								},
-								"description": "Retorna todos os produtos da categoria informada."
-							},
-							"response": [
-								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": ""
-											}
-										],
-										"url": {
-											"raw": "{{baseUrl}}/produtos/categoria/:categoria",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"produtos",
-												"categoria",
-												":categoria"
-											],
-											"variable": [
-												{
-													"key": "categoria"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
+									"key": "pedidoId",
+									"value": "<string>"
 								}
 							]
 						},
+						"description": "Confirma o pedido indicando que ele está pronto para ser feito pela cozinha (após pago)."
+					},
+					"response": [
 						{
-							"name": "Adiciona um novo produto",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUrl}}/produtos",
-								"description": "Adiciona um novo produto ao catálogo."
-							},
-							"response": [
-								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
-											"options": {
-												"raw": {
-													"headerFamily": "json",
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{baseUrl}}/produtos"
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Edita um produto",
-							"request": {
+							"name": "OK",
+							"originalRequest": {
 								"method": "PUT",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/produtos/:id",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"produtos",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "<string>"
-										}
-									]
-								},
-								"description": "Edita um produto específico do catálogo."
-							},
-							"response": [
-								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n  \"nome\": \"<string>\",\n  \"descricao\": \"<string>\",\n  \"categoria\": \"<string>\",\n  \"preco\": \"<double>\",\n  \"urlDaImagem\": \"<string>\"\n}",
-											"options": {
-												"raw": {
-													"headerFamily": "json",
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{baseUrl}}/produtos/:id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"produtos",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "Remove um produto",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
 										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
 									}
 								],
 								"body": {
@@ -1034,62 +1481,210 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{baseUrl}}/produtos/:id",
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"produtos",
-										":id"
+										"pedidos",
+										":pedidoId",
+										"confirmar"
 									],
 									"variable": [
 										{
-											"key": "id",
-											"value": "<string>"
+											"key": "pedidoId"
 										}
 									]
-								},
-								"description": "Remove um produto específico do catálogo."
+								}
 							},
-							"response": [
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
 								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Content-Type",
-												"value": ""
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "{{baseUrl}}/produtos/:id",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"produtos",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [],
-									"cookie": [],
-									"body": ""
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"valorTotal\": \"<double>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Consultar situação do pagamento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pagamentos/:pedidoId/situacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pagamentos",
+								":pedidoId",
+								"situacao"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
 								}
 							]
+						},
+						"description": "Confirma o pedido indicando que ele está pronto para ser feito pela cozinha (após pago)."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"confirmar"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"valorTotal\": \"<double>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Webhook de pagamento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoDaSituacao\": \"approved\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pagamentos/:pedidoId/situacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pagamentos",
+								":pedidoId",
+								"situacao"
+							],
+							"variable": [
+								{
+									"key": "pedidoId",
+									"value": "<string>"
+								}
+							]
+						},
+						"description": "Confirma o pedido indicando que ele está pronto para ser feito pela cozinha (após pago)."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/pedidos/:pedidoId/confirmar",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pedidos",
+										":pedidoId",
+										"confirmar"
+									],
+									"variable": [
+										{
+											"key": "pedidoId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"pedidoId\": {\n    \"random\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"status\": \"<string>\",\n  \"valorTotal\": \"<double>\"\n}"
 						}
 					]
 				}
