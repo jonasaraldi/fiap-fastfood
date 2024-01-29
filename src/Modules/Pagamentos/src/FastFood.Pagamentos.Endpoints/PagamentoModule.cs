@@ -26,7 +26,9 @@ public class PagamentoModule : ICarterModule
             RealizarPagamentoCommand command = new(pedidoId); 
             await sender.Send(command, cancellationToken);
             return TypedResults.NoContent();
-        });
+        })
+        .WithSummary("Realizar pagamento")
+        .WithDescription("Realiza pagamento do pedido.");
         
         pagamentos.MapGet("situacao", async (
             Ulid pedidoId,
@@ -36,9 +38,11 @@ public class PagamentoModule : ICarterModule
             GetSituacaoDoPagamentoQuery query = new(pedidoId);
             var response = await sender.Send(query, cancellationToken);
             return TypedResults.Ok(response);
-        });
+        })
+        .WithSummary("Obtem situação de pagamento")
+        .WithDescription("Obtem situação de pagamento pedido.");
         
-        pagamentos.MapPut("situacao", async (
+        pagamentos.MapPost("situacao", async (
             Ulid pedidoId,
             [FromBody] AtualizarSituacaoDoPagamentoRequest request,
             ISender sender,
@@ -47,6 +51,8 @@ public class PagamentoModule : ICarterModule
             AtualizarSituacaoDoPagamentoCommand command = new(pedidoId, request.CodigoDaSituacao);
             await sender.Send(command, cancellationToken);
             return TypedResults.NoContent();
-        });
+        })
+        .WithSummary("Webhook de pagamento")
+        .WithDescription("Webhook de atualização da situação do pagamento.");
     }
 }

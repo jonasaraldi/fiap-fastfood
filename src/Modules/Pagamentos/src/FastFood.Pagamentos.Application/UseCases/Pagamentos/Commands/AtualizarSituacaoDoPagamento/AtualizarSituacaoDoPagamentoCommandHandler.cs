@@ -26,7 +26,7 @@ public class AtualizarSituacaoDoPagamentoCommandHandler : ICommandHandler<Atuali
     public async Task Handle(
         AtualizarSituacaoDoPagamentoCommand request, CancellationToken cancellationToken)
     {
-        Pagamento? pagamento = await _pagamentoRepository.GetByPedidoIdAsync(request.PedidoId, cancellationToken);
+        var pagamento = await _pagamentoRepository.GetByPedidoIdAsync(request.PedidoId, cancellationToken);
         if (pagamento is null)
         {
             throw new PagamentoNaoEncontradoDomainException();
