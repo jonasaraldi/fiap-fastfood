@@ -22,7 +22,7 @@ public sealed class RemoverItemDePedidoCommandHandler : ICommandHandler<RemoverI
     public async Task<RemoverItemDePedidoResponse> Handle(
         RemoverItemDePedidoCommand request, CancellationToken cancellationToken)
     {
-        Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
+        var pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
         
         if (pedido is null)
             throw new PedidoNaoEncontradoDomainException();

@@ -9,9 +9,7 @@ public sealed record AdicionarItemDePedidoCommand(
     decimal Preco,
     int Quantidade,
     string? Observacao = null)
-    : ICommand<AdicionarItemDePedidoResponse>
-{
-}
+    : ICommand<AdicionarItemDePedidoResponse>;
 
 public sealed record AdicionarItemDePedidoResponse(
     Ulid PedidoId, Ulid ItemDePedidoId, decimal ValorTotal);

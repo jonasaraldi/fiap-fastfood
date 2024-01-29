@@ -5,6 +5,4 @@ namespace FastFood.Pedidos.Application.Services.Pedidos.Commands.IdentificarClie
 public sealed record IdentificarClienteCommand(
     Ulid PedidoId, 
     string Nome, 
-    string Email) : ICommand
-{
-}
+    string Email) : ICommand;

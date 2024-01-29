@@ -22,7 +22,7 @@ public sealed class ConfirmarPedidoCommandHandler : ICommandHandler<ConfirmarPed
     public async Task<ConfirmarPedidoResponse> Handle(
         ConfirmarPedidoCommand request, CancellationToken cancellationToken)
     {
-        Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
+        var pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
 
         if (pedido is null)
             throw new PedidoNaoEncontradoDomainException();

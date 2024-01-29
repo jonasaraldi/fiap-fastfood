@@ -1,17 +1,16 @@
 using FastFood.Pedidos.Application.Abstractions;
 using FastFood.Pedidos.Application.Abstractions.UnitsOfWork;
-using FastFood.Pedidos.Domain.Pedidos;
 using FastFood.Pedidos.Domain.Pedidos.Exceptions;
 using FastFood.Pedidos.Domain.Pedidos.Repositories;
 
-namespace FastFood.Pedidos.Application.Services.Pedidos.Commands.FinalizarPedido;
+namespace FastFood.Pedidos.Application.Services.Pedidos.Commands.FinalizarPreparoDoPedido;
 
-public sealed class FinalizarPedidoCommandHandler : ICommandHandler<FinalizarPedidoCommand, FinalizarPedidoResponse>
+public sealed class FinalizarPreparoDoPedidoCommandHandler : ICommandHandler<FinalizarPreparoDoPedidoCommand, FinalizarPreparoDoPedidoResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public FinalizarPedidoCommandHandler(
+    public FinalizarPreparoDoPedidoCommandHandler(
         IPedidoRespository pedidoRespository,
         IUnitOfWork unitOfWork)
     {
@@ -19,15 +18,15 @@ public sealed class FinalizarPedidoCommandHandler : ICommandHandler<FinalizarPed
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<FinalizarPedidoResponse> Handle(
-        FinalizarPedidoCommand request, CancellationToken cancellationToken)
+    public async Task<FinalizarPreparoDoPedidoResponse> Handle(
+        FinalizarPreparoDoPedidoCommand request, CancellationToken cancellationToken)
     {
         var pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
         
         if (pedido is null)
             throw new PedidoNaoEncontradoDomainException();
 
-        pedido.Finalizar();
+        pedido.MarcarComoPronto();
         
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);

@@ -98,18 +98,25 @@ public sealed class Pedido : AggregateRoot
     public Pedido Receber()
     {
         Status.Receber(this);
+        Pago = true;
+        RaiseDomainEvent(new DomainEvents.PedidoRecebido(Id));
+        
         return this;
     }
     
     public Pedido Preparar()
     {
         Status.Preparar(this);
+        RaiseDomainEvent(new DomainEvents.PedidoEmPreparacao(Id));
+        
         return this;
     }
     
     public Pedido MarcarComoPronto()
     {
         Status.MarcarComoPronto(this);
+        RaiseDomainEvent(new DomainEvents.PedidoPronto(Id));
+        
         return this;
     }
     
@@ -152,12 +159,4 @@ public sealed class Pedido : AggregateRoot
 
     public static Pedido Criar() => 
         new(Array.Empty<ItemDePedido>());
-
-    public void MarcarComoPago()
-    {
-        if (Status is not PedidoConfirmado)
-            throw new PedidoNaoPodeSerPagoNoStatusDomainException(Status);
-
-        Pago = true;
-    }
 }

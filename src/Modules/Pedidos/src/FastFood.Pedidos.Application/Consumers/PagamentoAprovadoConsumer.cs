@@ -28,7 +28,7 @@ public class PagamentoAprovadoConsumer : INotificationHandler<DomainEvents.Pagam
     public async Task Handle(DomainEvents.PagamentoAprovado notification, CancellationToken cancellationToken)
     {
         Ulid pedidoId = notification.PedidoId;
-        Pedido? pedido = await _pedidoRespository.GetByIdAsync(pedidoId, cancellationToken);
+        var pedido = await _pedidoRespository.GetByIdAsync(pedidoId, cancellationToken);
         
         if (pedido is null)
         {
@@ -36,7 +36,7 @@ public class PagamentoAprovadoConsumer : INotificationHandler<DomainEvents.Pagam
             throw new PedidoNaoEncontradoDomainException();
         }
 
-        pedido.MarcarComoPago();
+        pedido.Receber();
         _pedidoRespository.Update(pedido);
         await _unitOfWork.CommitAsync(cancellationToken);
         

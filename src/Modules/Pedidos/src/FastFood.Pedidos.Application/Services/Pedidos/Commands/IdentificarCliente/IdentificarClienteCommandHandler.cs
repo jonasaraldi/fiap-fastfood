@@ -9,7 +9,7 @@ using MediatR;
 
 namespace FastFood.Pedidos.Application.Services.Pedidos.Commands.IdentificarCliente;
 
-public class IdentificarClienteCommandHandler : ICommandHandler<IdentificarClienteCommand>
+public sealed class IdentificarClienteCommandHandler : ICommandHandler<IdentificarClienteCommand>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
@@ -25,7 +25,8 @@ public class IdentificarClienteCommandHandler : ICommandHandler<IdentificarClien
     public async Task Handle(
         IdentificarClienteCommand request, CancellationToken cancellationToken)
     {
-        Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
+        var pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
+        
         if (pedido is null)
             throw new PedidoNaoEncontradoDomainException();
 

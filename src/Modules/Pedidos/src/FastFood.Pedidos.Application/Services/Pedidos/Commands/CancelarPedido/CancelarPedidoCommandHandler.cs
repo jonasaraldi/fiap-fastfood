@@ -6,7 +6,7 @@ using FastFood.Pedidos.Domain.Pedidos.Repositories;
 
 namespace FastFood.Pedidos.Application.Services.Pedidos.Commands.CancelarPedido;
 
-public class CancelarPedidoCommandHandler : ICommandHandler<CancelarPedidoCommand, CancelarPedidoResponse>
+public sealed class CancelarPedidoCommandHandler : ICommandHandler<CancelarPedidoCommand, CancelarPedidoResponse>
 {
     private readonly IPedidoRespository _pedidoRespository;
     private readonly IUnitOfWork _unitOfWork;
@@ -22,7 +22,7 @@ public class CancelarPedidoCommandHandler : ICommandHandler<CancelarPedidoComman
     public async Task<CancelarPedidoResponse> Handle(
         CancelarPedidoCommand request, CancellationToken cancellationToken)
     {
-        Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
+        var pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
 
         if (pedido is null)
             throw new PedidoNaoEncontradoDomainException();

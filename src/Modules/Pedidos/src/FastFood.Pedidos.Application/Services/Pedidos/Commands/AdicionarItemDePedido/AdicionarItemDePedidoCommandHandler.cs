@@ -24,7 +24,7 @@ public sealed class AdicionarItemDePedidoCommandHandler : ICommandHandler<Adicio
     public async Task<AdicionarItemDePedidoResponse> Handle(
         AdicionarItemDePedidoCommand request, CancellationToken cancellationToken)
     {
-        Pedido? pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
+        var pedido = await _pedidoRespository.GetByIdAsync(request.PedidoId, cancellationToken);
 
         if (pedido is null) 
             throw new PedidoNaoEncontradoDomainException();

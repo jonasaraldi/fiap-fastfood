@@ -99,9 +99,9 @@ kubectl config set-context --current --namespace=fastfood
 
 Rodando os YAMLs
 ```bash
-cd k8s
-kubectl apply -f postgres
-kubectl apply -f api
+kubectl apply -f k8s
+kubectl apply -f k8s/postgres
+kubectl apply -f k8s/api
 ```
 
 

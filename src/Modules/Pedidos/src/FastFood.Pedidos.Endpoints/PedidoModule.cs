@@ -4,7 +4,10 @@ using FastFood.Pedidos.Application.Services.Pedidos.Commands.AtualizarCpf;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.CancelarPedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.ConfirmarPedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.CriarPedido;
+using FastFood.Pedidos.Application.Services.Pedidos.Commands.FinalizarPedido;
+using FastFood.Pedidos.Application.Services.Pedidos.Commands.FinalizarPreparoDoPedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.IdentificarCliente;
+using FastFood.Pedidos.Application.Services.Pedidos.Commands.PrepararPedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Commands.RemoverItemDePedido;
 using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetConsultaDePedidos;
 using FastFood.Pedidos.Application.Services.Pedidos.Queries.GetConsultaOperacionalDePedidos;
@@ -176,6 +179,51 @@ public class PedidoModule : ICarterModule
             {
                 Summary = "Cancela o pedido",
                 Description = "Cancela o pedido informado caso já não esteja confirmado."
+            });
+        
+        pedido.MapPut("{pedidoId}/iniciar-preparo", async (
+                Ulid pedidoId,
+                ISender sender, 
+                CancellationToken cancellationToken) =>
+            {
+                PrepararPedidoCommand command = new(pedidoId);
+                var response = await sender.Send(command, cancellationToken);
+                return TypedResults.Ok(response);
+            })
+            .WithOpenApi(operation => new(operation)
+            {
+                Summary = "Preparar o pedido",
+                Description = "Inicia o preparo do pedido informado caso já tenha sido pago."
+            });
+        
+        pedido.MapPut("{pedidoId}/finalizar-preparo", async (
+                Ulid pedidoId,
+                ISender sender, 
+                CancellationToken cancellationToken) =>
+            {
+                FinalizarPreparoDoPedidoCommand command = new(pedidoId);
+                var response = await sender.Send(command, cancellationToken);
+                return TypedResults.Ok(response);
+            })
+            .WithOpenApi(operation => new(operation)
+            {
+                Summary = "Finalizar preparo do pedido",
+                Description = "Finaliza o preparo do pedido informado marcando ele como pronto."
+            });
+        
+        pedido.MapPut("{pedidoId}/finalizar", async (
+                Ulid pedidoId,
+                ISender sender, 
+                CancellationToken cancellationToken) =>
+            {
+                FinalizarPedidoCommand command = new(pedidoId);
+                var response = await sender.Send(command, cancellationToken);
+                return TypedResults.Ok(response);
+            })
+            .WithOpenApi(operation => new(operation)
+            {
+                Summary = "Finalizar pedido",
+                Description = "Finaliza o pedido após o pedido ser entregue para o cliente."
             });
     }
 }
