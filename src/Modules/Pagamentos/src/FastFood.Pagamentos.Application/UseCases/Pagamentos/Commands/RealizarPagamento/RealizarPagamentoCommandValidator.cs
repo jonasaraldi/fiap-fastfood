@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace FastFood.Pagamentos.Application.Services.Pagamentos.Commands.RealizarPagamento;
+namespace FastFood.Pagamentos.Application.UseCases.Pagamentos.Commands.RealizarPagamento;
 
 public sealed class RealizarPagamentoCommandValidator : AbstractValidator<RealizarPagamentoCommand>
 {

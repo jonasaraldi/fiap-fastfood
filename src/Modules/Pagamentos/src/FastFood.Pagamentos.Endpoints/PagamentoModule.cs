@@ -1,7 +1,7 @@
 using Carter;
-using FastFood.Pagamentos.Application.Services.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
-using FastFood.Pagamentos.Application.Services.Pagamentos.Commands.RealizarPagamento;
-using FastFood.Pagamentos.Application.Services.Pagamentos.Queries.GetSituacaoDoPagamento;
+using FastFood.Pagamentos.Application.UseCases.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
+using FastFood.Pagamentos.Application.UseCases.Pagamentos.Commands.RealizarPagamento;
+using FastFood.Pagamentos.Application.UseCases.Pagamentos.Queries.GetSituacaoDoPagamento;
 using FastFood.Pagamentos.Endpoints.Models;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

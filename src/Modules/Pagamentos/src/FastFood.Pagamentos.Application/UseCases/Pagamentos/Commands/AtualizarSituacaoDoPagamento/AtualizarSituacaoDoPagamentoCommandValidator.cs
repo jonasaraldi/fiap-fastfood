@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace FastFood.Pagamentos.Application.Services.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
+namespace FastFood.Pagamentos.Application.UseCases.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
 
 public class AtualizarSituacaoDoPagamentoCommandValidator 
     : AbstractValidator<AtualizarSituacaoDoPagamentoCommand>

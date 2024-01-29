@@ -2,9 +2,8 @@ using FastFood.Pagamentos.Application.Abstractions;
 using FastFood.Pagamentos.Application.Gateways.Repositories;
 using FastFood.Pagamentos.Application.Gateways.UnitOfWorks;
 using FastFood.Pagamentos.Domain;
-using MediatR;
 
-namespace FastFood.Pagamentos.Application.Services.Pagamentos.Commands.RealizarPagamento;
+namespace FastFood.Pagamentos.Application.UseCases.Pagamentos.Commands.RealizarPagamento;
 
 public sealed class RealizarPagamentoCommandHandler : ICommandHandler<RealizarPagamentoCommand>
 {

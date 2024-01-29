@@ -3,10 +3,9 @@ using FastFood.Pagamentos.Application.Gateways.Repositories;
 using FastFood.Pagamentos.Application.Gateways.UnitOfWorks;
 using FastFood.Pagamentos.Domain;
 using FastFood.Pagamentos.Domain.Exceptions;
-using FastFood.Pagamentos.Domain.ValueObjects.Situacao;
 using MediatR;
 
-namespace FastFood.Pagamentos.Application.Services.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
+namespace FastFood.Pagamentos.Application.UseCases.Pagamentos.Commands.AtualizarSituacaoDoPagamento;
 
 public class AtualizarSituacaoDoPagamentoCommandHandler : ICommandHandler<AtualizarSituacaoDoPagamentoCommand>
 {

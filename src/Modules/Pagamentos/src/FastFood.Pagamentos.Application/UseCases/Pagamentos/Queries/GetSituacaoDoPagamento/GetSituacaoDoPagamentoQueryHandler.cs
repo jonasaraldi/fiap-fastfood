@@ -3,7 +3,7 @@ using FastFood.Pagamentos.Application.Gateways.Repositories;
 using FastFood.Pagamentos.Domain;
 using FastFood.Pagamentos.Domain.Exceptions;
 
-namespace FastFood.Pagamentos.Application.Services.Pagamentos.Queries.GetSituacaoDoPagamento;
+namespace FastFood.Pagamentos.Application.UseCases.Pagamentos.Queries.GetSituacaoDoPagamento;
 
 public class GetSituacaoDoPagamentoQueryHandler : ICommandHandler<GetSituacaoDoPagamentoQuery, GetPagamentosResponse>
 {

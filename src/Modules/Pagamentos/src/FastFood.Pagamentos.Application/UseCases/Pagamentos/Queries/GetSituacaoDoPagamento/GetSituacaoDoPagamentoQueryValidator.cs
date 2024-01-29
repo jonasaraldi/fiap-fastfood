@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace FastFood.Pagamentos.Application.Services.Pagamentos.Queries.GetSituacaoDoPagamento;
+namespace FastFood.Pagamentos.Application.UseCases.Pagamentos.Queries.GetSituacaoDoPagamento;
 
 public class GetSituacaoDoPagamentoQueryValidator : AbstractValidator<GetSituacaoDoPagamentoQuery>
 {
