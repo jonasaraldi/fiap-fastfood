@@ -89,11 +89,6 @@ Caso queira debugar o projeto, é importante ter instalado o [SDK do .NET Core 7
 
 ## Kubernetes
 
-Criando namespace
-```bash
-kubectl create ns fastfood
-```
-
 Definindo contexto
 ```bash
 kubectl config set-context --current --namespace=fastfood
