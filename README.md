@@ -28,7 +28,7 @@ Os contextos delimitados levantados no processo de documentação do DDD, viram 
 
 Os conceitos e tecnologias utilizadas no projeto foram:
 - Domain Driven Design (DDD)
-- Arquitetura Hexagonal
+- Arquitetura Hexagonal e Arquitetura Limpa
 - .NET Core 7
 - EF Core
 - Postgres
@@ -36,6 +36,7 @@ Os conceitos e tecnologias utilizadas no projeto foram:
 - Command Query Segregation (CQS) com MediatR
 - Minimals API
 - xUnit
+- Kubernetes
 
 ## 📖 Documentação
 
