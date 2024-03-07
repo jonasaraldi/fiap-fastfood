@@ -13,13 +13,43 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build
       run: dotnet build --no-restore
+      
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    - name: Set Docker image tag
+      id: set_tag
+      run: echo "IMAGE_TAG=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+      
+    - name: Build the Docker image
+      run: |
+        docker build -t fiap-fastfood-api:${{ env.IMAGE_TAG }} .
+        docker tag fiap-fastfood-api:${{ env.IMAGE_TAG }} 302625862148.dkr.ecr.us-east-1.amazonaws.com/fiap-fastfood-api:${{ env.IMAGE_TAG }}
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: AWS ECR Login
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        region: us-east-1
+      
+    - name: Push image to AWS ECR
+      run: |
+        docker push 302625862148.dkr.ecr.us-east-1.amazonaws.com/fiap-fastfood-api:${{ env.IMAGE_TAG }}
