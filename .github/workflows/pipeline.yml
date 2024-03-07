@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-
+    name: Build & Test
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,8 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
-  release:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     needs: build
 
@@ -46,7 +47,7 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Build, tag, and push docker image to Amazon ECR
+    - name: Build, tag and push docker image to Amazon ECR
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: fiap-fastfood-api
@@ -54,3 +55,4 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        docker push $REGISTRY/$REPOSITORY:latest
