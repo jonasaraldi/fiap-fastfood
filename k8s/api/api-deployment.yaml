@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: jonasaraldi/fiap-fastfood:2.0.0
+        image: 302625862148.dkr.ecr.us-east-1.amazonaws.com/fiap-fastfood-api:latest
         resources:
           requests:
             memory: "256Mi"
