@@ -31,7 +31,7 @@ Os conceitos e tecnologias utilizadas no projeto foram:
 - Arquitetura Hexagonal e Arquitetura Limpa
 - .NET Core 7
 - EF Core
-- Postgres
+- [Postgres no Amazon RDS](/docs/postgres/README.md)
 - Docker
 - Command Query Segregation (CQS) com MediatR
 - Minimals API
