@@ -59,7 +59,8 @@ jobs:
     - name: Configure kubectl
       run: aws eks --region us-east-1 update-kubeconfig --name fastfood-cluster
     
-    - name: Apply YAML files
-      run: kubectl apply -f k8s && kubectl apply -f k8s/postgres && kubectl apply -f k8s/api
-      
-        
+    - name: Apply Namespace YAML
+      run: kubectl apply -f k8s/production/namespace.yaml
+
+    - name: Apply API YAMLs
+      run: kubectl apply -f k8s/production/api
