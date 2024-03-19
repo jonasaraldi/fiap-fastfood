@@ -57,7 +57,7 @@ jobs:
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
     - name: Configure kubectl
-      run: aws eks --region us-east-1 update-kubeconfig --name fastfood-cluster
+      run: aws eks --region us-east-1 update-kubeconfig --name fastfood-production
     
     - name: Apply Namespace YAML
       run: kubectl apply -f k8s/production/namespace.yaml
