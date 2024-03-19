@@ -64,8 +64,8 @@ jobs:
 
     - name: Create Kubernetes Secret
       run: |
-        kubectl create secret generic pedido-connection-string-secret --from-literal=ConnectionStrings__PedidoDbContext=${{ secrets.PEDIDO_CONNECTION_STRING }}
-        kubectl create secret generic catalogo-connection-string-secret --from-literal=ConnectionStrings__CatalogoDbContext=${{ secrets.CATALOGO_CONNECTION_STRING }}
+        kubectl create secret generic pedido-connection-string-secret --from-literal=ConnectionStrings__PedidoDbContext=${{ secrets.PEDIDO_CONNECTION_STRING }} &&
+        kubectl create secret generic catalogo-connection-string-secret --from-literal=ConnectionStrings__CatalogoDbContext=${{ secrets.CATALOGO_CONNECTION_STRING }} &&
         kubectl create secret generic pagamento-connection-string-secret --from-literal=ConnectionStrings__PagamentoDbContext=${{ secrets.PAGAMENTOS_CONNECTION_STRING }}
 
     - name: Apply API YAMLs
