@@ -62,13 +62,5 @@ jobs:
     - name: Apply Namespace YAML
       run: kubectl apply -f k8s/production/namespace.yaml
 
-    - name: Recreate Kubernetes Secret
-      run: |
-        kubectl delete secret generic fastfood-secrets || true
-        kubectl create secret generic fastfood-secrets 
-          --from-literal=ConnectionStrings__PedidoDbContext=${{ secrets.PEDIDO_CONNECTION_STRING }}
-          --from-literal=ConnectionStrings__CatalogoDbContext=${{ secrets.CATALOGO_CONNECTION_STRING }}
-          --from-literal=ConnectionStrings__PagamentoDbContext=${{ secrets.PAGAMENTOS_CONNECTION_STRING }}
-
     - name: Apply API YAMLs
       run: kubectl apply -f k8s/production/api
