@@ -22,8 +22,5 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "1"
-        envFrom:
-          - secretRef:
-              name: api-secrets
         ports:
         - containerPort: 80
