@@ -18,3 +18,14 @@ A utilização do Entity Framework Core com a estratégia Code First facilitou m
 Ao utilizar o Amazon RDS (Relational Database Service), baseado no PostgreSQL, podemos aproveitar os recursos de alta disponibilidade oferecidos pela AWS. O RDS gerencia automaticamente tarefas como backup, replicação e failover, garantindo assim uma infraestrutura robusta e confiável para o banco de dados. Essa disponibilidade é essencial para garantir que o banco de dados esteja sempre acessível e funcionando corretamente, mesmo em caso de falhas ou interrupções.
 
 Ao considerar esses fatores, o PostgreSQL se destacou como a escolha mais adequada para atender às necessidades atuais do projeto, oferecendo um equilíbrio entre familiaridade, desempenho, praticidade e disponibilidade no desenvolvimento e manutenção do banco de dados.
+
+## Modelagem DER
+
+### Database de pedido
+<img src="./tabela-pedido.png" />
+
+### Database de catalogo
+<img src="./tabela-catalogo.png" />
+
+### Database de pagamento
+<img src="./tabela-pagamento.png" />

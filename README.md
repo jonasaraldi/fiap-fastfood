@@ -37,6 +37,7 @@ Os conceitos e tecnologias utilizadas no projeto foram:
 - Minimals API
 - xUnit
 - Kubernetes
+- [AWS](./docs/aws/README.md)
 
 ## 📖 Documentação
 
